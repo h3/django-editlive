@@ -14,7 +14,8 @@ except ImportError:
     from setuptools import setup, find_packages
 
 install_requires = [
-# 'simplejson',
+    'simplejson',
+    'django-dajaxice',
 ]
 
 #tests_require = [
