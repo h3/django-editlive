@@ -40,7 +40,7 @@
             if ($self.options.width) {
                 var chim = parseInt($self.input.css('padding-left').match(/\d+/)[0], 10) 
                            + parseInt($self.input.css('padding-right').match(/\d+/)[0], 10);
-                $self.input.css('width', $self.options.width - chim);
+                $self.input.css('width', parseInt($self.options.width, 10) - chim);
             }
 
             $self._createPlaceholder($self.input);

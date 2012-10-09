@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django import template
-from django.template import Variable
+from django.template import Variable, VariableDoesNotExist
 #from django.conf import settings
 
 from editlive.utils import get_adaptor
@@ -10,7 +10,13 @@ register = template.Library()
 
 @register.assignment_tag(takes_context=True)
 def editlive(context, context_variable, **kwargs):
-    field_value = Variable(context_variable).resolve(context)
+    try:
+        field_value = Variable(context_variable).resolve(context)
+    except VariableDoesNotExist:
+        # When a relation is missing it might raise an exception 
+        # and break the entire site. So we just set it blank.
+        field_value = ''
+
     field_name  = context_variable.split('.')[-1]
     adaptor_str = kwargs.get('adaptor', None) # Ex: "editlive.adaptors.TextAdaptor"
     context_obj = Variable(context_variable.split('.')[0]).resolve(context)
