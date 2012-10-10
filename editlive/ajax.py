@@ -77,3 +77,37 @@ def delete_objects(request, **kwargs):
         out['message'] = 'Erreur lors de la suppression des objets'
 
     return simplejson.dumps(out)
+
+import re
+from editlive.utils import get_field_type
+
+@dajaxice_register(method='POST')
+def sync(request, **kwargs):
+    # On the first pass we collect data from the database
+    # while trying to limit queries as much as possible
+    rs = {}
+    for model in kwargs:
+        ids = list(set([x['object_id'] for x in kwargs[model]]))
+        rs[model] = get_model(*model.split('.')).objects.filter(pk__in=ids)
+
+    # Then we correlate the data and send back only what
+    # has changed
+    for model in kwargs:
+        for field in kwargs[model]:
+            obj = rs[model].get(pk=field['object_id'])
+            if '_set-' in field['field_name']: # Fieldset
+                field_name = re.sub(r"\w+_set-\d+-", '', field['field_name'])
+            else: # Normal field
+                field_name = field['field_name']
+
+            adaptor = get_adaptor(obj, field_name)
+            oldval = field.get('value', 'None')
+            newval = adaptor.get_value()
+
+            if unicode(oldval) != unicode(newval):
+                print unicode(newval) == unicode('None')
+                print "%s!=%s (CHANGED)" % (oldval, newval)
+           #else:
+           #    print "%s==%s" % (oldval, newval)
+            
+    return simplejson.dumps({})

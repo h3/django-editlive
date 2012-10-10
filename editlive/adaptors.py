@@ -10,17 +10,18 @@ from editlive.utils import get_dict_from_obj, apply_filters, import_class
 
 class BaseAdaptor(object):
 
-    def __init__(self, field, obj, field_name, field_value=None, kwargs={}, initial={}):
+    def __init__(self, field, obj, field_name, field_value='', kwargs={}, initial={}):
         self.kwargs = kwargs
         self.field = field
         self.obj = obj
         self.model = obj.__class__
         self.field_name = field_name
-        self.field_value = field_value
+        self.field_value = getattr(self.obj, self.field_name, field_value)
         self.template_filters = None
         self.form_class = modelform_factory(self.model)
         self.form = self.form_class(instance=self.obj, initial=initial)
         self.form_field = self.form[self.field_name]
+
 
         if self.kwargs.get('formset'):
             self.field_index = self.kwargs.get('field-index', 0)
@@ -49,7 +50,7 @@ class BaseAdaptor(object):
         o = []
         for k, v in self.kwargs.items():
             if k == 'template_filters':
-                self.attributes['rendered-value'] = self.get_value()
+                self.attributes['rendered-value'] = self.render_value()
                 self.attributes[k] = v
             elif v is not None:
                 self.attributes['data-' + k] = v
@@ -60,12 +61,17 @@ class BaseAdaptor(object):
         return ' ' + ' '.join(o) + ' '
 
     def get_value(self):
-        return self.render_value()
+        if callable(self.field_value): 
+            return self.field_value()
+        return self.field_value 
 
     def set_value(self, value):
         self.field_value = value
         setattr(self.obj, self.field_name, self.field_value)
         return value
+
+    def render_value(self, value=None):
+        return apply_filters(value or self.get_value(), self.template_filters)
 
     def save(self):
         form = self.get_form()
@@ -100,11 +106,6 @@ class BaseAdaptor(object):
 
         return mark_safe(field + self.render_widget())
 
-    def render_value(self, value=None):
-        value = value or self.field_value
-        if callable(value): value = value()
-        return apply_filters(value, self.template_filters)
-
     def get_form(self):
         form = modelform_factory(self.model)
         return form(data=get_dict_from_obj(self.obj), instance=self.obj)
@@ -120,6 +121,12 @@ class BooleanAdaptor(BaseAdaptor):
     def __init__(self, *args, **kwargs):
         super(BooleanAdaptor, self).__init__(*args, **kwargs)
         self.attributes.update({'data-type': 'booleanField'})
+
+    def get_value(self):
+        if callable(self.field_value): 
+            v = self.field_value()
+        v = self.field_value
+        return v and 'on' or 'off'
 
     def set_value(self, value):
         self.field_value = value
@@ -153,12 +160,7 @@ class ForeignKeyAdaptor(BaseAdaptor):
         return value
 
     def render_value(self):
-        value = getattr(self.obj, self.field_name, None)
-        if value:
-            if callable(value): value = value()
-            return unicode(apply_filters(value, self.template_filters))
-        else:
-            return u''
+        return unicode(super(ForeignKeyAdaptor, self).render_value())
 
 
 class ChoicesAdaptor(BaseAdaptor):

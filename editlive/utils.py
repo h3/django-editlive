@@ -30,8 +30,7 @@ def import_class(classpath, package=None):
     classpath = '.'.join(classpath.split('.')[:-1])
     return getattr(import_module(classpath), classname, None)
 
-
-def get_default_adaptor(field):
+def get_field_type(field):
     if isinstance(field, str) and field == 'tabular':
         fieldtype = 'tabular'
     elif isinstance(field, str) and field == 'stacked':
@@ -58,7 +57,10 @@ def get_default_adaptor(field):
         fieldtype = 'file'
     else:
         fieldtype = 'text'
+    return fieldtype
 
+def get_default_adaptor(field):
+    fieldtype = get_field_type(field)
     adaptors = getattr(settings, 'EDITLIVE_ADAPTORS', {})
     adaptors.update(editlive_settings.EDITLIVE_DEFAULT_ADAPTORS)
     adaptor = adaptors.get(fieldtype, None)
