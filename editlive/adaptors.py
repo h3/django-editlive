@@ -93,7 +93,7 @@ class BaseAdaptor(object):
 
     def render_widget(self):
         self.attributes['rendered-value'] = self.render_value()
-        return u'<editlive%s/>' % self.format_attributes()
+        return u'<editlive%s></editlive>' % self.format_attributes()
 
     def render(self):
         field = unicode(self.form_field)
