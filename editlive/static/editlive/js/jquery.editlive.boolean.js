@@ -1,6 +1,6 @@
 ;(function($){
 
-    $.widget('editliveWidgets.booleanField', $.editliveWidgets.textField, {
+    $.widget('editliveWidgets.booleanField', $.editliveWidgets.charField, {
         _type: 'boolean',
         options: {
             choices: 'Oui|Non'
@@ -74,24 +74,7 @@
         _get_value: function() {
             if (this.element.is(':checked')) return true;
             else return false;
-        },
-
-        success: function(data) {
-            var $self = this;
-            //$self.control.removeClass('error');
-            //$self.set_placeholder_value($self._get_value());
-            //$self.blur();
-            $self._trigger('success');
-            //$self.btn_group.switchClass( "newClass", "anotherNewClass", 1000 );
-        },
-
-        error: function(data) {
-            var $self = this;
-            $self.control.addClass('error');
-            $self._display_errors(data.messages);
-            $self._trigger('error');
-            //$self.btn_group.switchClass( "newClass", "anotherNewClass", 1000 );
         }
-        
-    })
+    });
+
 })(jQuery);

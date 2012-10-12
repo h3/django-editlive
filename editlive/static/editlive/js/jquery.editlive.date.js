@@ -1,6 +1,6 @@
 ;(function($){
 
-    $.widget('editliveWidgets.dateField', $.editliveWidgets.textField, {
+    $.widget('editliveWidgets.dateField', $.editliveWidgets.charField, {
         _type: 'date',
         options: { 
             dateFormat: 'dd/mm/yy',

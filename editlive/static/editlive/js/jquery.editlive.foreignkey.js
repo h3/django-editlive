@@ -1,5 +1,5 @@
 ;(function($){
-    $.widget('editliveWidgets.foreignkeyField', $.editliveWidgets.textField, {
+    $.widget('editliveWidgets.foreignkeyField', $.editliveWidgets.charField, {
         _type: 'foreignkey',
         sourceSelect: false,
         options: {
@@ -22,16 +22,6 @@
             });
             return $self.data
         },
-
-     ///get_display_value: function() {
-     ///    var val = this._get_value();
-     ///    if (this.sourceSelect) {
-     ///        return this.sourceSelect.find('option[value="'+ val +'"]').text();
-     ///    }
-     ///    else {
-     ///        return val;
-     ///    }
-     ///},
 
         _init: function(){
             var $self = this;
@@ -64,7 +54,7 @@
               //};
             }
 
-            //$.editliveWidgets.textField.prototype._init.apply(this, arguments);
+            //$.editliveWidgets.charField.prototype._init.apply(this, arguments);
             $self.input = $('<input class="editlive" style="width:'+ ($self.options.width || '') +';" type="text" />').hide().insertAfter($self.element);
             $self.input.autocomplete($self.options)
                 .data('autocomplete')._renderItem = function(ul, item){
@@ -75,6 +65,7 @@
 
             $self._createPlaceholder($self.input);
         },
+
         get_display_value: function() {
             return this.rendered_val || this.element.find('option:selected').text();
         },

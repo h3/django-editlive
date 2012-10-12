@@ -23,7 +23,6 @@
 
         _create: function() {
             var $self = this;
-            console.log(this.element);
             $self.form = $('#'+ $self.element.data('form-id'));
             $self.options = $.extend(this.options, $self.element.data());
             $self.form.find('[type="submit"]').bind('click.ajaxform', function(e){

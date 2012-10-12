@@ -46,7 +46,21 @@ class BaseAdaptor(object):
         if self.kwargs.get('template_filters'):
             self.template_filters = self.kwargs.get('template_filters').split('|')
 
+    def get_real_field_name(self):
+        """
+        Formsets mangles fieldnames with positional slugs.
+        This function returns the actual field name alone.
+        """
+        if '_set-' in self.field_name: # Formset field
+            manager, pos, field_name = filter(None, re.split(r'(\w+)_set-(\d+)-(\w+)', self.field_name))
+        else:
+            field_name = self.field_name
+        return field_name
+
     def format_attributes(self):
+        """
+        Format the HTML attributes of the <editlive></editlive> element.
+        """
         o = []
         for k, v in self.kwargs.items():
             if k == 'template_filters':
@@ -66,11 +80,18 @@ class BaseAdaptor(object):
         return self.field_value 
 
     def set_value(self, value):
+        """
+        Set the value to the database object (does not save)
+        """
         self.field_value = value
         setattr(self.obj, self.field_name, self.field_value)
         return value
 
     def render_value(self, value=None):
+        """
+        Returns the field value as it should be rendered on
+        the placeholder.
+        """
         return apply_filters(value or self.get_value(), self.template_filters)
 
     def save(self):
@@ -82,6 +103,7 @@ class BaseAdaptor(object):
                 'rendered_value': self.render_value()}
         else: 
             messages = []
+            print form.errors
             for field_name_error, errors_field in form.errors.items():
                 for error in errors_field:
                     messages.append({'field_name': field_name_error, 'message': unicode(error)})
@@ -89,6 +111,7 @@ class BaseAdaptor(object):
             return {
                 'error': True, 
                 'messages': messages,
+                'value': self.get_value(),
                 'rendered_value': self.render_value()}
 
     def render_widget(self):
@@ -96,6 +119,9 @@ class BaseAdaptor(object):
         return u'<editlive%s></editlive>' % self.format_attributes()
 
     def render(self):
+        """
+        Render the form field along with the <editlive> tag
+        """
         field = unicode(self.form_field)
         
         if self.kwargs.get('formset'):
@@ -109,6 +135,12 @@ class BaseAdaptor(object):
     def get_form(self):
         form = modelform_factory(self.model)
         return form(data=get_dict_from_obj(self.obj), instance=self.obj)
+
+
+class CharAdaptor(BaseAdaptor):
+    def __init__(self, *args, **kwargs):
+        super(CharAdaptor, self).__init__(*args, **kwargs)
+        self.attributes.update({'data-type': 'charField'})
 
 
 class TextAdaptor(BaseAdaptor):
@@ -147,6 +179,7 @@ class DateTimeAdaptor(BaseAdaptor):
 
 
 class ForeignKeyAdaptor(BaseAdaptor):
+
     def __init__(self, *args, **kwargs):
         super(ForeignKeyAdaptor, self).__init__(*args, **kwargs)
         self.attributes.update({
@@ -156,11 +189,11 @@ class ForeignKeyAdaptor(BaseAdaptor):
 
     def set_value(self, value):
         self.field_value = value
-        setattr(self.obj, '%s_id' % self.field_name, self.field_value)
-        return value
+        setattr(self.obj, '%s_id' % self.get_real_field_name(), self.field_value)
+        return self.field_value
 
     def render_value(self):
-        return unicode(super(ForeignKeyAdaptor, self).render_value())
+        return unicode(getattr(self.obj, self.get_real_field_name()))
 
 
 class ChoicesAdaptor(BaseAdaptor):

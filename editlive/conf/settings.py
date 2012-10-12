@@ -27,6 +27,7 @@ editlive.register(TextChoicesAdaptorOption)
 
 EDITLIVE_DEFAULT_ADAPTORS = {
     # Fields
+    'char':     'editlive.adaptors.CharAdaptor',
     'text':     'editlive.adaptors.TextAdaptor',
     'date':     'editlive.adaptors.DateAdaptor',
     'datetime': 'editlive.adaptors.DateTimeAdaptor',

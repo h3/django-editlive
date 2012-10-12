@@ -1,6 +1,6 @@
 ;(function($){
 
-    $.widget('editliveWidgets.choicesField', $.editliveWidgets.textField, {
+    $.widget('editliveWidgets.choicesField', $.editliveWidgets.charField, {
         _type: 'choices',
         options: {
             choices: []

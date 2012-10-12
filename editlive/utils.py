@@ -32,32 +32,30 @@ def import_class(classpath, package=None):
 
 def get_field_type(field):
     if isinstance(field, str) and field == 'tabular':
-        fieldtype = 'tabular'
+        return 'tabular'
     elif isinstance(field, str) and field == 'stacked':
-        fieldtype = 'stacked'
+        return 'stacked'
     elif isinstance(field, models.CharField):
-        fieldtype = 'text'
+        return 'char'
         if getattr(field, 'choices', None):
-            fieldtype = 'choices'
+            return 'choices'
     elif isinstance(field, models.TextField):
-        fieldtype = 'textarea'
+        return 'text'
     elif isinstance(field, models.BooleanField):
-        fieldtype = 'boolean'
+        return 'boolean'
     elif isinstance(field, models.DateTimeField):
-        fieldtype = 'datetime'
+        return 'datetime'
     elif isinstance(field, models.DateField):
-        fieldtype = 'date'
+        return 'date'
     elif isinstance(field, ForeignKey):
-        fieldtype = 'fk'
+        return 'fk'
     elif isinstance(field, ManyToManyField):
-        fieldtype = 'm2m'
+        return 'm2m'
     elif isinstance(field, models.ImageField):
-        fieldtype = 'image'
+        return 'image'
     elif isinstance(field, models.FileField):
-        fieldtype = 'file'
-    else:
-        fieldtype = 'text'
-    return fieldtype
+        return 'file'
+    return 'char' # Default
 
 def get_default_adaptor(field):
     fieldtype = get_field_type(field)
