@@ -1,0 +1,207 @@
+.clearfix {
+  *zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.affix {
+  position: fixed;
+}
+
+.editlive {
+  padding: 4px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #555;
+  text-align: left;
+  cursor: pointer;
+  background: #eee;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+}
+
+.editlive:hover {
+  background: #def!important;
+}
+
+.editlive-text {
+  background: transparent;
+  border: 0;
+}
+
+.btn .editlive {
+  padding: 0;
+  font-size: inherit;
+  line-height: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 3px;
+}
+
+.btn .editlive:hover {
+  background: transparent!important;
+}
+
+.btn.block {
+  display: block;
+}
+
+.editlive-control-group,
+.editlive-control-group input {
+  margin-bottom: 0;
+}
+
+.editlive-control-group.block .editlive {
+  display: block;
+}
+
+.editlive-control-group.inline,
+.editlive-control-group.inline .editlive {
+  display: inline-block;
+}
+
+/* Hacks (move to valrive.css ?) */
+
+h1 strong {
+  display: inline-block;
+}
+
+h1 .editlive {
+  padding: 2px 4px;
+  font-size: 30px;
+  line-height: 32px;
+}
+
+h1 .editlive-control-group input {
+  height: 25px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.project-job-type {
+  font-size: 18px;
+}
+
+.project-job-type .editlive {
+  font-size: 18px;
+}
+
+/* bootstrapui.less */
+
+.ui-datepicker {
+  -webkit-box-shadow: 1px 1px 12px #777777;
+     -moz-box-shadow: 1px 1px 12px #777777;
+          box-shadow: 1px 1px 12px #777777;
+}
+
+.ui-autocomplete {
+  max-height: 300px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-box-shadow: 1px 1px 8px #777777;
+     -moz-box-shadow: 1px 1px 8px #777777;
+          box-shadow: 1px 1px 8px #777777;
+}
+
+.editlive-m2m {
+  padding: 0 0 0 4px;
+  margin: 0 0 7px 0;
+  background: transparent;
+  border: 0;
+  *zoom: 1;
+}
+
+.editlive-m2m:before,
+.editlive-m2m:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.editlive-m2m:after {
+  clear: both;
+}
+
+.editlive-m2m i[class^="icon-"] {
+  float: right;
+  margin: 2px 4px 0 0;
+}
+
+.editlive-m2m li {
+  padding: 3px 0;
+  margin: 0;
+  list-style: none;
+  border-bottom: 1px dashed #ccc;
+}
+
+.editlive-m2m li:last-child {
+  border: 0;
+}
+
+.editlive-m2m li:hover {
+  background: #def;
+}
+
+.editlive-m2m:hover {
+  background: transparent!important;
+}
+
+.editlive-m2m + input {
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+}
+
+.editlive-m2m + input:focus {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.ui-datepicker-trigger {
+  display: none;
+}

@@ -6,7 +6,6 @@
 
         _init: function(){
             var $self = this;
-
             $self.editlive = $($self.element.data('widget.editlive'));
             $self.items    = $($self.element.data('actions'));
             $self.options  = $.extend(this.options, $self.element.data());

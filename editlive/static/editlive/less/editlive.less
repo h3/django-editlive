@@ -1,0 +1,129 @@
+.editlive {
+    cursor: pointer;
+    background: #eee;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    color: #555;
+    font-size: 13px;
+    line-height: 18px;
+    padding: 4px;
+    text-align: left;
+}
+
+.editlive:hover {
+    background: #def!important;
+}
+
+.editlive-text {
+    border: 0;
+    background: transparent;
+}
+
+.btn .editlive {
+    background: transparent;
+    border: 0;
+    border-radius: 3px;
+    font-size: inherit;
+    line-height: inherit;
+    padding: 0;
+    &:hover {
+        background: transparent!important;
+    }
+}
+
+.btn.block {
+    display: block;
+}
+
+.editlive-control-group,
+.editlive-control-group input {
+    margin-bottom: 0;
+}
+
+.editlive-control-group.block .editlive {
+    display: block;
+}
+
+.editlive-control-group.inline,
+.editlive-control-group.inline .editlive {
+    display: inline-block;
+}
+ 
+
+
+/* Hacks (move to valrive.css ?) */
+
+h1 strong {
+    display: inline-block;
+}
+h1 .editlive {
+    font-size: 30px;
+    padding: 2px 4px;
+    line-height: 32px;
+}
+h1 .editlive-control-group input {
+    font-size: 30px;
+    height: 25px;
+    font-weight: bold;
+}
+
+.project-job-type {
+    font-size: 18px;
+    .editlive { 
+        font-size: 18px;
+    }
+}
+
+
+/* bootstrapui.less */
+
+.ui-datepicker {
+    .box-shadow(1px 1px 12px #777);
+}
+
+.ui-autocomplete { 
+    max-height: 300px; 
+    overflow-y: scroll; 
+    overflow-x: hidden;
+    .box-shadow(1px 1px 8px #777);
+}
+
+.editlive-m2m {
+    background: transparent;
+    border: 0;
+    margin: 0 0 7px 0;
+    padding: 0 0 0 4px;
+    .clearfix();
+    i[class^="icon-"] {
+        float: right;
+        margin: 2px 4px 0 0;
+    }
+    li {
+        list-style: none;
+        margin: 0;
+        padding: 3px 0;
+        border-bottom: 1px dashed #ccc;
+        &:last-child {
+            border: 0;
+        }
+        &:hover {
+            background: #def;
+        }
+    }
+}
+
+.editlive-m2m:hover {
+    background: transparent!important;
+}
+
+.editlive-m2m + input {
+    .opacity(70);    
+    &:focus {
+        .opacity(100);
+    }
+}
+
+
+.ui-datepicker-trigger {
+    display: none;
+}
