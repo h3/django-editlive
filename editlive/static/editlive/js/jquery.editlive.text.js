@@ -225,7 +225,6 @@
         },
 
         focus: function(e){
-            console.log('111');
             var $self = this;
             $self._trigger('focus')
             $self.show();
@@ -256,7 +255,6 @@
         },
 
         show: function() {
-            console.log('ZZZ');
             this._bind_kb_blur_events();
             this._set_element_width();
             this._watch_blur();
