@@ -36,9 +36,10 @@ def get_field_type(field):
     elif isinstance(field, str) and field == 'stacked':
         return 'stacked'
     elif isinstance(field, models.CharField):
-        return 'char'
         if getattr(field, 'choices', None):
             return 'choices'
+        else:
+            return 'char'
     elif isinstance(field, models.TextField):
         return 'text'
     elif isinstance(field, models.BooleanField):
@@ -66,7 +67,6 @@ def get_default_adaptor(field):
     if adaptor:
         return adaptor
     else:
-       #print "Warning: %s adaptor not found" % fieldtype
         return adaptors.get('text')
     
 
