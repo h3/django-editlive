@@ -73,7 +73,6 @@ def get_default_adaptor(field):
 def get_adaptor(obj, field_name, field_value=None, kwargs={}, adaptor=None):
     # Related field
     if field_name.endswith('_set'):
-       #inline_type = kwargs.get('inline', 'stacked')
         if adaptor is None: adaptor = get_default_adaptor('stacked')
         path_module, class_adaptor = ('.'.join(adaptor.split('.')[:-1]), adaptor.split('.')[-1])
         Adaptor = getattr(import_module(path_module), class_adaptor)
