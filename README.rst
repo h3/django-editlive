@@ -45,18 +45,17 @@ Installation
 
  5. Add the editlive JS to your base template::
 
-    <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.text.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.date.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.datetime.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.boolean.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.foreignkey.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.choices.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.manytomany.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.ajaxform.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.listactions.js"></script>
+    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.js"></script>
+    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.char.js"></script>
+    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.text.js"></script>
+    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.date.js"></script>
+    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.datetime.js"></script>
+    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.boolean.js"></script>
+    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.foreignkey.js"></script>
+    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.choices.js"></script>
+    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.manytomany.js"></script>
 
-Note: not all files are required.  Eventually all the JS will be minified, but meanwhile you can include just what you need.
+Note: not all files are required. Eventually all the JS will be minified, but meanwhile you can include just what you need.
 
 
 Basic usage
@@ -124,5 +123,6 @@ More to come
 
 There is other undocumented features I will eventually document. Meanwhile you can take a look at the source code.
 
- * ajaxform
- * listactions
+ * ajaxform (functional, but undocummented)
+ * listactions (functional, but undocummented)
+ * sync (not functional yet)
