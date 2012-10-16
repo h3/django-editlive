@@ -23,6 +23,12 @@
                     $.editlive.loadWidget(v);
                 });
             },
+
+            getByFieldId: function(fieldId) {
+                if (fieldId[0] == '#') fieldId = fieldId.slice(1);
+                return $('editlive[data-field-id="'+ fieldId +'"]');
+            },
+
             loadWidget: function(el){
                 var el = $(el), initialized = el.data('initialized') || false;
                 if (initialized) return true;
