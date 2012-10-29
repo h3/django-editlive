@@ -32,6 +32,7 @@
 
         _populate: function() {
             var $self = this;
+            $self.choices.empty();
             $.each($self.options.choices, function(k, item) {
                 if (item.value != $self.selected.value) {
                     $('<li><a href="#'+ item.value +'">'+ item.label +'</a></li>')
@@ -84,11 +85,8 @@
 
         success: function(data) {
             var $self = this;
-            //$self.control.removeClass('error');
-            //$self.set_placeholder_value($self._get_value());
-            //$self.blur();
+            $self._populate();
             $self._trigger('success');
-            //$self.btn_group.switchClass( "newClass", "anotherNewClass", 1000 );
         },
 
         error: function(data) {
@@ -96,7 +94,6 @@
             $self.control.addClass('error');
             $self._display_errors(data.messages);
             $self._trigger('error');
-            //$self.btn_group.switchClass( "newClass", "anotherNewClass", 1000 );
         }
         
     })
