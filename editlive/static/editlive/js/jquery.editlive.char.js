@@ -29,9 +29,12 @@
             $self.module_name  = $self.editlive.attr('module-name');
             $self.rendered_val = $self.editlive.attr('rendered-value');
             $self.tpl_filters  = $self.editlive.attr('template_filters');
+            $self.input_style  = $self.editlive.attr('input_style');
 
             if ($self.options.maxwidth != 'auto') {
+                console.log($self.options.maxwidth, $self.element)
                 $self.control.css('max-width', $self.options.maxwidth);
+                $self.element.css('max-width', $self.options.maxwidth);
             }
 
             if ($self.options.width) {
@@ -74,9 +77,9 @@
             if ($self.options['class']) {
                 $self.placeholder.addClass($self.options['class']);
             }
-            if ($self.options.mini)  $self.placeholder.addClass('eph-mini');
-            if ($self.options.small) $self.placeholder.addClass('eph-small');
-            if ($self.options.large) $self.placeholder.addClass('eph-large');
+            if ($self.options.mini)  { $self.element.addClass('eie-mini');  $self.placeholder.addClass('eph-mini'); }
+            if ($self.options.small) { $self.element.addClass('eie-small'); $self.placeholder.addClass('eph-small'); }
+            if ($self.options.large) { $self.element.addClass('eie-large'); $self.placeholder.addClass('eph-large'); }
             $self.placeholder.bind('click.editlive', function(e) {
                 $self.focus();
             });

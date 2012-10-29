@@ -85,6 +85,13 @@
   line-height: 15px;
 }
 
+.eie-small {
+  height: 17px!important;
+  padding: 3px 6px!important;
+  font-size: 12px!important;
+  line-height: 15px!important;
+}
+
 .editlive:hover {
   background: #def!important;
 }
