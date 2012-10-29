@@ -29,3 +29,28 @@ def editlive(context, context_variable, **kwargs):
 
     adaptor = get_adaptor(context_obj, field_name, field_value=field_value, kwargs=kwargs, adaptor=adaptor_str)
     return adaptor.render()
+
+
+#@register.simple_tag(takes_context=True)
+#def sync(context, css_class, object_name, prop, **kwargs):
+#    try:
+#        obj = Variable(object_name).resolve(context)
+#    except VariableDoesNotExist:
+#        # When a relation is missing it might raise an exception 
+#        # and break the entire site. So we just set it blank.
+#        obj = None
+#
+#    return getattr(obj, prop)()
+
+
+
+def prefix(value, string):
+    return '%s%s' % (value, string)
+register.simple_tag(prefix)
+register.filter('prefix', prefix)
+
+
+def suffix(value, string):
+    return '%s%s' % (value, string)
+register.simple_tag(suffix)
+register.filter('suffix', suffix)

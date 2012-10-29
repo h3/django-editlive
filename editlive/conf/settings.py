@@ -44,3 +44,12 @@ EDITLIVE_DEFAULT_ADAPTORS = {
    'stacked':   'editlive.adaptors.StackedInlineAdaptor',
 }
 
+#EDITLIVE_SYNC_TEMPLATE = """
+#<script type="text/javascript">(function($){$(function(){
+#$('%(selector)s').sync({
+#    model: '%(model)s',
+#    app: '%(app)s',
+#    property: '%(property)s'
+#});
+#});})(jQuery);</script>
+#"""

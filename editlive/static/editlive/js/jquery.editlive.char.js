@@ -10,7 +10,10 @@
             maxwidth: 'auto',
             emptyvalue: 'Cliquer pour modifier',
             wrapclass: 'inline',
-            errorplacement: 'bottom'
+            errorplacement: 'bottom',
+            mini: false,
+            small: false,
+            large: false
         },
 
         // Setup the widget
@@ -67,7 +70,13 @@
         _createPlaceholder: function(el) {
             var $self = this;
             $self.placeholder = $('<span class="editlive editlive-'+ $self._type +'" />')
-                                    .insertAfter(el || $self.element)
+                                    .insertAfter(el || $self.element);
+            if ($self.options['class']) {
+                $self.placeholder.addClass($self.options['class']);
+            }
+            if ($self.options.mini)  $self.placeholder.addClass('eph-mini');
+            if ($self.options.small) $self.placeholder.addClass('eph-small');
+            if ($self.options.large) $self.placeholder.addClass('eph-large');
             $self.placeholder.bind('click.editlive', function(e) {
                 $self.focus();
             });

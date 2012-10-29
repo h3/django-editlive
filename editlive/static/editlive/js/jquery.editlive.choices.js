@@ -22,6 +22,11 @@
             $self.btn_toggle = $(['<button class="btn dropdown-toggle" data-toggle="dropdown">',
                                   '<span class="caret"></span></button>'].join(''))
                                   .insertAfter($self.btn_label);
+
+            if ($self.options.mini)  $self.btn_label.add($self.btn_toggle).addClass('btn-mini');
+            if ($self.options.small) $self.btn_label.add($self.btn_toggle).addClass('btn-small');
+            if ($self.options.large) $self.btn_label.add($self.btn_toggle).addClass('btn-large');
+
             $self._populate();
         },
 

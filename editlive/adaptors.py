@@ -107,7 +107,6 @@ class BaseAdaptor(object):
                 'rendered_value': self.render_value()}
         else: 
             messages = []
-            print form.errors
             for field_name_error, errors_field in form.errors.items():
                 for error in errors_field:
                     messages.append({'field_name': field_name_error, 'message': unicode(error)})

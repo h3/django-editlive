@@ -4,11 +4,25 @@
     border: 1px solid #e5e5e5;
     border-radius: 3px;
     color: #555;
-    font-size: 13px;
+    font-size: inherit;
     line-height: 18px;
     padding: 4px;
     text-align: left;
+    &.fixedwidth {
+        overflow: hidden; 
+        white-space: nowrap; 
+        text-overflow: ellipsis; 
+    }
+    &.eph-mini {}
+    &.eph-small {
+        line-height: 15px;
+        height: 17px;
+        font-size: 12px;
+        padding: 3px 6px;
+    }
+    &.eph-large {}
 }
+
 
 .editlive:hover {
     background: #def!important;
