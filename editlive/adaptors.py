@@ -18,6 +18,7 @@ class BaseAdaptor(object):
         self.field_name = field_name
         self.field_value = getattr(self.obj, self.field_name, field_value)
         self.template_filters = None
+        self.load_tags = []
         self.form_class = modelform_factory(self.model)
         self.form = self.form_class(instance=self.obj, initial=initial)
         self.form_field = self.form[self.field_name]
@@ -45,6 +46,8 @@ class BaseAdaptor(object):
 
         if self.kwargs.get('template_filters'):
             self.template_filters = self.kwargs.get('template_filters').split('|')
+            if self.kwargs.get('load_tags'):
+                self.load_tags = self.kwargs.get('load_tags').split('|')
 
     def get_real_field_name(self):
         """
@@ -92,7 +95,8 @@ class BaseAdaptor(object):
         Returns the field value as it should be rendered on
         the placeholder.
         """
-        return apply_filters(value or self.get_value(), self.template_filters)
+        v = value or self.get_value()
+        return apply_filters(v, self.template_filters, self.load_tags)
 
     def save(self):
         form = self.get_form()
