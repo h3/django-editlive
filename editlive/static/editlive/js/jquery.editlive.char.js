@@ -29,10 +29,8 @@
             $self.module_name  = $self.editlive.attr('module-name');
             $self.rendered_val = $self.editlive.attr('rendered-value');
             $self.tpl_filters  = $self.editlive.attr('template_filters');
-            $self.input_style  = $self.editlive.attr('input_style');
 
             if ($self.options.maxwidth != 'auto') {
-                console.log($self.options.maxwidth, $self.element)
                 $self.control.css('max-width', $self.options.maxwidth);
                 $self.element.css('max-width', $self.options.maxwidth);
             }

@@ -63,6 +63,10 @@
                             .append('<a>' + item.label + '</a>');
                 };
 
+            if ($self.options.maxwidth != 'auto') {
+                $self.input.css('max-width', $self.options.maxwidth);
+            }
+
             $self._createPlaceholder($self.input);
         },
 
