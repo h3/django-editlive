@@ -13,6 +13,10 @@
         })
         return opts;
     };
+    
+    $.inherit = function(p, c) {
+        for (var x in c) p[x] = c[x];
+    };
 
     $.editlive = (function($) {
         $self = this;
@@ -33,7 +37,7 @@
                 var el = $(el), initialized = el.data('initialized') || false;
                 if (initialized) return true;
                 else {
-                    var widgetname = el.data('type');
+                    var widgetname = el.data('widget') || el.data('type');
                     if ($.isFunction($.editliveWidgets[widgetname])) {
                         var opts, options, input;
                         opts  = getJsOptions(el);

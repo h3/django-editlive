@@ -92,6 +92,10 @@
   line-height: 15px!important;
 }
 
+select.eie-small {
+  height: 25px!important;
+}
+
 .editlive:hover {
   background: #def!important;
 }

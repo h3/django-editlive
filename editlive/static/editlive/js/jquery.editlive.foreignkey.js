@@ -1,10 +1,9 @@
 ;(function($){
+    
     $.widget('editliveWidgets.foreignkeyField', $.editliveWidgets.charField, {
         _type: 'foreignkey',
         sourceSelect: false,
-        options: {
-            maxlength: 10
-        },
+        options: {},
 
         _source_is_select: function(){
             if (typeof(this.__source_is_select) == 'undefined') {
@@ -55,7 +54,7 @@
             }
 
             //$.editliveWidgets.charField.prototype._init.apply(this, arguments);
-            $self.input = $('<input class="editlive" style="width:'+ ($self.options.width || '') +';" type="text" />').hide().insertAfter($self.element);
+            $self.input = $('<input class="editlive" type="text" />').hide().insertAfter($self.element);
             $self.input.autocomplete($self.options)
                 .data('autocomplete')._renderItem = function(ul, item){
                     return $('<li />').appendTo(ul)
@@ -65,6 +64,12 @@
 
             if ($self.options.maxwidth != 'auto') {
                 $self.input.css('max-width', $self.options.maxwidth);
+            }
+
+            if ($self.options.width) {
+                var chim = parseInt($self.element.css('padding-left').match(/\d+/)[0], 10) 
+                           + parseInt($self.element.css('padding-right').match(/\d+/)[0], 10);
+                $self.input.css('width', $self.options.width - chim);
             }
 
             $self._createPlaceholder($self.input);
@@ -101,5 +106,18 @@
             this.input.hide();
             if (this.placeholder) this.placeholder.show();
         },
-    })
+    });
+
+    $.widget('editliveWidgets.foreignkeyFieldSelect', $.editliveWidgets.charField, {
+        _type: 'foreignkey',
+        _init: function(){
+            this._createPlaceholder();
+            if (this.options.width) {
+                var chim = parseInt(this.element.css('padding-left').match(/\d+/)[0], 10) 
+                           + parseInt(this.element.css('padding-right').match(/\d+/)[0], 10);
+                this.element.css('width', this.options.width - chim);
+            }
+        },
+    });
+
 })(jQuery);
