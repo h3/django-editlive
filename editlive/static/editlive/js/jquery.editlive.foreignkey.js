@@ -97,7 +97,6 @@
         },
 
         show: function() {
-            console.log('CCC');
             this.input.show();
             if (this.placeholder) this.placeholder.hide();
         },
