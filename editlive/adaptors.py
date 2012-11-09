@@ -101,7 +101,7 @@ class BaseAdaptor(object):
     def save(self):
         form = self.get_form()
         if form.is_valid():
-            self.obj.save()
+            form.save()
             return {
                 'error': False,
                 'rendered_value': self.render_value()}
