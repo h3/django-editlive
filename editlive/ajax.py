@@ -20,8 +20,13 @@ def save(request, **kwargs):
     obj           = get_object_or_404(Model, pk=object_id)
     adaptor       = get_adaptor(obj, field_name)
     tpl_filters   = kwargs.get('tpl_filters')
+    load_tags     = kwargs.get('load_tags')
 
-    if tpl_filters: adaptor.template_filters = tpl_filters.split('|')
+    if tpl_filters: 
+        adaptor.template_filters = tpl_filters.split('|')
+        if load_tags:
+            adaptor.load_tags = load_tags.split('|')
+
     adaptor.set_value(field_value)
 
     return simplejson.dumps(adaptor.save())

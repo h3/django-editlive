@@ -69,6 +69,8 @@ class BaseAdaptor(object):
             if k == 'template_filters':
                 self.attributes['rendered-value'] = self.render_value()
                 self.attributes[k] = v
+            elif k in ['load_tags']:
+                self.attributes[k] = v
             elif v is not None:
                 self.attributes['data-' + k] = v
 

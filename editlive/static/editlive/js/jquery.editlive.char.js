@@ -29,6 +29,7 @@
             $self.module_name  = $self.editlive.attr('module-name');
             $self.rendered_val = $self.editlive.attr('rendered-value');
             $self.tpl_filters  = $self.editlive.attr('template_filters');
+            $self.load_tags    = $self.editlive.attr('load_tags');
 
             if ($self.options.maxwidth != 'auto') {
                 $self.control.css('max-width', $self.options.maxwidth);
@@ -243,7 +244,8 @@
                 object_id:     $self.object_id,
                 app_label:     $self.app_label,
                 module_name:   $self.module_name,
-                tpl_filters:   $self.tpl_filters
+                tpl_filters:   $self.tpl_filters,
+                load_tags:     $self.load_tags
             });
         },
 
