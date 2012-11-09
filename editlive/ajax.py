@@ -10,18 +10,23 @@ from editlive.utils import get_adaptor, import_class
 
 @dajaxice_register(method='POST')
 def save(request, **kwargs):
-    field_name    = kwargs.get('field_name')
-    field_value   = kwargs.get('field_value')
-    object_id     = kwargs.get('object_id')
-    app_label     = kwargs.get('app_label')
-    module_name   = kwargs.get('module_name')
+    field_name = kwargs.get('field_name')
+    field_value = kwargs.get('field_value')
+    object_id = kwargs.get('object_id')
+    app_label = kwargs.get('app_label')
+    module_name = kwargs.get('module_name')
     field_options = kwargs.get('field_options')
-    Model         = get_model(app_label, module_name)
-    obj           = get_object_or_404(Model, pk=object_id)
-    adaptor       = get_adaptor(obj, field_name)
-    tpl_filters   = kwargs.get('tpl_filters')
+    Model = get_model(app_label, module_name)
+    obj = get_object_or_404(Model, pk=object_id)
+    adaptor = get_adaptor(obj, field_name)
+    tpl_filters = kwargs.get('tpl_filters')
+    load_tags = kwargs.get('load_tags')
 
-    if tpl_filters: adaptor.template_filters = tpl_filters.split('|')
+    if tpl_filters:
+        adaptor.template_filters = tpl_filters.split('|')
+        if load_tags:
+            adaptor.load_tags = load_tags.split('|')
+
     adaptor.set_value(field_value)
 
     return simplejson.dumps(adaptor.save())
@@ -29,7 +34,7 @@ def save(request, **kwargs):
 
 @dajaxice_register(method='POST')
 def save_form(request, **kwargs):
-    meta  = kwargs.get('meta')
+    meta = kwargs.get('meta')
     model = get_model(*meta.get('model').split('.'))
     fkwargs = {}
 
@@ -45,12 +50,15 @@ def save_form(request, **kwargs):
 
     if form.is_valid():
         form.save()
-        out = { 'error': False }
-    else: 
+        out = {'error': False}
+    else:
         messages = []
         for field_name_error, errors_field in form.errors.items():
             for error in errors_field:
-                messages.append({'field_name': field_name_error, 'message': unicode(error)})
+                messages.append({
+                    'field_name': field_name_error,
+                    'message': unicode(error)
+                })
 
         out = {'error': True, 'messages': messages}
 
@@ -60,12 +68,12 @@ def save_form(request, **kwargs):
 @dajaxice_register(method='POST')
 def delete_objects(request, **kwargs):
     # Todo: permission & app/model whitelist
-    object_list   = kwargs['objects']
-    app_label     = kwargs['meta'].get('appLabel')
-    module_name   = kwargs['meta'].get('moduleName')
-    Model         = get_model(app_label, module_name)
+    object_list = kwargs['objects']
+    app_label = kwargs['meta'].get('appLabel')
+    module_name = kwargs['meta'].get('moduleName')
+    Model = get_model(app_label, module_name)
     out = {
-        'error': False, 
+        'error': False,
         'object_list': object_list,
         'app_label': kwargs['meta'].get('appLabel'),
         'module_name': kwargs['meta'].get('moduleName'),
@@ -109,5 +117,4 @@ def delete_objects(request, **kwargs):
 #                print "%s!=%s (CHANGED)" % (oldval, newval)
 #           #else:
 #           #    print "%s==%s" % (oldval, newval)
-#            
 #    return simplejson.dumps({})

@@ -10,7 +10,9 @@ from editlive.utils import get_dict_from_obj, apply_filters, import_class
 
 class BaseAdaptor(object):
 
-    def __init__(self, field, obj, field_name, field_value='', kwargs={}, initial={}):
+    def __init__(self, field, obj, field_name, field_value='', \
+            kwargs={}, initial={}):
+
         self.kwargs = kwargs
         self.field = field
         self.obj = obj
@@ -23,12 +25,11 @@ class BaseAdaptor(object):
         self.form = self.form_class(instance=self.obj, initial=initial)
         self.form_field = self.form[self.field_name]
 
-
         if self.kwargs.get('formset'):
             self.field_index = self.kwargs.get('field-index', 0)
             self.field_name = '%s_set-%d-%s' % (
-                                self.kwargs.get('formset'), 
-                                self.field_index, 
+                                self.kwargs.get('formset'),
+                                self.field_index,
                                 self.form_field.html_name)
             self.field_id = 'id_%s' % self.field_name
         else:
@@ -45,7 +46,8 @@ class BaseAdaptor(object):
         }
 
         if self.kwargs.get('template_filters'):
-            self.template_filters = self.kwargs.get('template_filters').split('|')
+            self.template_filters = self.kwargs.get('template_filters')\
+                                        .split('|')
             if self.kwargs.get('load_tags'):
                 self.load_tags = self.kwargs.get('load_tags').split('|')
 
@@ -54,8 +56,9 @@ class BaseAdaptor(object):
         Formsets mangles fieldnames with positional slugs.
         This function returns the actual field name alone.
         """
-        if '_set-' in self.field_name: # Formset field
-            manager, pos, field_name = filter(None, re.split(r'(\w+)_set-(\d+)-(\w+)', self.field_name))
+        if '_set-' in self.field_name:  # Formset field
+            manager, pos, field_name = filter(None, \
+                    re.split(r'(\w+)_set-(\d+)-(\w+)', self.field_name))
         else:
             field_name = self.field_name
         return field_name
@@ -69,6 +72,8 @@ class BaseAdaptor(object):
             if k == 'template_filters':
                 self.attributes['rendered-value'] = self.render_value()
                 self.attributes[k] = v
+            elif k in ['load_tags']:
+                self.attributes[k] = v
             elif v is not None:
                 self.attributes['data-' + k] = v
 
@@ -78,9 +83,9 @@ class BaseAdaptor(object):
         return ' ' + ' '.join(o) + ' '
 
     def get_value(self):
-        if callable(self.field_value): 
+        if callable(self.field_value):
             return self.field_value()
-        return self.field_value 
+        return self.field_value
 
     def set_value(self, value):
         """
@@ -105,14 +110,17 @@ class BaseAdaptor(object):
             return {
                 'error': False,
                 'rendered_value': self.render_value()}
-        else: 
+        else:
             messages = []
             for field_name_error, errors_field in form.errors.items():
                 for error in errors_field:
-                    messages.append({'field_name': field_name_error, 'message': unicode(error)})
+                    messages.append({
+                        'field_name': field_name_error,
+                        'message': unicode(error)
+                    })
 
             return {
-                'error': True, 
+                'error': True,
                 'messages': messages,
                 'value': self.get_value(),
                 'rendered_value': self.render_value()}
@@ -126,7 +134,6 @@ class BaseAdaptor(object):
         Render the form field along with the <editlive> tag
         """
         field = unicode(self.form_field)
-        
         if self.kwargs.get('formset'):
             auto_id = 'id="%s"' % self.form_field.auto_id
             name = 'name="%s"' % self.form_field.html_name
@@ -158,7 +165,7 @@ class BooleanAdaptor(BaseAdaptor):
         self.attributes.update({'data-type': 'booleanField'})
 
     def get_value(self):
-        if callable(self.field_value): 
+        if callable(self.field_value):
             v = self.field_value()
         v = self.field_value
         return v and 'on' or 'off'
@@ -192,7 +199,8 @@ class ForeignKeyAdaptor(BaseAdaptor):
 
     def set_value(self, value):
         self.field_value = value
-        setattr(self.obj, '%s_id' % self.get_real_field_name(), self.field_value)
+        setattr(self.obj, '%s_id' % \
+                self.get_real_field_name(), self.field_value)
         return self.field_value
 
     def render_value(self):
@@ -224,11 +232,12 @@ class ManyToManyAdaptor(BaseAdaptor):
 
 
 def get_dynamic_modelform(**kwargs):
-    form = type('DynamicForm',(ModelForm,),{})
-    meta = type('Meta',(object,),{})
+    form = type('DynamicForm', (ModelForm, ), {})
+    meta = type('Meta', (object, ), {})
     meta.exclude = kwargs.get('exclude', None)
     form.Meta = meta
     return form
+
 
 class BaseInlineAdaptor(object):
 
@@ -239,15 +248,19 @@ class BaseInlineAdaptor(object):
         self.model = self.manager.model
         self.obj = self.model()
         self.value = value
-        # TODO: fix this shit..
-        # http://stackoverflow.com/questions/12462616/finding-the-relation-field-of-a-related-object-in-django
+        # TODO
+        """
+        fix this shit..
+        http://stackoverflow.com/questions/12462616/
+        finding-the-relation-field-of-a-related-object-in-django
+        """
         self.query_field = self.manager.core_filters.keys()[0].split('__')[0]
         self.form_class = self.get_form()
         self.initial = initial
         self.initial[self.query_field] = obj.pk
 
         self.form = self.form_class(**{
-            'instance': self.obj, 
+            'instance': self.obj,
             'initial': initial,
             'prefix': self.manager_name[:-4],
         })
@@ -262,7 +275,8 @@ class BaseInlineAdaptor(object):
             fkwargs['form'] = import_class(self.kwargs.get('form'))
         else:
             # Generic form
-            fkwargs['form'] = get_dynamic_modelform(exclude=(self.query_field,))
+            fkwargs['form'] = get_dynamic_modelform(\
+                                exclude=(self.query_field, ))
 
         return modelform_factory(self.model, **fkwargs)
 

@@ -7,7 +7,7 @@ class Editlive(object):
         self.options = []
         for k in kwargs:
             self.options.append(
-                k.replace('_','-') + '="' + kwargs.get(k) + '"')
+                k.replace('_', '-') + '="' + kwargs.get(k) + '"')
 
     def render(self, form, form_style, context):
         self.options.append('data-type="' + self.widget_type + '"')
