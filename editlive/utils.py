@@ -11,8 +11,9 @@ from django.db.models.fields.related import ForeignKey, ManyToManyField
 from editlive.conf import settings as editlive_settings
 
 """
-Mostly copied/inspired of: 
-https://github.com/zikzakmedia/django-inplaceeditform/blob/master/inplaceeditform/commons.py
+Mostly copied/inspired of:
+https://github.com/zikzakmedia/django-inplaceeditform/
+blob/master/inplaceeditform/commons.py
 """
 
 
@@ -29,6 +30,7 @@ def import_class(classpath, package=None):
     classname = classpath.split('.')[-1]
     classpath = '.'.join(classpath.split('.')[:-1])
     return getattr(import_module(classpath), classname, None)
+
 
 def get_field_type(field):
     if isinstance(field, str) and field == 'tabular':
@@ -56,7 +58,8 @@ def get_field_type(field):
         return 'image'
     elif isinstance(field, models.FileField):
         return 'file'
-    return 'char' # Default
+    return 'char'  # Default
+
 
 def get_default_adaptor(field):
     fieldtype = get_field_type(field)
@@ -68,27 +71,33 @@ def get_default_adaptor(field):
         return adaptor
     else:
         return adaptors.get('text')
-    
+
 
 def get_adaptor(obj, field_name, field_value=None, kwargs={}, adaptor=None):
     # Related field
     if field_name.endswith('_set'):
-        if adaptor is None: adaptor = get_default_adaptor('stacked')
-        path_module, class_adaptor = ('.'.join(adaptor.split('.')[:-1]), adaptor.split('.')[-1])
+        if adaptor is None:
+            adaptor = get_default_adaptor('stacked')
+        path_module, class_adaptor = ('.'.join(adaptor.split('.')[:-1]), \
+                                        adaptor.split('.')[-1])
         Adaptor = getattr(import_module(path_module), class_adaptor)
         return Adaptor(obj, field_name, field_value, kwargs=kwargs)
 
-    else: # Vanilla field
+    else:  # Vanilla field
 
-        if '_set-' in field_name: # Formset field
-            manager, pos, field_name = filter(None, re.split(r'(\w+)_set-(\d+)-(\w+)', field_name))
+        if '_set-' in field_name:  # Formset field
+            manager, pos, field_name = filter(None, \
+                    re.split(r'(\w+)_set-(\d+)-(\w+)', field_name))
 
         field = obj._meta.get_field_by_name(field_name)[0]
-        if adaptor is None: adaptor = get_default_adaptor(field)
-        path_module, class_adaptor = ('.'.join(adaptor.split('.')[:-1]), adaptor.split('.')[-1])
+        if adaptor is None:
+            adaptor = get_default_adaptor(field)
+        path_module, class_adaptor = ('.'.join(adaptor.split('.')[:-1]), \
+                                        adaptor.split('.')[-1])
         Adaptor = getattr(import_module(path_module), class_adaptor)
 
-        return Adaptor(field, obj, field_name, field_value=field_value, kwargs=kwargs)
+        return Adaptor(field, obj, field_name, \
+                field_value=field_value, kwargs=kwargs)
 
 
 def get_dict_from_obj(obj):
@@ -118,5 +127,7 @@ def apply_filters(value, filters, load_tags=None):
             load_tags_str = "{%% load %s %%}" % ' '.join(load_tags)
         else:
             load_tags_str = ""
-        value = template.Template("""%s{{ value%s }}""" % (load_tags_str, filters_str)).render(template.Context({'value': value}))
+        ctx = template.Context({'value': value})
+        value = template.Template("""%s{{ value%s }}""" % (\
+                load_tags_str, filters_str)).render(ctx)
     return value
