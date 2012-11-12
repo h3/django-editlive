@@ -74,7 +74,7 @@ class BaseAdaptor(object):
                 self.attributes[k] = v
             elif k in ['load_tags']:
                 self.attributes[k] = v
-            elif v is not None:
+            elif v is not None and v not in ['readonly']:
                 self.attributes['data-' + k] = v
 
         for k, v in self.attributes.items():
@@ -134,6 +134,8 @@ class BaseAdaptor(object):
         Render the form field along with the <editlive> tag
         """
         field = unicode(self.form_field)
+        if self.kwargs.get('readonly'):
+            return self.render_value()
         if self.kwargs.get('formset'):
             auto_id = 'id="%s"' % self.form_field.auto_id
             name = 'name="%s"' % self.form_field.html_name
