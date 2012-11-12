@@ -251,7 +251,7 @@
 
         success: function(data) {
             var $self = this;
-            if (data.rendered_value) {
+            if (typeof(data.rendered_value) != 'undefined') {
                 $self.rendered_val = data.rendered_value;
             }
             $self.set_placeholder_value();
