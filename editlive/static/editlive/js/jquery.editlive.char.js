@@ -161,15 +161,24 @@
             }
         },
 
+        _display_error: function(error) {
+            this.element.tooltip({
+                title: error.message,
+                placement: this.options.errorplacement
+            }).tooltip('show');
+        },
+
         _display_errors: function(errors) {
             var $self = this;
             $.each(errors, function(k, v) {
-                var el = $('[name="'+ v.field_name +'"]');
-                el.tooltip({
-                    title: v.message,
-                    placement: $self.options.errorplacement
-                }).tooltip('show');
+                if (v.field_name == $self.field_name) {
+                    $self._display_error(v);
+                }
             });
+        },
+
+        _destroy_errors: function() {
+            this.element.tooltip('destroy');
         },
 
         focus: function(e){
@@ -263,6 +272,7 @@
                     .css('background-color', $self.options.highlightColor)
                     .animate({backgroundColor: oldColor});
             }
+            $self._destroy_errors();
             $self._trigger('success');
         },
 
