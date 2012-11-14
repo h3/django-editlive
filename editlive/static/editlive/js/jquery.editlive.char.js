@@ -4,6 +4,7 @@
         _type: 'char',
         _active: false,
         widgetEventPrefix: 'widget',
+        placeholdertag: 'span',
         value: undefined,
         options: {
             minwidth: 120,
@@ -71,7 +72,7 @@
 
         _createPlaceholder: function(el) {
             var $self = this;
-            $self.placeholder = $('<span class="editlive editlive-'+ $self._type +'" />')
+            $self.placeholder = $('<'+ $self.placeholdertag +' class="editlive editlive-'+ $self._type +'" />')
                                     .insertAfter(el || $self.element);
             if ($self.options['class']) {
                 $self.placeholder.addClass($self.options['class']);
@@ -114,7 +115,7 @@
             $('html').bind('click.editlive_'+ $self.element.attr('id'), function(e){
                 var targetId = $(e.target).attr('id')
                 if (typeof(targetId) == 'undefined') {
-                    if (!$(e.target).hasClass('editlive')) {
+                    if (!$(e.target).hasClass('editlive') && !$(e.target).parents('.editlive').get(0)) {
                         $self.blur();
                     }
                 }
@@ -297,70 +298,3 @@
     });
 
 })(jQuery);
-
-//.delegate( "li.multi-option-item", "click", $.proxy( this._itemClick, this ) );
-//
-/*
-;(function($){
-    $.fn.autoGrowInput = function(o) {
-
-        o = $.extend({
-            width: false,
-            maxwidth: 1000,
-            minwidth: 0,
-            comfortZone: 20,
-            highlightColor: '#b3ffa0'
-        }, o);
-
-        this.filter('input:text').each(function(){
-
-            var minwidth = o.minwidth || $(this).width(),
-            val = '',
-            input = $(this),
-            testSubject = $('<tester/>').css({
-                position: 'absolute',
-                top: -9999,
-                left: -9999,
-                width: 'auto',
-                fontSize: input.css('fontSize'),
-                fontFamily: input.css('fontFamily'),
-                fontWeight: input.css('fontWeight'),
-                letterSpacing: input.css('letterSpacing'),
-                whiteSpace: 'nowrap'
-            }),
-            check = function() {
-
-                if (val === (val = input.val())) {return;}
-
-                // Enter new content into testSubject
-                var escaped = val.replace(/&/g, '&amp;').replace(/\s/g,' ').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                testSubject.html(escaped);
-
-                // Calculate new width + whether to change
-                var testerWidth = testSubject.width(),
-                    newWidth = (testerWidth + o.comfortZone) >= minwidth ? testerWidth + o.comfortZone : minwidth,
-                    currentWidth = input.width(),
-                    isValidWidthChange = (newWidth < currentWidth && newWidth >= minwidth)
-                        || (newWidth > minwidth && newWidth < o.maxwidth);
-
-                // Animate width
-                if (isValidWidthChange) {
-                    input.width(newWidth);
-                }
-
-            };
-
-        testSubject.insertAfter(input);
-
-        $(this).bind('keyup keydown blur update', check);
-
-        });
-
-        return this;
-
-    };
-
-})(jQuery);
-
-*/
-

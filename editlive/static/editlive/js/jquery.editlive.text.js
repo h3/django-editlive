@@ -2,6 +2,7 @@
 
     $.widget('editliveWidgets.textField', $.editliveWidgets.charField, {
         _type: 'text',
+        placeholdertag: 'div',
         options: {},
         _create: function() { 
             var $self = this;
@@ -14,6 +15,13 @@
                 $self.element.css('min-height', $self.element.height(200));
             }
             $.editliveWidgets.charField.prototype._create.apply(this, arguments);
+        },
+
+        set_placeholder_value: function(display) {
+            if (this.placeholder) {
+                var val = display || this.get_display_value() || this.options.emptyvalue;
+                this.placeholder.html(val);
+            }
         },
 
         _bind_kb_blur_events: function(el) {
