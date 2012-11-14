@@ -40,8 +40,16 @@
                     var widgetname = el.data('widget') || el.data('type');
                     if ($.isFunction($.editliveWidgets[widgetname])) {
                         var opts, options, input;
-                        opts  = getJsOptions(el);
-                        input = $id(el.data('field-id'));
+                        var opts  = getJsOptions(el);
+                        input_id = $id(el.data('field-id'));
+
+                        // We start by checking for a close match. Theorically there
+                        // shouldn't be two fields with the same id, but in reality it
+                        // does happens and it does fuck up editlive.
+                        input = el.prev(input_id);
+                        if (!input.get(0)) input = el.closest(input_id);
+                        else if (!input.get(0)) input = el.parent().find(input_id);
+                        else input = $(input_id);
 
                         if (!input.length && $.editliveWidgets[widgetname].prototype._selector) {
                             input = $($.editliveWidgets[widgetname].prototype._selector);
