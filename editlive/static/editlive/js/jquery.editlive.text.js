@@ -3,7 +3,7 @@
     $.widget('editliveWidgets.textField', $.editliveWidgets.charField, {
         _type: 'text',
         options: {},
-        _create: function() {
+        _create: function() { 
             var $self = this;
             if (!$self.options.width) {
                 // Restric native textarea resizing to vertical only

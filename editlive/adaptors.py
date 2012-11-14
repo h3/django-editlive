@@ -23,33 +23,37 @@ class BaseAdaptor(object):
         self.load_tags = []
         self.form_class = modelform_factory(self.model)
         self.form = self.form_class(instance=self.obj, initial=initial)
-        self.form_field = self.form[self.field_name]
+        try:
+            self.form_field = self.form[self.field_name]
+        except KeyError:
+            self.form_field = False
 
-        if self.kwargs.get('formset'):
-            self.field_index = self.kwargs.get('field-index', 0)
-            self.field_name = '%s_set-%d-%s' % (
-                                self.kwargs.get('formset'),
-                                self.field_index,
-                                self.form_field.html_name)
-            self.field_id = 'id_%s' % self.field_name
-        else:
-            self.field_id = self.form_field.auto_id
+        if self.form_field:
+            if self.kwargs.get('formset'):
+                self.field_index = self.kwargs.get('field-index', 0)
+                self.field_name = '%s_set-%d-%s' % (
+                                    self.kwargs.get('formset'),
+                                    self.field_index,
+                                    self.form_field.html_name)
+                self.field_id = 'id_%s' % self.field_name
+            else:
+                self.field_id = self.form_field.auto_id
 
-        self.attributes = {
-            'data-type': 'livetextField',
-            'data-field-id': self.field_id,
-            'module-name': self.model._meta.module_name,
-            'app-label': self.model._meta.app_label,
-            'field-name': self.field_name,
-            'object-id': self.obj.pk,
-            'rendered-value': 'Cliquer pour modifier',
-        }
+            self.attributes = {
+                'data-type': 'livetextField',
+                'data-field-id': self.field_id,
+                'module-name': self.model._meta.module_name,
+                'app-label': self.model._meta.app_label,
+                'field-name': self.field_name,
+                'object-id': self.obj.pk,
+                'rendered-value': 'Cliquer pour modifier',
+            }
 
-        if self.kwargs.get('template_filters'):
-            self.template_filters = self.kwargs.get('template_filters')\
-                                        .split('|')
-            if self.kwargs.get('load_tags'):
-                self.load_tags = self.kwargs.get('load_tags').split('|')
+            if self.kwargs.get('template_filters'):
+                self.template_filters = self.kwargs.get('template_filters')\
+                                            .split('|')
+                if self.kwargs.get('load_tags'):
+                    self.load_tags = self.kwargs.get('load_tags').split('|')
 
     def get_real_field_name(self):
         """
@@ -105,8 +109,10 @@ class BaseAdaptor(object):
 
     def save(self):
         form = self.get_form()
-        if form.is_valid():
-            form.save()
+        field = form[self.form_field.name]
+        # We do not validate the whole form as it lead to conflicts
+        if len(field.errors) == 0:
+            self.obj.save()
             return {
                 'error': False,
                 'rendered_value': self.render_value()}
@@ -134,15 +140,18 @@ class BaseAdaptor(object):
         Render the form field along with the <editlive> tag
         """
         field = unicode(self.form_field)
-        if self.kwargs.get('readonly'):
-            return self.render_value()
-        if self.kwargs.get('formset'):
-            auto_id = 'id="%s"' % self.form_field.auto_id
-            name = 'name="%s"' % self.form_field.html_name
-            field = re.sub(auto_id, 'id="%s"' % self.field_id, field)
-            field = re.sub(name, 'name="%s"' % self.field_name, field)
+        if self.form_field:
+            if self.kwargs.get('readonly'):
+                return self.render_value()
+            if self.kwargs.get('formset'):
+                auto_id = 'id="%s"' % self.form_field.auto_id
+                name = 'name="%s"' % self.form_field.html_name
+                field = re.sub(auto_id, 'id="%s"' % self.field_id, field)
+                field = re.sub(name, 'name="%s"' % self.field_name, field)
 
-        return mark_safe(field + self.render_widget())
+            return mark_safe(field + self.render_widget())
+        else:
+            return field
 
     def get_form(self):
         form = modelform_factory(self.model)
@@ -152,19 +161,22 @@ class BaseAdaptor(object):
 class CharAdaptor(BaseAdaptor):
     def __init__(self, *args, **kwargs):
         super(CharAdaptor, self).__init__(*args, **kwargs)
-        self.attributes.update({'data-type': 'charField'})
+        if self.form_field:
+            self.attributes.update({'data-type': 'charField'})
 
 
 class TextAdaptor(BaseAdaptor):
     def __init__(self, *args, **kwargs):
         super(TextAdaptor, self).__init__(*args, **kwargs)
-        self.attributes.update({'data-type': 'textField'})
+        if self.form_field:
+            self.attributes.update({'data-type': 'textField'})
 
 
 class BooleanAdaptor(BaseAdaptor):
     def __init__(self, *args, **kwargs):
         super(BooleanAdaptor, self).__init__(*args, **kwargs)
-        self.attributes.update({'data-type': 'booleanField'})
+        if self.form_field:
+            self.attributes.update({'data-type': 'booleanField'})
 
     def get_value(self):
         if callable(self.field_value):
@@ -181,23 +193,26 @@ class BooleanAdaptor(BaseAdaptor):
 class DateAdaptor(BaseAdaptor):
     def __init__(self, *args, **kwargs):
         super(DateAdaptor, self).__init__(*args, **kwargs)
-        self.attributes.update({'data-type': 'dateField'})
+        if self.form_field:
+            self.attributes.update({'data-type': 'dateField'})
 
 
 class DateTimeAdaptor(BaseAdaptor):
     def __init__(self, *args, **kwargs):
         super(DateTimeAdaptor, self).__init__(*args, **kwargs)
-        self.attributes.update({'data-type': 'datetimeField'})
+        if self.form_field:
+            self.attributes.update({'data-type': 'datetimeField'})
 
 
 class ForeignKeyAdaptor(BaseAdaptor):
 
     def __init__(self, *args, **kwargs):
         super(ForeignKeyAdaptor, self).__init__(*args, **kwargs)
-        self.attributes.update({
-            'data-type':   'foreignkeyField',
-            'data-source': '#%s' % self.attributes.get('data-field-id'),
-        })
+        if self.form_field:
+            self.attributes.update({
+                'data-type':   'foreignkeyField',
+                'data-source': '#%s' % self.attributes.get('data-field-id'),
+            })
 
     def set_value(self, value):
         self.field_value = value
@@ -212,7 +227,8 @@ class ForeignKeyAdaptor(BaseAdaptor):
 class ChoicesAdaptor(BaseAdaptor):
     def __init__(self, *args, **kwargs):
         super(ChoicesAdaptor, self).__init__(*args, **kwargs)
-        self.attributes.update({'data-type': 'choicesField'})
+        if self.form_field:
+            self.attributes.update({'data-type': 'choicesField'})
 
     def get_value(self):
         if callable(self.field_value):
@@ -223,10 +239,11 @@ class ChoicesAdaptor(BaseAdaptor):
 class ManyToManyAdaptor(BaseAdaptor):
     def __init__(self, *args, **kwargs):
         super(ManyToManyAdaptor, self).__init__(*args, **kwargs)
-        self.attributes.update({
-            'data-type':   'manytomanyField',
-            'data-source': '#%s' % self.attributes.get('data-field-id'),
-        })
+        if self.form_field:
+            self.attributes.update({
+                'data-type':   'manytomanyField',
+                'data-source': '#%s' % self.attributes.get('data-field-id'),
+            })
 
     def set_value(self, value):
         if value is None:
