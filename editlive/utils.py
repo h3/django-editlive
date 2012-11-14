@@ -100,11 +100,20 @@ def get_adaptor(obj, field_name, field_value=None, kwargs={}, adaptor=None):
                 field_value=field_value, kwargs=kwargs)
 
 
+def is_managed_field(obj, fieldname):
+    if hasattr(obj, fieldname):
+        field = getattr(obj, fieldname)
+        if hasattr(field, '_meta'):
+            meta = getattr(field, '_meta')
+            return meta.managed
+    return False
+
+
 def get_dict_from_obj(obj):
     obj_dict = obj.__dict__
     obj_dict_result = obj_dict.copy()
     for key, value in obj_dict.items():
-        if '_id' in key:
+        if '_id' in key and is_managed_field(obj, key.replace('_id', '')):
             key2 = key.replace('_id', '')
             obj_dict_result[key2] = obj_dict_result[key]
             del obj_dict_result[key]
