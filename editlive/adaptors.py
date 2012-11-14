@@ -109,8 +109,10 @@ class BaseAdaptor(object):
 
     def save(self):
         form = self.get_form()
-        if form.is_valid():
-            form.save()
+        field = form[self.form_field.name]
+        # We do not validate the whole form as it lead to conflicts
+        if len(field.errors) == 0:
+            self.obj.save()
             return {
                 'error': False,
                 'rendered_value': self.render_value()}
