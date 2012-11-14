@@ -1,7 +1,5 @@
 ;(function($){
 
-    var $id = function(i){ return $('#'+i) };
-
     var getJsOptions = function(el){
         var data = el.data(), opts = {}, opt,
         excluded = ['adaptor', 'type', 'fieldid', 'plugin'];
@@ -28,11 +26,6 @@
                 });
             },
 
-            getByFieldId: function(fieldId) {
-                if (fieldId[0] == '#') fieldId = fieldId.slice(1);
-                return $('editlive[data-field-id="'+ fieldId +'"]');
-            },
-
             loadWidget: function(el){
                 var el = $(el), initialized = el.data('initialized') || false;
                 if (initialized) return true;
@@ -41,15 +34,15 @@
                     if ($.isFunction($.editliveWidgets[widgetname])) {
                         var opts, options, input;
                         var opts  = getJsOptions(el);
-                        input_id = $id(el.data('field-id'));
+                        input_id = '#'+ el.data('field-id');
 
                         // We start by checking for a close match. Theorically there
                         // shouldn't be two fields with the same id, but in reality it
                         // does happens and it does fuck up editlive.
                         input = el.prev(input_id);
                         if (!input.get(0)) input = el.closest(input_id);
-                        else if (!input.get(0)) input = el.parent().find(input_id);
-                        else input = $(input_id);
+                        if (!input.get(0)) input = el.parent().find(input_id);
+                        if (!input.get(0)) input = $(input_id);
 
                         if (!input.length && $.editliveWidgets[widgetname].prototype._selector) {
                             input = $($.editliveWidgets[widgetname].prototype._selector);
