@@ -82,7 +82,6 @@
             var endColor = $self._placeholderColor;
 
             if ($.effects.highlight) {
-                console.log('B', startColor, endColor)
                 var el = $self.placeholder || $self.element;
                 el.animate({backgroundColor: startColor}, 
                     $self.options.highlight.duration / 2,
