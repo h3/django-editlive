@@ -14,7 +14,12 @@
             errorplacement: 'bottom',
             mini: false,
             small: false,
-            large: false
+            large: false,
+            highlight: {
+                duration: 300,
+                effect: 'highlight',
+                options: {color: '#ff9'}
+            }
         },
 
         // Setup the widget
@@ -67,7 +72,27 @@
 
         _set_value: function(v) {
             this.value = v;
-            return this.element.val(v);
+            this.element.val(v);
+            return v;       
+        },
+
+        _highlight: function(){
+            var $self = this;
+            var startColor = $self.options.highlight.options.color;
+            var endColor = $self._placeholderColor;
+
+            if ($.effects.highlight) {
+                console.log('B', startColor, endColor)
+                var el = $self.placeholder || $self.element;
+                el.animate({backgroundColor: startColor}, 
+                    $self.options.highlight.duration / 2,
+                    function() {
+                        setTimeout(function(){
+                            el.animate({backgroundColor: endColor}, 
+                                $self.options.highlight.duration / 2);
+                            }, 250);
+                    })
+            }
         },
 
         _createPlaceholder: function(el) {
@@ -84,6 +109,7 @@
                 $self.focus();
             });
             $self.set_placeholder_value();
+            $self._placeholderColor = $self.placeholder.css('backgroundColor');
         },
 
         // Respond to changes to options
@@ -268,10 +294,7 @@
             $self.control.removeClass('error');
             $self.blur(true);
             if (!$self._parent_is_btn && $self.placeholder) {
-                var oldColor = $self.placeholder.css('background-color');
-                $self.placeholder
-                    .css('background-color', $self.options.highlightColor)
-                    .animate({backgroundColor: oldColor});
+                $self._highlight();
             }
             $self._destroy_errors();
             $self._trigger('success');

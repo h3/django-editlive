@@ -67,9 +67,13 @@
   color: #555;
   text-align: left;
   cursor: pointer;
-  background: #eee;
+  background-color: #eee;
   border: 1px solid #e5e5e5;
   border-radius: 3px;
+  -webkit-transition: background 0.8s;
+     -moz-transition: background 0.8s;
+       -o-transition: background 0.8s;
+          transition: background 0.8s;
 }
 
 .editlive.fixedwidth {
