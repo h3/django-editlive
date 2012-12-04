@@ -221,7 +221,9 @@ class ForeignKeyAdaptor(BaseAdaptor):
         return self.field_value
 
     def render_value(self):
-        return unicode(getattr(self.obj, self.get_real_field_name()))
+        val = getattr(self.obj, self.get_real_field_name())
+        rendered_val = '' if val is None else unicode(val)
+        return rendered_val
 
 
 class ChoicesAdaptor(BaseAdaptor):
