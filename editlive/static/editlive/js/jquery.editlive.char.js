@@ -79,7 +79,7 @@
         _highlight: function(){
             var $self = this;
             var startColor = $self.options.highlight.options.color;
-            var endColor = $self._placeholderColor;
+            var endColor   = $self._placeholderColor;
 
             if ($.effects.highlight) {
                 var el = $self.placeholder || $self.element;
@@ -87,10 +87,15 @@
                     $self.options.highlight.duration / 2,
                     function() {
                         setTimeout(function(){
-                            el.animate({backgroundColor: endColor}, 
-                                $self.options.highlight.duration / 2);
-                            }, 250);
-                    })
+                            try {
+                                el.animate({backgroundColor: endColor}, 
+                                    $self.options.highlight.duration / 2);
+                            } catch(e) {
+                                // This will happen when the initial background color is transparent
+                                el.css('backgroundColor', 'transparent');
+                            };
+                        }, 250);
+                    });
             }
         },
 
