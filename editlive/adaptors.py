@@ -96,7 +96,7 @@ class BaseAdaptor(object):
         Set the value to the database object (does not save)
         """
         self.field_value = value
-        setattr(self.obj, self.field_name, self.field_value)
+        setattr(self.obj, self.field_name, value)
         return value
 
     def render_value(self, value=None):
@@ -113,9 +113,10 @@ class BaseAdaptor(object):
         # We do not validate the whole form as it lead to conflicts
         if len(field.errors) == 0:
             self.obj.save()
+            val = getattr(self.obj, self.field_name)
             return {
                 'error': False,
-                'rendered_value': self.render_value()}
+                'rendered_value': self.render_value(val)}
         else:
             messages = []
             for field_name_error, errors_field in form.errors.items():
