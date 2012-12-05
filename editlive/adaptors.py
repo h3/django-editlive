@@ -232,8 +232,8 @@ class ForeignKeyAdaptor(BaseAdaptor):
                 self.get_real_field_name(), self.field_value)
         return self.field_value
 
-    def render_value(self):
-        val = getattr(self.obj, self.get_real_field_name())
+    def render_value(self, value=None):
+        val = value or getattr(self.obj, self.get_real_field_name())
         rendered_val = '' if val is None else unicode(val)
         return rendered_val
 
