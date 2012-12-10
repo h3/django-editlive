@@ -32,12 +32,18 @@ def import_class(classpath, package=None):
     return getattr(import_module(classpath), classname, None)
 
 
+def isinstanceof(field, types):
+    return any(isinstance(field, getattr(models, t)) for t in types)
+    
+
 def get_field_type(field):
     if isinstance(field, str) and field == 'tabular':
         return 'tabular'
     elif isinstance(field, str) and field == 'stacked':
         return 'stacked'
-    elif isinstance(field, models.CharField):
+    elif isinstanceof(field, ['BigIntegerField', 'CharField', 
+        'FloatField', 'IntegerField', 'PositiveIntegerField', 
+        'PositiveSmallIntegerField', 'SlugField', 'SmallIntegerField']):
         if getattr(field, 'choices', None):
             return 'choices'
         else:
