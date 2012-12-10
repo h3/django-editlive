@@ -78,9 +78,13 @@ def delete_objects(request, **kwargs):
         'app_label': kwargs['meta'].get('appLabel'),
         'module_name': kwargs['meta'].get('moduleName'),
     }
+    print Model
+    print Model.objects.filter(pk__in=object_list).delete()
     try:
         Model.objects.filter(pk__in=object_list).delete()
+        print "AAA"
     except:
+        print "BBB"
         out['error'] = True
         out['message'] = 'Erreur lors de la suppression des objets'
 

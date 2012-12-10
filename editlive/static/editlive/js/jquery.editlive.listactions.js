@@ -1,6 +1,7 @@
 ;(function($){
     $.widget('editliveWidgets.listactions', {
         _type: 'listactions',
+        _standalone: true,
         _selector: 'editlive[data-type="listactions"]',
         options: {},
 

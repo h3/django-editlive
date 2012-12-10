@@ -15,6 +15,7 @@
 
     $.widget('editliveWidgets.ajaxform', {
         _type: 'ajaxform',
+        _standalone: true,
         _selector: 'editlive[data-type="ajaxform"]',
         options: {
             errorPlacement: 'bottom',
