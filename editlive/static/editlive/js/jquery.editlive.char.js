@@ -54,11 +54,6 @@
         _init: function(){
             var $self = this;
             $self._createPlaceholder();
-            //if (!this.option.width) {
-            //    $self.element.autoGrowInput({
-            //        maxwidth: $self.options.maxwidth == 'auto' && $self.element.parent().parent().width() || $self.options.maxwidth
-            //    });
-            //}
             if ($self.options.width) {
                 var chim = parseInt($self.placeholder.css('padding-left').match(/\d+/)[0], 10) 
                            + parseInt($self.placeholder.css('padding-right').match(/\d+/)[0], 10);
@@ -131,8 +126,8 @@
 
         _get_width: function() {
             if (this.option.width) return this.option.width;
-            var width = this.placeholder.width()
-            if (width > this.control.width()) width = this.control.width() - 10;
+            var width = this.placeholder.width();
+            if (this.control.width() > 0 && width > this.control.width()) width = this.control.width() - 10;
             if (width < this.option.minwidth) width = this.option.minwidth;
             if (width < 0) width = 'none';
             return width;

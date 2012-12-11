@@ -24,6 +24,10 @@
             }
         },
 
+        _get_width: function() {
+            return this.placeholder.parent().parent().width();
+        },
+
         _bind_kb_blur_events: function(el) {
             var $self = this;
             (el || $self.element).bind('keyup.editlive', function(e){
