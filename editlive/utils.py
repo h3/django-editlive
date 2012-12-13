@@ -5,7 +5,6 @@ import collections
 from django import template
 from django.db import models
 from django.conf import settings
-from django.db.models.fields import FieldDoesNotExist
 from django.db.models.fields.related import ForeignKey, ManyToManyField
 
 from editlive.conf import settings as editlive_settings
@@ -34,15 +33,15 @@ def import_class(classpath, package=None):
 
 def isinstanceof(field, types):
     return any(isinstance(field, getattr(models, t)) for t in types)
-    
+
 
 def get_field_type(field):
     if isinstance(field, str) and field == 'tabular':
         return 'tabular'
     elif isinstance(field, str) and field == 'stacked':
         return 'stacked'
-    elif isinstanceof(field, ['BigIntegerField', 'CharField', 
-        'FloatField', 'IntegerField', 'PositiveIntegerField', 
+    elif isinstanceof(field, ['BigIntegerField', 'CharField',
+        'FloatField', 'IntegerField', 'PositiveIntegerField',
         'PositiveSmallIntegerField', 'SlugField', 'SmallIntegerField']):
         if getattr(field, 'choices', None):
             return 'choices'

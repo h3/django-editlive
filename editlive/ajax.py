@@ -14,7 +14,7 @@ def save(request, **kwargs):
     field_value = kwargs.get('field_value')
     object_id = kwargs.get('object_id')
     app_label = kwargs.get('app_label')
-    module_name = kwargs.get('module_name')
+    module_name = kwargs.get('module_name') # Unused ?
     field_options = kwargs.get('field_options')
     Model = get_model(app_label, module_name)
     obj = get_object_or_404(Model, pk=object_id)

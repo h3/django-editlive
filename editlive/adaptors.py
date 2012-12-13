@@ -2,7 +2,6 @@ import re
 
 from django.conf import settings
 from django.utils.safestring import mark_safe
-from django.forms import ValidationError
 from django.forms.models import modelform_factory
 from django.forms import ModelForm
 
@@ -199,7 +198,8 @@ class DateAdaptor(BaseAdaptor):
             self.attributes.update({'data-type': 'dateField'})
 
     def render_value(self, value=None):
-        if self.template_filters and not any(item.startswith('date:') for item in self.template_filters):
+        if self.template_filters and not any(item.startswith('date:')\
+                for item in self.template_filters):
             self.template_filters.append(u"date:'%s'" % settings.DATE_FORMAT)
         return super(DateAdaptor, self).render_value(value=value)
 
@@ -211,8 +211,10 @@ class DateTimeAdaptor(BaseAdaptor):
             self.attributes.update({'data-type': 'datetimeField'})
 
     def render_value(self, value=None):
-        if self.template_filters and not any(item.startswith('date:') for item in self.template_filters):
-            self.template_filters.append(u"date:'%s'" % settings.DATETIME_FORMAT)
+        if self.template_filters and not any(item.startswith('date:')\
+                for item in self.template_filters):
+            self.template_filters.append(\
+                    u"date:'%s'" % settings.DATETIME_FORMAT)
         return super(DateTimeAdaptor, self).render_value(value=value)
 
 
