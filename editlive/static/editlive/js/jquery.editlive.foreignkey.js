@@ -104,7 +104,7 @@
         hide: function() {
             this.input.hide();
             if (this.placeholder) this.placeholder.show();
-        },
+        }
     });
 
     $.widget('editliveWidgets.foreignkeyFieldSelect', $.editliveWidgets.charField, {
@@ -116,7 +116,7 @@
                            + parseInt(this.element.css('padding-right').match(/\d+/)[0], 10);
                 this.element.css('width', this.options.width - chim);
             }
-        },
+        }
     });
 
 })(jQuery);
