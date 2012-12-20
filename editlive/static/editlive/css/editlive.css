@@ -249,4 +249,5 @@ select.eie-small {
 .editlive-controls.inline.input-prepend,
 .editlive-controls.inline.input-append {
   float: left;
+  margin-bottom: 0;
 }
