@@ -114,8 +114,13 @@
             if (this.options.width) {
                 var chim = parseInt(this.element.css('padding-left').match(/\d+/)[0], 10) 
                            + parseInt(this.element.css('padding-right').match(/\d+/)[0], 10);
-                this.element.css('width', this.options.width - chim);
+                this.element.width(this.options.width - chim + 6);
+                var chim = parseInt(this.placeholder.css('padding-left').match(/\d+/)[0], 10) 
+                           + parseInt(this.placeholder.css('padding-right').match(/\d+/)[0], 10);
+                this.placeholder.width(this.options.width - chim + 8);
+                this.element.css('margin-bottom', this.placeholder.css('margin-bottom'));
             }
+
         }
     });
 

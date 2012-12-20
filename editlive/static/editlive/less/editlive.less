@@ -4,10 +4,10 @@
     border: 1px solid #e5e5e5;
     border-radius: 3px;
     color: #555;
-    font-size: inherit;
     line-height: 18px;
-    padding: 4px;
+    padding: 6px;
     text-align: left;
+    font-size: 14px;
     .transition(background 0.5s);
     &.fixedwidth {
         overflow: hidden; 
@@ -22,6 +22,21 @@
         padding: 3px 6px;
     }
     &.eph-large {}
+
+}
+
+.input-prepend.editlive {
+    .icon, strong, b {
+        float: left;
+        margin-right: 4px;
+    }
+}
+
+.input-append .editlive {
+    .icon, strong, b {
+        float: right;
+        margin-left: 4px;
+    }
 }
 
 .eie-mini {}
@@ -62,46 +77,20 @@ select.eie-small {
     display: block;
 }
 
-.editlive-control-group,
-.editlive-control-group input {
+.editlive-controls,
+.editlive-controls input {
     margin-bottom: 0;
 }
 
-.editlive-control-group.block .editlive {
+.editlive-controls.block .editlive {
     display: block;
 }
 
-.editlive-control-group.inline,
-.editlive-control-group.inline .editlive {
+.editlive-controls.inline,
+.editlive-controls.inline .editlive {
     display: inline-block;
 }
  
-
-
-/* Hacks (move to valrive.css ?) */
-
-h1 strong {
-    display: inline-block;
-}
-h1 .editlive {
-    font-size: 30px;
-    padding: 2px 4px;
-    line-height: 32px;
-}
-h1 .editlive-control-group input {
-    font-size: 30px;
-    height: 25px;
-    font-weight: bold;
-}
-
-.project-job-type {
-    font-size: 18px;
-    .editlive { 
-        font-size: 18px;
-    }
-}
-
-
 /* bootstrapui.less */
 
 .ui-datepicker {
@@ -153,4 +142,25 @@ h1 .editlive-control-group input {
 
 .ui-datepicker-trigger {
     display: none;
+}
+
+.editlive-input-append {
+    display: inline-block;
+    .add-on {
+        border: 1px solid #c30;    
+        display: inline-block;
+        background: #eee;
+        padding: 3px 9px;
+        border: 1px solid #ddd;
+        margin-left: -6px;
+        color: #777;
+        border-width: 1px 1px 1px 0;
+        .border-radius(0 3px 3px 0);
+    }
+}
+
+// Weird margin bug workaround ..
+.editlive-controls.inline.input-prepend,
+.editlive-controls.inline.input-append {
+    float: left;    
 }

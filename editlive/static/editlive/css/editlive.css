@@ -61,8 +61,8 @@
 }
 
 .editlive {
-  padding: 4px;
-  font-size: inherit;
+  padding: 6px;
+  font-size: 14px;
   line-height: 18px;
   color: #555;
   text-align: left;
@@ -70,10 +70,10 @@
   background-color: #eee;
   border: 1px solid #e5e5e5;
   border-radius: 3px;
-  -webkit-transition: background 0.8s;
-     -moz-transition: background 0.8s;
-       -o-transition: background 0.8s;
-          transition: background 0.8s;
+  -webkit-transition: background 0.5s;
+     -moz-transition: background 0.5s;
+       -o-transition: background 0.5s;
+          transition: background 0.5s;
 }
 
 .editlive.fixedwidth {
@@ -87,6 +87,20 @@
   padding: 3px 6px;
   font-size: 12px;
   line-height: 15px;
+}
+
+.input-prepend.editlive .icon,
+.input-prepend.editlive strong,
+.input-prepend.editlive b {
+  float: left;
+  margin-right: 4px;
+}
+
+.input-append .editlive .icon,
+.input-append .editlive strong,
+.input-append .editlive b {
+  float: right;
+  margin-left: 4px;
 }
 
 .eie-small {
@@ -126,44 +140,18 @@ select.eie-small {
   display: block;
 }
 
-.editlive-control-group,
-.editlive-control-group input {
+.editlive-controls,
+.editlive-controls input {
   margin-bottom: 0;
 }
 
-.editlive-control-group.block .editlive {
+.editlive-controls.block .editlive {
   display: block;
 }
 
-.editlive-control-group.inline,
-.editlive-control-group.inline .editlive {
+.editlive-controls.inline,
+.editlive-controls.inline .editlive {
   display: inline-block;
-}
-
-/* Hacks (move to valrive.css ?) */
-
-h1 strong {
-  display: inline-block;
-}
-
-h1 .editlive {
-  padding: 2px 4px;
-  font-size: 30px;
-  line-height: 32px;
-}
-
-h1 .editlive-control-group input {
-  height: 25px;
-  font-size: 30px;
-  font-weight: bold;
-}
-
-.project-job-type {
-  font-size: 18px;
-}
-
-.project-job-type .editlive {
-  font-size: 18px;
 }
 
 /* bootstrapui.less */
@@ -238,4 +226,27 @@ h1 .editlive-control-group input {
 
 .ui-datepicker-trigger {
   display: none;
+}
+
+.editlive-input-append {
+  display: inline-block;
+}
+
+.editlive-input-append .add-on {
+  display: inline-block;
+  padding: 3px 9px;
+  margin-left: -6px;
+  color: #777;
+  background: #eee;
+  border: 1px solid #c30;
+  border: 1px solid #ddd;
+  border-width: 1px 1px 1px 0;
+  -webkit-border-radius: 0 3px 3px 0;
+     -moz-border-radius: 0 3px 3px 0;
+          border-radius: 0 3px 3px 0;
+}
+
+.editlive-controls.inline.input-prepend,
+.editlive-controls.inline.input-append {
+  float: left;
 }

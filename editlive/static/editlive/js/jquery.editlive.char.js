@@ -15,6 +15,8 @@
             mini: false,
             small: false,
             large: false,
+            input_prepend: '',
+            input_append: '',
             highlight: {
                 duration: 300,
                 effect: 'highlight',
@@ -28,7 +30,7 @@
             $self.value        = $self._get_value();
             $self.editlive     = $self.element.data('widget.editlive');
             $self.options      = $.extend($self.options, $self.editlive.data());
-            $self.control      = $('<div class="control-group editlive-control-group '+ $self.options.wrapclass +'" />');
+            $self.control      = $('<div class="controls editlive-controls '+ $self.options.wrapclass +'" />');
             $self.field_name   = $self.editlive.attr('field-name'); 
             $self.object_id    = $self.editlive.attr('object-id');
             $self.app_label    = $self.editlive.attr('app-label');
@@ -49,6 +51,21 @@
             }
 
             $self.element.hide().wrap($self.control);
+
+            if ($self.options.input_prepend != '') {
+                var addon = $('<span class="add-on" />').css('display', 'none').insertBefore(this.element),
+                    p = this.options.input_prepend;
+                $self.element.parents('.editlive-controls').addClass('input-prepend');
+                if (p.indexOf('<') > -1) { addon.html(p); }
+                else { addon.text(p); }
+            }
+            if ($self.options.input_append != '') {
+                var addon = $('<span class="add-on" />').css('display', 'none').insertAfter(this.element),
+                    p = this.options.input_append;
+                $self.element.parents('.editlive-controls').addClass('input-append');
+                if (p.indexOf('<') > -1) { addon.html(p); }
+                else { addon.text(p); }
+            }
         },
 
         _init: function(){
@@ -113,7 +130,7 @@
 
         // Respond to changes to options
         _setOption: function( key, value ) {
-            switch( key ) {
+            switch(key) {
                 case "clear":
                     // handle changes to clear option
                     break;
@@ -221,7 +238,7 @@
         blur: function(cancel){
             var $self = this;
             if ($self._parent_is_btn) {
-                $self.input.parents('.editlive-control-group').addClass('btn');
+                $self.input.parents('.editlive-controls').addClass('btn');
             }
             if (cancel) {
                 $self._set_value($self.value);
@@ -242,14 +259,21 @@
             this._set_element_width();
             this._watch_blur();
             if (this.placeholder) this.placeholder.hide();
-            this.element.show().focus();
-            this.element.next('.add-on').css('display', 'inline-block');
+            this.element.show().focus()
+                .parent().find('.add-on').css('display', 'inline-block');
+            if (this.options.input_prepend != '') {
+                this.element.parents('.editlive-controls').addClass('input-prepend');
+            }
+            if (this.options.input_append != '') {
+                this.element.parents('.editlive-controls').addClass('input-append');
+            }
         },
 
         hide: function() {
             this._unwatch_blur();
             this._unbind_kb_blur_events();
-            this.element.hide();
+            this.element.hide()
+                .parent().find('.add-on').css('display', 'none');
             if (this.placeholder) this.placeholder.show();
         },
 
@@ -265,8 +289,16 @@
 
         set_placeholder_value: function(display) {
             if (this.placeholder) {
-                var val = display || this.get_display_value() || this.options.emptyvalue;
-                this.placeholder.text(val);
+                var p = this.options.input_prepend,
+                    a = this.options.input_append,
+                    v = display || this.get_display_value() || this.options.emptyvalue,
+                    o = [a, v, p].join('');
+                if (o.indexOf('<') > -1) {
+                    this.placeholder.html(o);
+                }
+                else {
+                    this.placeholder.text(o);
+                }
             }
         },
 
