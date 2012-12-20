@@ -3,7 +3,7 @@
     $.widget('editliveWidgets.textField', $.editliveWidgets.charField, {
         _type: 'text',
         placeholdertag: 'div',
-        options: {},
+        options: {wrapclass: ''},
         _create: function() { 
             var $self = this;
             if (!$self.options.width) {
