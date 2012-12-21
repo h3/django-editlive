@@ -62,6 +62,29 @@
     
     })($); 
 
+    $.fn.editlive = function(method, arg) {
+        var editlive = $(this).data('editlive');
+        if (editlive) {
+            switch(method) {
+                case 'link':
+                    $(this).bind('editlivesuccess', function(){
+                        $(arg).text(editlive._get_value());
+                    });
+                break;
+                case 'val':
+                    if (arg) {
+                        editlive._set_value(arg);
+                        editlive.change();
+                        return arg;
+                    }
+                    else {
+                        return editlive._get_value();
+                    }
+                break;
+            }
+        }
+    };
+
     $(function(){
         $.editlive.load()
         $('[rel="tooltip"]').tooltip()

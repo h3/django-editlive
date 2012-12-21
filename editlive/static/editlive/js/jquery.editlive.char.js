@@ -3,7 +3,7 @@
     $.widget('editliveWidgets.charField', {
         _type: 'char',
         _active: false,
-        widgetEventPrefix: 'widget',
+        widgetEventPrefix: 'editlive',
         placeholdertag: 'span',
         value: undefined,
         options: {
@@ -66,6 +66,8 @@
                 if (p.indexOf('<') > -1) { addon.html(p); }
                 else { addon.text(p); }
             }
+
+            $self.element.data('editlive', $self);
         },
 
         _init: function(){
