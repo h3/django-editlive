@@ -67,6 +67,7 @@
         if (editlive) {
             switch(method) {
                 case 'link':
+                    $(arg).text(editlive._get_value());
                     $(this).bind('editlivesuccess', function(){
                         $(arg).text(editlive._get_value());
                     });
