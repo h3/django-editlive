@@ -2,8 +2,8 @@
 
 .. _contents:
 
-.. |example1| image:: /_static/examples/example-1.png
-.. |example2| image:: /_static/examples/example-2.png
+.. |example1| image:: /_static/example-1.png
+.. |example2| image:: /_static/example-2.png
 
 
 Django editlive documentation
