@@ -25,6 +25,8 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "docs_settings")
 #sys.path.insert(2, os.path.abspath('../../../editlive_demo/'))
 #sys.path.insert(3, os.path.abspath('../../../'))
 
+sys.path.insert(0, os.path.join(os.getcwd(), os.pardir))
+sys.path.insert(0, os.path.join(os.getcwd(), os.pardir, 'editlive/'))
 
 # -- General configuration -----------------------------------------------------
 
