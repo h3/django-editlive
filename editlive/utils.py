@@ -5,9 +5,19 @@ import collections
 from django import template
 from django.db import models
 from django.conf import settings
+from django.forms import ModelForm
 from django.db.models.fields.related import ForeignKey, ManyToManyField
 
 from editlive.conf import settings as editlive_settings
+
+
+def get_dynamic_modelform(**kwargs):
+    form = type('DynamicForm', (ModelForm, ), {})
+    meta = type('Meta', (object, ), {})
+    meta.exclude = kwargs.get('exclude', None)
+    form.Meta = meta
+    return form
+
 
 """
 Mostly copied/inspired of:
