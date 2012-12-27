@@ -14,6 +14,7 @@ except ImportError:
     from setuptools import setup, find_packages
 
 install_requires = [
+    'Django',
     'simplejson',
     'django-dajaxice',
 ]

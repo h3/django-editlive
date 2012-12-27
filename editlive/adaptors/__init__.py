@@ -1,3 +1,9 @@
+"""Adaptors
+
+.. moduleauthor:: Maxime Haineault <max@motion-m.ca>
+
+"""
+from editlive.adaptors.char import BaseAdaptor
 from editlive.adaptors.char import CharAdaptor
 from editlive.adaptors.boolean import BooleanAdaptor
 from editlive.adaptors.choices import ChoicesAdaptor
