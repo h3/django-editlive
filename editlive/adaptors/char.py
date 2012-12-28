@@ -1,57 +1,39 @@
 """
 .. module:: CharAdaptor
-   :platform: Unix, Windows
-   :synopsis: A useful module indeed.
-
-.. moduleauthor:: Andrew Carter <andrew@invalid.com>
-
-
+.. moduleauthor:: Maxime Haineault <max@motion-m.ca>
 """
 
 from editlive.adaptors.base import BaseAdaptor
 
 
 class CharAdaptor(BaseAdaptor):
-    """The CharAdaptor.
+    """The CharAdaptor is the most generic adaptor. It subclass the 
+    BaseAdaptor and only alter the `data-type` attribute and set it 
+    to "charField".
 
     .. note::
 
-       The CharAdaptor subclass BaseAdaptor.
+       The CharAdaptor is used as default when there is no specific 
+       adaptor for a given field type.
 
     """
 
     def __init__(self, *args, **kwargs):
-        """The CharAdaptor is basically just the BaseAdaptor.
-
-        Args:
-           field (str): We all know what foo does.
-           obj (obj): We all know what foo does.
-           field_name (str): We all know what foo does.
-
-
-        Kwargs:
-           field_value (str): We all know what foo does.
-           kwargs(dict): We all know what foo does.
-
-        """
         super(CharAdaptor, self).__init__(*args, **kwargs)
         if self.form_field:
             self.attributes.update({'data-type': 'charField'})
 
-    def hello(self, *args, **kwargs):
-        """The CharAdaptor is basically just the BaseAdaptor.
+#   def hello(self, test, test2='blah'):
+#       """This gets the foobar
 
-        Args:
-           field (str): We all know what foo does.
-           obj (obj): We all know what foo does.
-           field_name (str): We all know what foo does.
+#       This really should have a full function definition, but I am too lazy.
 
+#       >>> print get_foobar(10, 20)
+#       30
+#       >>> print get_foobar('a', 'b')
+#       ab
 
-        Kwargs:
-           field_value (str): We all know what foo does.
-           kwargs(dict): We all know what foo does.
+#       Isn't that what you want?
 
-        """
-        super(CharAdaptor, self).__init__(*args, **kwargs)
-        if self.form_field:
-            self.attributes.update({'data-type': 'charField'})
+#       """
+#       print "yay"

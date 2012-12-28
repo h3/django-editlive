@@ -5,6 +5,3 @@
 """
 
 VERSION = "0.0.1"
-
-class Wtf(object):
-    pass

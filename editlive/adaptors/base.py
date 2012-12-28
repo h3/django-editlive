@@ -54,21 +54,25 @@ class BaseAdaptor(object):
                 if self.kwargs.get('load_tags'):
                     self.load_tags = self.kwargs.get('load_tags').split('|')
 
-    def get_real_field_name(self):
-        """
-        Formsets mangles fieldnames with positional slugs.
-        This function returns the actual field name alone.
-        """
-        if '_set-' in self.field_name:  # Formset field
-            manager, pos, field_name = filter(None, \
-                    re.split(r'(\w+)_set-(\d+)-(\w+)', self.field_name))
-        else:
-            field_name = self.field_name
-        return field_name
-
     def format_attributes(self):
-        """
-        Format the HTML attributes of the <editlive></editlive> element.
+        """Formats the HTML attributes of the <editlive /> element.
+
+        This method takes no argument, it only use `self.kwargs` to build up
+        `self.attributes` then convert it to HTML attributes and return it as
+        a string.
+
+        >>> self.format_attributes()
+        app-label="myapp" field-name="myfieldname"
+        rendered-value="Hello World" object-id="1"
+        data-type="charField" data-field-id="id_myfieldname"
+        module-name="mymodule"
+
+        Most kwargs are prefixed with `data-` when converted to attribute
+        except for those:
+
+        * rendered-value
+        * load_tags
+
         """
         o = []
         for k, v in self.kwargs.items():
@@ -83,24 +87,55 @@ class BaseAdaptor(object):
         for k, v in self.attributes.items():
             if v is not None:
                 o.append('%s="%s"' % (k, v))
+
         return ' ' + ' '.join(o) + ' '
 
+    def get_form(self):
+        """Creates and returns a form on the fly from the model using
+        `modelform_factory`.
+
+        The returned form is instantiated with `self.obj`.
+        """
+        form = modelform_factory(self.model)
+        return form(data=get_dict_from_obj(self.obj), instance=self.obj)
+
+    def get_real_field_name(self):
+        """Returns the reald fieldname regardless if the field is part of a
+        formset or not.
+
+        Formsets mangles fieldnames with positional slugs. This method 
+        returns the actual field name without the position.
+
+        >>> print self.field_name
+        "myfieldname_set-0"
+        >>> print self.get_real_field_name()
+        "myfieldname"
+        """
+        if '_set-' in self.field_name:  # Formset field
+            manager, pos, field_name = filter(None, \
+                    re.split(r'(\w+)_set-(\d+)-(\w+)', self.field_name))
+        else:
+            field_name = self.field_name
+        return field_name
+
     def get_value(self):
+        """Returns `self.field_value` unless it is callable. If it is 
+        callable, it calls it before returning the output.
+        """
         if callable(self.field_value):
             return self.field_value()
         return self.field_value
 
     def set_value(self, value):
-        """
-        Set the value to the database object (does not save)
+        """Set the value of the object (but does not save it) and sets 
+        `self.field_value`.
         """
         self.field_value = value
         setattr(self.obj, self.field_name, value)
         return value
 
     def render_value(self, value=None):
-        """
-        Returns the field value as it should be rendered on
+        """Returns the field value as it should be rendered on
         the placeholder.
         """
         v = value or self.get_value()
@@ -136,8 +171,7 @@ class BaseAdaptor(object):
         return u'<editlive%s></editlive>' % self.format_attributes()
 
     def render(self):
-        """
-        Render the form field along with the <editlive> tag
+        """Render the form field along with the <editlive> tag
         """
         field = unicode(self.form_field)
         if self.form_field:
@@ -153,10 +187,6 @@ class BaseAdaptor(object):
         else:
             return field
 
-    def get_form(self):
-        form = modelform_factory(self.model)
-        return form(data=get_dict_from_obj(self.obj), instance=self.obj)
-
 
 class BaseInlineAdaptor(object):
 
@@ -167,12 +197,10 @@ class BaseInlineAdaptor(object):
         self.model = self.manager.model
         self.obj = self.model()
         self.value = value
-        # TODO
-        """
-        fix this shit..
-        http://stackoverflow.com/questions/12462616/
-        finding-the-relation-field-of-a-related-object-in-django
-        """
+        # TODO:
+        # fix this shit..
+        # http://stackoverflow.com/questions/12462616/
+        # finding-the-relation-field-of-a-related-object-in-django
         self.query_field = self.manager.core_filters.keys()[0].split('__')[0]
         self.form_class = self.get_form()
         self.initial = initial
