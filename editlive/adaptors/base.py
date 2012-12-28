@@ -22,6 +22,7 @@ class BaseAdaptor(object):
         self.load_tags = []
         self.form_class = modelform_factory(self.model)
         self.form = self.form_class(instance=self.obj, initial=initial)
+
         try:
             self.form_field = self.form[self.field_name]
         except KeyError:
@@ -142,12 +143,36 @@ class BaseAdaptor(object):
         return apply_filters(v, self.template_filters, self.load_tags)
 
     def save(self):
+        """Saves the object to database.
+
+        A form is created on the fly for validation purpose, but only the 
+        saved field is validated.
+
+        **Successful save**
+
+        >>> self.set_value('john@doe.com')
+        'john@doe.com'
+        >>> self.save()
+        {'rendered_value': u'john@doe.com', 'error': False}
+
+        **Validation error**
+        
+        >>> self.set_value('Hello world')
+        'Hello world'
+        >>> self.save()
+        {'rendered_value': u'Hello world', 'error': True, 'value': u'Hello world',
+         'messages': [{'message': u'Enter a valid e-mail address.', 'field_name': 'email_test'}]}
+
+        """
         form = self.get_form()
         field = form[self.form_field.name]
         # We do not validate the whole form as it lead to conflicts
         if len(field.errors) == 0:
             self.obj.save()
             val = getattr(self.obj, self.field_name)
+            print {
+                'error': False,
+                'rendered_value': self.render_value(val)}
             return {
                 'error': False,
                 'rendered_value': self.render_value(val)}
@@ -167,11 +192,28 @@ class BaseAdaptor(object):
                 'rendered_value': self.render_value()}
 
     def render_widget(self):
+        """Returns the <editlive /> HTML widget as string.
+
+        This will also set the `self.attributes['rendered-value']`.
+
+        >>> self.render_widget()
+        <editlive app-label="myapp" field-name="firstname"
+            rendered-value="John" object-id="1" data-type="charField" 
+            data-field-id="id_firstname" module-name="mymodule"></editlive>
+
+        """
         self.attributes['rendered-value'] = self.render_value()
         return u'<editlive%s></editlive>' % self.format_attributes()
 
     def render(self):
-        """Render the form field along with the <editlive> tag
+        """Returns the form field along with the <editlive /> tag as string
+
+        >>> self.render()
+        <input id="id_firstname" type="text" name="firstname" maxlength="25" />
+        <editlive app-label="myapp" field-name="firstname"
+            rendered-value="John" object-id="1" data-type="charField" 
+            data-field-id="id_firstname" module-name="mymodule"></editlive>
+
         """
         field = unicode(self.form_field)
         if self.form_field:
@@ -182,13 +224,15 @@ class BaseAdaptor(object):
                 name = 'name="%s"' % self.form_field.html_name
                 field = re.sub(auto_id, 'id="%s"' % self.field_id, field)
                 field = re.sub(name, 'name="%s"' % self.field_name, field)
-
+            print mark_safe(field + self.render_widget())
             return mark_safe(field + self.render_widget())
         else:
             return field
 
 
 class BaseInlineAdaptor(object):
+    """ Experimental stuff..
+    """
 
     def __init__(self, obj, manager, value, initial={}, **kwargs):
         self.kwargs = kwargs['kwargs']
