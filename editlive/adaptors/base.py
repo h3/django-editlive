@@ -8,6 +8,26 @@ from editlive.utils import (get_dict_from_obj,\
 
 
 class BaseAdaptor(object):
+    """The BaseAdaptor is an abstract class which provides all the 
+    basic methods and variable necessary to interact with and render 
+    an object field.
+
+    It provides the following functionalities:
+
+    * Renders the object's display value (rendered with filters applied)
+    * Renders the editlive markup
+    * Get a field value
+    * Set a field value
+    * Validate field value
+    * Save a field value
+
+    .. envvar:: kwargs 
+
+    .. note::
+
+       This class is never used directly, you must subclass it.
+
+    """
 
     def __init__(self, field, obj, field_name, field_value='', \
             kwargs={}, initial={}):

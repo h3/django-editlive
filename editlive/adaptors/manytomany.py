@@ -2,6 +2,9 @@ from editlive.adaptors.base import BaseAdaptor
 
 
 class ManyToManyAdaptor(BaseAdaptor):
+    """The ManyToManyAdaptor is used for ManyToMany fields".
+    """
+
     def __init__(self, *args, **kwargs):
         super(ManyToManyAdaptor, self).__init__(*args, **kwargs)
         if self.form_field:

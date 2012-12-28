@@ -2,6 +2,8 @@ from editlive.adaptors.base import BaseAdaptor
 
 
 class DateAdaptor(BaseAdaptor):
+    """The CharAdaptor is used for DateField".
+    """
     def __init__(self, *args, **kwargs):
         super(DateAdaptor, self).__init__(*args, **kwargs)
         if self.form_field:
@@ -15,6 +17,8 @@ class DateAdaptor(BaseAdaptor):
 
 
 class DateTimeAdaptor(BaseAdaptor):
+    """The CharAdaptor is used for DateTimeField".
+    """
     def __init__(self, *args, **kwargs):
         super(DateTimeAdaptor, self).__init__(*args, **kwargs)
         if self.form_field:
@@ -26,4 +30,3 @@ class DateTimeAdaptor(BaseAdaptor):
             self.template_filters.append(\
                     u"date:'%s'" % settings.DATETIME_FORMAT)
         return super(DateTimeAdaptor, self).render_value(value=value)
-

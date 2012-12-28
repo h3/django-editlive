@@ -2,6 +2,8 @@ from editlive.adaptors.base import BaseAdaptor
 
 
 class ForeignKeyAdaptor(BaseAdaptor):
+    """The ForeignKeyAdaptor is used for ForeignKey fields".
+    """
 
     def __init__(self, *args, **kwargs):
         super(ForeignKeyAdaptor, self).__init__(*args, **kwargs)
