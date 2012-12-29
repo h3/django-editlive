@@ -1,0 +1,1 @@
+.. include:: ../../jsdoc/charField.rst

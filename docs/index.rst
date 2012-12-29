@@ -1,13 +1,21 @@
-.. _index:
+.. almir documentation master file, created by
 
+.. _index:
 .. _contents:
 
 .. |example1| image:: /_static/example-1.png
 .. |example2| image:: /_static/example-2.png
 
-=============================
 Django editlive documentation
 =============================
+
+
+:Author: Maxime Haineault <max@motion-m.ca>
+:Source code: `github.com project <https://github.com/h3/django-editlive/>`_
+:Bug tracker: `github.com issues <https://github.com/h3/django-editlive/issues>`_
+:Generated: |today|
+:License: BSD
+:Version: |release|
 
 .. rubric:: Everything you need to know about Django editlive.
 
@@ -70,7 +78,7 @@ interact with them. Learn more about it below:
 * **UI Widgets:**
 
   * :doc:`booleanField <topics/widgets/boolean>`
-  * :doc:`charField <topics/widgets/char>`
+  * :doc:`charField <topics/widgets/jquery.editlive.char>`
   * :doc:`choicesField <topics/widgets/choices>`
   * :doc:`dateField <topics/widgets/date>`
   * :doc:`datetimeField <topics/widgets/datetime>`
@@ -78,3 +86,14 @@ interact with them. Learn more about it below:
   * :doc:`manytomanyField <topics/widgets/manytomany>`
   * :doc:`textField <topics/widgets/text>`
   * :doc:`Writing custom widgets <topics/widgets/custom>`
+
+* **Developers:**
+
+  * :doc:`Building the JavaScript documentation <topics/develop/jsdoc>`
+
+
+
+.. toctree::
+   :maxdepth: 4
+
+   topics/installation.rst
