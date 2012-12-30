@@ -30,7 +30,7 @@ sys.path.insert(0, os.path.join(os.getcwd(), os.pardir, 'editlive/'))
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.viewcode', 'sphinx.ext.autodoc']
+extensions = ['sphinx.ext.viewcode', 'sphinx.ext.autodoc', 'sphinx.ext.intersphinx']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -92,11 +92,13 @@ pygments_style = 'sphinx'
 #modindex_common_prefix = []
 
 
-# -- Options for HTML output ---------------------------------------------------
+intersphinx_mapping = {
+  'python': ('http://python.readthedocs.org/en/latest/', None),
+  'django': ('http://django.readthedocs.org/en/latest/', None),
+  'dajaxice': ('http://django-dajaxice.readthedocs.org/en/latest/', None)
+}
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-html_theme = 'default'
+# -- Options for HTML output ---------------------------------------------------
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -288,3 +290,9 @@ epub_copyright = u'2012, Maxime Haineault'
 
 # Allow duplicate toc entries.
 #epub_tocdup = True
+
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+if on_rtd:
+    html_theme = 'default'
+else:
+    html_theme = 'nature'

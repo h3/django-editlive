@@ -1,36 +1,11 @@
-/**
- * @fileOverview Contains the awesome plug-in code.
- * @version 0.1
- * @author Pulkit Goyal <pulkit110@gmail.com>
-*/
-
-/**
- * See (http://jquery.com/).
- * @name jQuery
- * @class
- * See the jQuery Library  (http://jquery.com/) for full details.  This just
- * documents the function and classes that are added to jQuery by this plug-in.
- */
- 
-/**
- * See (http://jquery.com/)
- * @name fn
- * @class
- * See the jQuery Library  (http://jquery.com/) for full details.  This just
- * documents the function and classes that are added to jQuery by this plug-in.
- * @memberOf jQuery
- */
-
 ;(function($){
-
     /**
-     * charField - an awesome jQuery plugin.
+     * charField - the base widget
      *
-     * @name charField
+     * @name jQuery.fn.charField
      * @class
      */
     var charField = {
-        /** @lends $.fn.charField */
         _type: 'char',
         _active: false,
         widgetEventPrefix: 'editlive',
@@ -180,7 +155,7 @@
         $self._placeholderColor = $self.placeholder.css('backgroundColor');
     };
 
-        // Respond to changes to options
+    // Respond to changes to options
     charField._setOption = function( key, value ) {
         switch(key) {
             case "clear":
@@ -217,7 +192,6 @@
                 if (targetId != (el || $self.element).attr('id')) {
                     $self.blur();
                 }
-
             }
         });
     };

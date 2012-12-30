@@ -7,7 +7,7 @@
 .. |example2| image:: /_static/example-2.png
 
 Django editlive documentation
-=============================
++++++++++++++++++++++++++++++
 
 
 :Author: Maxime Haineault <max@motion-m.ca>
@@ -49,51 +49,19 @@ When the placeholder is clicked, it's replaced by an input field and when this f
 is blurred, it is automatically saved to the database with AJAX. To cancel an edit you
 must use the escape key.
 
-Topics
-======
 
 Adaptors are special classes which are used to abstract the different fields types and 
 interact with them. Learn more about it below:
 
-* :ref:`genindex`
-
-* **General:**
-
-  * :doc:`Installation <topics/installation>`
-  * :doc:`Settings <topics/settings>`
-  * :doc:`Utils <topics/utils>`
-  * :doc:`JavaScript API <topics/javascriptapi>`
-
-* **Adaptors:**
-
-  * :doc:`BaseAdaptor <topics/adaptors/base>`
-  * :doc:`BooleanAdaptor <topics/adaptors/boolean>`
-  * :doc:`CharAdaptor <topics/adaptors/char>`
-  * :doc:`ChoicesAdaptor <topics/adaptors/choices>`
-  * :doc:`DateAdaptor and DateTimeAdaptor <topics/adaptors/date>`
-  * :doc:`ForeignKeyAdaptor <topics/adaptors/foreignkey>`
-  * :doc:`ManyToManyAdaptor <topics/adaptors/manytomany>`
-  * :doc:`TextAdaptor <topics/adaptors/text>`
-
-* **UI Widgets:**
-
-  * :doc:`booleanField <topics/widgets/boolean>`
-  * :doc:`charField <topics/widgets/jquery.editlive.char>`
-  * :doc:`choicesField <topics/widgets/choices>`
-  * :doc:`dateField <topics/widgets/date>`
-  * :doc:`datetimeField <topics/widgets/datetime>`
-  * :doc:`foreignkeyField <topics/widgets/foreignkey>`
-  * :doc:`manytomanyField <topics/widgets/manytomany>`
-  * :doc:`textField <topics/widgets/text>`
-  * :doc:`Writing custom widgets <topics/widgets/custom>`
-
-* **Developers:**
-
-  * :doc:`Building the JavaScript documentation <topics/develop/jsdoc>`
-
-
+Table of Contents
+=================
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
-   topics/installation.rst
+   topics/installation
+   topics/settings
+   topics/javascriptapi
+   topics/adaptors
+   topics/widgets
+   topics/developers

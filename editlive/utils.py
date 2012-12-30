@@ -78,8 +78,8 @@ def get_field_type(field):
 
 def get_default_adaptor(field):
     fieldtype = get_field_type(field)
-    adaptors = getattr(settings, 'EDITLIVE_ADAPTORS', {})
-    adaptors.update(editlive_settings.EDITLIVE_DEFAULT_ADAPTORS)
+    adaptors = editlive_settings.EDITLIVE_DEFAULT_ADAPTORS
+    adaptors.update(getattr(settings, 'EDITLIVE_ADAPTORS', {}))
     adaptor = adaptors.get(fieldtype, None)
 
     if adaptor:
