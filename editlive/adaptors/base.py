@@ -190,9 +190,6 @@ class BaseAdaptor(object):
         if len(field.errors) == 0:
             self.obj.save()
             val = getattr(self.obj, self.field_name)
-            print {
-                'error': False,
-                'rendered_value': self.render_value(val)}
             return {
                 'error': False,
                 'rendered_value': self.render_value(val)}
@@ -244,7 +241,6 @@ class BaseAdaptor(object):
                 name = 'name="%s"' % self.form_field.html_name
                 field = re.sub(auto_id, 'id="%s"' % self.field_id, field)
                 field = re.sub(name, 'name="%s"' % self.field_name, field)
-            print mark_safe(field + self.render_widget())
             return mark_safe(field + self.render_widget())
         else:
             return field
