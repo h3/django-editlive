@@ -1,0 +1,10 @@
+{% extends "editlive/test/base.html" %}
+{% load editlive_tags %}
+
+{% block content %}
+<div class="span12">
+    <h1>BigIntegerField test</h1>
+    <h3>Basic</h3>
+    {% editlive "object.biginteger_test" as test %}{{ test }}
+</div>
+{% endblock %}
