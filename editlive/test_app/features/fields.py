@@ -13,6 +13,14 @@ def set_browser():
 #   world.browser = Client()
 
 
+@after.all
+def tear_down(result):
+    if result.steps_failed == 0\
+        and (result.features_passed == result.features_ran) \
+        and (result.scenarios_passed and result.scenarios_ran):
+        world.browser.quit()
+
+
 def S(selector):
     return world.browser.find_element_by_css_selector(selector)
 
@@ -23,56 +31,39 @@ def access_url(step, url):
 #   world.dom = html.fromstring(response.content)
 
 
-@step(r'I see a field named "(.*)" with the id "(.*)"')
-def see_field(step, fieldname, field_id):
-    field = S('#'+field_id)
-    assert field.tag_name == 'input'
-    assert field.get_attribute('type') == 'text'
-    assert field.get_attribute('maxlength') == '250'
-    assert field.get_attribute('name') == fieldname
+@step(r'I see "(.*)"')
+def node_exists(step, selector):
+    assert S(selector)
 
 
-@step(r'I see a editlive of type "(.*)" for the field id "(.*)"')
+@step(r'I see a "(.*)" editlive for "(.*)"')
 def see_editlive(step, fieldtype, field_id):
-    editlive = S('editlive[data-field-id="'+field_id+'"]')
+    editlive = S('editlive[data-field-id="'+field_id.replace('#','')+'"]')
     assert editlive.get_attribute('data-type') == fieldtype
  
 
-@step(r'I see the HTML node with the id "(.*)" is (hidden|visible)')
+@step(r'I see "(.*)" is (hidden|visible)')
 def see_html_node_visible_or_hidden(step, node_id, state):
-    node = S('#'+node_id)
+    node = S(node_id)
     if state == 'hidden':
         assert node.is_displayed() is False
     else:
         assert node.is_displayed()
  
 
-@step(r'I see the placeholder for the id "(.*)" is (hidden|visible)')
-def see_placeholder_visible_or_hidden(step, node_id, state):
-    span = S('#'+node_id+' + span')
-    assert 'editlive' in span.get_attribute('class').split(' ')
-    assert span.is_displayed()
+@step(r'I see a (hidden|visible) placeholder for "(.*)"')
+def see_placeholder_visible_or_hidden(step, state, node_id):
+    node = S(node_id+' + span')
+    assert 'editlive' in node.get_attribute('class').split(' ')
+    assert node.is_displayed()
  
 
-#@step(r'I click on the placeholder next to "(.*)" and see the input field appear')
-#def see_placeholder(step, field_id):
-#    field = world.dom.cssselect('#'+field_id)
-#    assert len(field) > 0
- 
- 
+@step(r'I click on the placeholder for "(.*)"')
+def click_on_placeholder(step, node_id):
+    node = S(node_id+' + span')
+    node.click()
 
 
-#@step('I fill in field with class "(.*?)" with "(.*?)"')
-#def fill_in_textfield_by_class(step, field_name, value):
-#    with AssertContextManager(step):
-#        text_field = find_field_by_class(world.browser, field_name)
-#        text_field.clear()
-#        text_field.send_keys(value)
-
-
-
-
-#   Scenario: Placeholder test
-#       Given I access the url "/editlive/test/charfield/"
-#       Then I click on the placeholder next to "id_char_test" and see the input field appear
-
+@step(r'I write "(.*)"')
+def write(step, content):
+    S(node_id).send_keys(content)

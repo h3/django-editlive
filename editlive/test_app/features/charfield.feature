@@ -5,7 +5,12 @@ Feature: charField
 
     Scenario: Initial state
         Given I access the url "/editlive/test/charfield/"
-        Then I see a field named "char_test" with the id "id_char_test"
-        Then I see a editlive of type "charField" for the field id "id_char_test"
-        Then I see the HTML node with the id "id_char_test" is hidden
-        Then I see the placeholder for the id "id_char_test" is visible
+        Then I see "input#id_char_test[name='char_test'][type='text'][maxlength='250']"
+        Then I see a "charField" editlive for "#id_char_test"
+        Then I see "#id_char_test" is hidden
+        Then I see a visible placeholder for "#id_char_test"
+
+    Scenario: Edit mode
+        Given I access the url "/editlive/test/charfield/"
+        When I click on the placeholder for "#id_char_test"
+        Then I see "#id_char_test" is visible
