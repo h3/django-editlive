@@ -27,4 +27,3 @@ class EditliveBaseFieldsTest(models.Model):
     text_test = models.TextField(u'TextField test', blank=True, null=True)
     time_test = models.TimeField(u'TimeField test', blank=True, null=True)
     url_test = models.URLField(u'URLField test', blank=True, null=True)
-

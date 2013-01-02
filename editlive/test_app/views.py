@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.views.generic import TemplateView
-from website.models import EditliveBaseFieldsTest
+from editlive.test_app.models import EditliveBaseFieldsTest
 
 FIELD_TYPES = [
     {'field':'object.biginteger_test','label':'BigIntegerField'},
