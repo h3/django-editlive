@@ -9,3 +9,8 @@ Install requirements::
 
     pip install -r example_project/requirements.txt
     pip install -r requirements.txt
+
+::
+
+    cd example_project/
+    python manage.py harvest -A dajaxice,south,editlive
