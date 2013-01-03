@@ -7,8 +7,8 @@ Create a virtual env::
 
 Install requirements::
 
-    pip install -r example_project/requirements.txt
     pip install -r requirements.txt
+    pip install -r example_project/requirements.txt
 
 ::
 
