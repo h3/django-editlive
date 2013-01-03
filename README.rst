@@ -3,6 +3,9 @@ django-editlive
 
 Live form editing for django with bootstrap (prototype application)
 
+.. figure:: https://api.travis-ci.org/h3/django-editlive.png?branch=master
+    :figwidth: image
+
 Requirements
 ------------
 
@@ -123,6 +126,18 @@ More to come
 
 There is other undocumented features I will eventually document. Meanwhile you can take a look at the source code.
 
- * ajaxform (functional, but undocummented)
- * listactions (functional, but undocummented)
- * sync (not functional yet)
+
+ * ajaxform (kind of functional, but undocummented)
+ * listactions (kind of functional, but undocummented)
+ * sync (experimental, not functional yet)
+
+
+Credits
+=======
+
+This project was created and is sponsored by:
+
+.. figure:: http://motion-m.ca/media/img/logo.png
+    :figwidth: image
+
+Motion Média (http://motion-m.ca)
