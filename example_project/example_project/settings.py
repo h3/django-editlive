@@ -17,7 +17,6 @@ except:
    #sys.path.insert(0, PROJECT_ROOT)
     sys.path.insert(0, abspath(join(PROJECT_ROOT, '../')))
     sys.path.insert(0, abspath(join(PROJECT_ROOT, '../../editlive/')))
-    print sys.path
     import example_project
     from example_project.envs.local import *
 #   try:
