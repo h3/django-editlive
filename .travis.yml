@@ -23,7 +23,7 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
 script:
   # "PATH=$PATH:/tmp/bin project/manage.py test"
-  - "PATH=$PATH:/tmp/bin example_project/manage.py harvest -d --settings=envs.lettuce"
+  - "PATH=$PATH:/tmp/bin example_project/manage.py harvest -A dajaxice,south,editlive"
 
 
 
