@@ -10,7 +10,7 @@ Install requirements::
     pip install -r requirements.txt
     pip install -r example_project/requirements.txt
 
-::
+Run the functional test suite::
 
     cd example_project/
     python manage.py harvest -A dajaxice,south,editlive
