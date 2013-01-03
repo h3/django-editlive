@@ -1,0 +1,44 @@
+{% load dajaxice_templatetags %}
+<!DOCTYPE html>
+<html lang="en-ca" class="" dir="ltr">
+    <head>
+        <title>Django editlive test</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script type="text/javascript" src="{{ STATIC_URL }}test_app/jquery-ui-1.9.2/js/jquery-1.8.3.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}test_app/jquery-ui-1.9.2/css/smoothness/jquery-ui-1.9.2.custom.min.css">
+        <script type="text/javascript" src="{{ STATIC_URL }}test_app/jquery-ui-1.9.2/js/jquery-ui-1.9.2.custom.min.js"></script>
+        {% dajaxice_js_import %}
+
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}test_app/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}test_app/bootstrap/css/bootstrap-responsive.min.css">
+        <script type="text/javascript" src="{{ STATIC_URL }}test_app/bootstrap/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}editlive/css/editlive.css">
+        <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.char.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.text.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.date.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.datetime.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.boolean.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.foreignkey.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.choices.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.manytomany.js"></script>
+    </head>
+    <body>
+        {% block body %}
+        <div class="container">
+            <div class="row">
+                {% block content %}
+                <div class="hero-unit">
+                    <h2>Editlive functional tests</h2>
+                    <p>Because sometimes .. you got to test.</p>
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+        {% endblock %}
+    </body>
+</html>
+

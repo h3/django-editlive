@@ -1,20 +1,21 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-django-editlive
-"""
 
 VERSION = __import__('editlive').VERSION
 
+import os
+from setuptools import setup, find_packages
+
 try:
-    from setuptools import setup, find_packages
+    from setuptest import test
 except ImportError:
-    from ez_setup import use_setuptools
-    use_setuptools()
-    from setuptools import setup, find_packages
+    from setuptools.command.test import test
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 
 install_requires = [
-    'Django',
+    'Django>=1.3',
     'simplejson',
     'django-dajaxice',
 ]
@@ -31,8 +32,8 @@ setup(
     author='Maxime Haineault',
     author_email='max@motion-m.ca',
     url='https://github.com/h3/django-editlive',
-    description = 'Live form editing for django (prototype application',
-    long_description=__doc__,
+    description = 'Live form editing for django (prototype application)',
+    long_description=read('README.rst'),
     packages=find_packages(exclude=["tests"]),
     zip_safe=False,
     license='BSD',
@@ -43,10 +44,11 @@ setup(
    #test_suite='nose.collector',
     include_package_data=True,
     classifiers=[
+        'Framework :: Django',
         'Intended Audience :: Developers',
-        'Intended Audience :: System Administrators',
-        'Operating System :: OS Independent',
-        'Topic :: Software Development'
+        'License :: OSI Approved :: BSD License',
+        'Topic :: Internet :: WWW/HTTP',
+        'Programming Language :: Python',
     ],
 )
 
