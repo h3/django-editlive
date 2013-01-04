@@ -34,7 +34,6 @@ Feature: Field tests
         Then I see "#id_slug_test" is visible
 
 
-
     Scenario: Text Initial state
         Given I access the url "/test/text/"
         Then I see "textarea#id_text_test[name='text_test']"
