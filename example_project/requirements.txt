@@ -1,7 +1,10 @@
-Cython==0.17.4
+South==0.7.6
 splinter==0.4.9
 lettuce==0.2.11
 lettuce_webdriver==0.2.1
 lxml==2.3.5
+
+Cython==0.17.4
+
 cssselect==0.7.1
 fuzzywuzzy==0.1
