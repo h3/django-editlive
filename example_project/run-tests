@@ -1,0 +1,3 @@
+#!/bin/sh
+export BROWSER="FF"
+python manage.py harvest -A dajaxice,south,editlive

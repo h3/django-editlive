@@ -1,9 +1,12 @@
-from lettuce import before, after, world
-from splinter.browser import Browser
+import os
+
 from django.test.utils import setup_test_environment, teardown_test_environment
 from django.core.management import call_command
 from django.db import connection
 from django.conf import settings
+
+from lettuce import before, after, world
+from splinter.browser import Browser
 
 @before.harvest
 def initial_setup(server):
@@ -11,8 +14,14 @@ def initial_setup(server):
     call_command('flush', interactive=False, verbosity=0)
     call_command('loaddata', 'test_data', verbosity=0)
     setup_test_environment()
-   #world.browser = Browser('webdriver.firefox')
-    world.browser = Browser('webdriver.chrome')
+    """
+    Locally we run tests with Firefox because it's faster than Google Chrome .. (wtf?)
+    But on Travis CI we use Google Chrome because Firefox hangs .. (wtf?)
+    """
+    if os.environ.get('BROWSER') == 'FF':
+        world.browser = Browser('webdriver.firefox')
+    else:
+        world.browser = Browser('webdriver.chrome')
 
 @after.harvest
 def cleanup(server):
