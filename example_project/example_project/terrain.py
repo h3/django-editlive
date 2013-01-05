@@ -11,7 +11,8 @@ def initial_setup(server):
     call_command('flush', interactive=False, verbosity=0)
     call_command('loaddata', 'test_data', verbosity=0)
     setup_test_environment()
-    world.browser = Browser('webdriver.firefox')
+   #world.browser = Browser('webdriver.firefox')
+    world.browser = Browser('webdriver.chrome')
 
 @after.harvest
 def cleanup(server):
