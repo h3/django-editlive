@@ -36,9 +36,11 @@ before_script:
 # - 'if [ -n "$REMOTE_ARG" ]; then sleep 60; fi'
 script:
   # "PATH=$PATH:/tmp/bin project/manage.py test"
-  - "PATH=$PATH:/tmp/bin strace -o /home/travis/builds/h3/django-editlive/trace example_project/manage.py harvest -A dajaxice,south,editlive"
-after_failure: 
- - "tail -n 500 /home/travis/builds/h3/django-editlive/trace"
+# - "PATH=$PATH:/tmp/bin strace -o /home/travis/builds/h3/django-editlive/trace example_project/manage.py harvest -A dajaxice,south,editlive"
+  - "PATH=$PATH:/tmp/bin strace -q python manage.py harvest -A dajaxice,south,editlive 2>&1 | grep -v 'ENOENT\|lstat\|unlink\|recvfrom\|getdents'"
+  
+#after_failure: 
+# - "tail -n 500 /home/travis/builds/h3/django-editlive/trace"
 
 
 #env:
