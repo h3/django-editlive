@@ -4,8 +4,5 @@ splinter==0.4.9
 lettuce==0.2.11
 lettuce_webdriver==0.2.1
 lxml==2.3.5
-Jinja2==2.6
 cssselect==0.7.1
-distribute==0.6.27
 fuzzywuzzy==0.1
-tornado==2.3
