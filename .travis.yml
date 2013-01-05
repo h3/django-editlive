@@ -36,7 +36,7 @@ before_script:
 # - 'if [ -n "$REMOTE_ARG" ]; then sleep 60; fi'
 script:
   # "PATH=$PATH:/tmp/bin project/manage.py test"
-  - "PATH=$PATH:/tmp/bin example_project/manage.py harvest -A dajaxice,south,editlive"
+  - "PATH=$PATH:/tmp/bin strace example_project/manage.py harvest -A dajaxice,south,editlive"
 after_failure: 
  - "ls /home/travis/builds/h3/django-editlive/"
 
