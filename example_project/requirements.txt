@@ -1,5 +1,4 @@
 Cython==0.17.4
-South==0.7.6
 splinter==0.4.9
 lettuce==0.2.11
 lettuce_webdriver==0.2.1
