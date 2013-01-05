@@ -1,14 +1,24 @@
-Feature: Smallsmallinteger field
-    Functional tests for the editlive Smallsmallinteger field
+Feature: SmallInteger field
+    Functional tests for the editlive SmallInteger field
 
-    Scenario: Initial state
-        Given I access the url "/test/smallinteger/"
+    Scenario: SmallInteger initial state
+        Given I open the smallinteger test page
         Then I see "input#id_smallinteger_test[name='smallinteger_test'][type='text']"
         Then I see a "charField" editlive for "#id_smallinteger_test"
         Then I see "#id_smallinteger_test" is hidden
         Then I see a visible placeholder for "#id_smallinteger_test"
 
-    Scenario: Edit mode
-        Given I access the url "/test/smallinteger/"
+    Scenario: SmallInteger edit mode
+        Given I open the smallinteger test page
         When I click on the placeholder for "#id_smallinteger_test"
         Then I see "#id_smallinteger_test" is visible
+
+    Scenario: SmallInteger Edit and save
+        Given I open the smallinteger test page
+        When I click on the placeholder for "#id_smallinteger_test"
+        Then I see "#id_smallinteger_test" is visible
+        When I input "1" in "#id_smallinteger_test"
+        Then the value of "#id_smallinteger_test" is "1"
+        Then I see "#id_smallinteger_test" is hidden
+        Then I see a visible placeholder for "#id_smallinteger_test"
+        Then I see the placeholder text change to "1"

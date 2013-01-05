@@ -1,28 +1,33 @@
 from lettuce import *
 from lettuce.django import django_url
-from nose.tools import assert_equals
-from lettuce_webdriver.util import assert_false
-from lettuce_webdriver.util import AssertContextManager
+#from lettuce_webdriver.util import assert_false
+#from lettuce_webdriver.util import AssertContextManager
 
 
-def S(selector):
-    return world.browser.find_by_css(selector)[0]
+def S(selector, using='css', wait=0, invert=False):
+    if wait > 0:
+        if invert:
+            method = 'is_element_present_by_%s' % using
+        else:
+            method = 'is_element_not_present_by_%s' % using
+    else:
+        method = 'find_by_%s' % using
+    return getattr(world.browser, method)(selector)
 
 
 def get_placeholder_for(node_id):
-    n = S(node_id)
+    n = S(node_id).first
     p = n.find_by_xpath('./ancestor::div[contains(concat(" ", @class, " "), "controls")][1]')
-    return S('.editlive')
+   #return S('.editlive').first
+    return p.find_by_css('.editlive')
 
 
-@step(r'I access the url "(.*)"')
-def access_url(step, url):
-    world.response = world.browser.visit(django_url(url))
+@step(r'I open the (\w+) test page')
+def access_url(step, name):
+   #import IPython
+   #IPython.embed()
+    world.response = world.go_to_page(name)
 
-
-@step(u'I should see "(.*)"')
-def i_should_see(step, text):
-    assert text in world.browser.html
 
 @step(u'a user exists with username "(.*)"')
 def a_user_exists_with_username(step, p_username):
@@ -33,18 +38,18 @@ def a_user_exists_with_username(step, p_username):
 
 @step(r'I see "(.*)"')
 def node_exists(step, selector):
-    assert S(selector)
+    assert world.browser.is_element_present_by_css(selector)
 
 
 @step(r'I see a "(.*)" editlive for "(.*)"')
 def see_editlive(step, fieldtype, field_id):
-    editlive = S('editlive[data-field-id="'+field_id.replace('#','')+'"]')
+    editlive = S('editlive[data-field-id="'+field_id.replace('#','')+'"]').first
     assert editlive['data-type'] == fieldtype
  
 
 @step(r'I see "(.*)" is (hidden|visible)')
 def see_html_node_visible_or_hidden(step, node_id, state):
-    node = S(node_id)
+    node = S(node_id).first
     if state == 'hidden':
         assert node.visible is False
     else:
@@ -53,22 +58,43 @@ def see_html_node_visible_or_hidden(step, node_id, state):
 
 @step(r'I see a (hidden|visible) placeholder for "(.*)"')
 def see_placeholder_visible_or_hidden(step, state, node_id):
-    node = get_placeholder_for(node_id)
+    node = get_placeholder_for(node_id).first
     assert 'editlive' in node['class'].split(' ')
     assert node.visible
  
 
 @step(r'I click on the placeholder for "(.*)"')
 def click_on_placeholder(step, node_id):
-    node = get_placeholder_for(node_id)
+    node = get_placeholder_for(node_id).first
     node.click()
 
 
 @step(r'I input "(.*)" in "(.*)"')
 def write(step, content, node_id):
-    S(node_id).type(content)
-
+    n = S(node_id).first
+    n.fill(content)
+    assert n['value'] == content
 
 @step(r'the value of "(.*)" is "(.*)"')
 def valueof(step, node_id, value):
-    assert S(node_id)['value'] == value
+    n = S(node_id).first
+   #import IPython
+   #IPython.embed()
+    assert n['value'] == value
+
+
+@step(r'I input "(.*)" in "(.*)"')
+def write(step, content, node_id):
+    n = S(node_id).first
+    n.fill(content)
+    assert n['value'] == content
+    world.browser.find_by_tag('h1').first.click()
+
+@step(r'I see the placeholder text change to "(.*)"')
+def write(step, content):
+    assert world.is_placeholder_present(content)
+
+
+@step(r'Then I see the following error: (.*)')
+def errorpresent(step, error):
+    assert world.is_error_present(error)
