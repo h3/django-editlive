@@ -42,7 +42,6 @@ script:
 #after_failure: 
 # - "tail -n 500 /home/travis/builds/h3/django-editlive/trace"
 
-
 #env:
 ## - DJANGO_VERSION=1.3.1
 #  - DJANGO_VERSION=1.4.3
