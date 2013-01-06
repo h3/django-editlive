@@ -15,11 +15,11 @@ for k in FIELDS:
 
 
 @world.absorb
-def go_to_page(name):
+def go_to_page(name, querystring=''):
     assert PAGES.has_key(name), \
         'the page "%s" is not mapped in the PAGES dictionary, ' \
         'check if you misspelled it or add into it in: test_app/features/steps.py' % name
-    world.browser.visit(django_url(PAGES[name]))
+    world.browser.visit(django_url(PAGES[name]) + querystring)
 
 @world.absorb
 def is_placeholder_present(content, wait_time=10):

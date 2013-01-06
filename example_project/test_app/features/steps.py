@@ -18,15 +18,17 @@ def S(selector, using='css', wait=0, invert=False):
 def get_placeholder_for(node_id):
     n = S(node_id).first
     p = n.find_by_xpath('./ancestor::div[contains(concat(" ", @class, " "), "controls")][1]')
-   #return S('.editlive').first
     return p.find_by_css('.editlive')
 
 
 @step(r'I open the (\w+) test page')
 def access_url(step, name):
-   #import IPython
-   #IPython.embed()
     world.response = world.go_to_page(name)
+
+
+@step(r'I open the (\w+) test page with options "(.*)"')
+def access_url(step, name, options):
+    world.response = world.go_to_page(name, options)
 
 
 @step(u'a user exists with username "(.*)"')
@@ -67,6 +69,12 @@ def see_placeholder_visible_or_hidden(step, state, node_id):
 def click_on_placeholder(step, node_id):
     node = get_placeholder_for(node_id).first
     node.click()
+ 
+
+@step(r'Then the value of the placeholder for "(.*)" is "(.*)"')
+def see_placeholder_visible_or_hidden(step, node_id, value):
+    node = get_placeholder_for(node_id).first
+    assert node.text == value
 
 
 @step(r'I input "(.*)" in "(.*)"')
