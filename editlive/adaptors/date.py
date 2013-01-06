@@ -2,7 +2,7 @@ from editlive.adaptors.base import BaseAdaptor
 
 
 class DateAdaptor(BaseAdaptor):
-    """The CharAdaptor is used for DateField".
+    """DateField adaptor
     """
     def __init__(self, *args, **kwargs):
         super(DateAdaptor, self).__init__(*args, **kwargs)
@@ -17,7 +17,7 @@ class DateAdaptor(BaseAdaptor):
 
 
 class DateTimeAdaptor(BaseAdaptor):
-    """The CharAdaptor is used for DateTimeField".
+    """ DateTimeField adaptor
     """
     def __init__(self, *args, **kwargs):
         super(DateTimeAdaptor, self).__init__(*args, **kwargs)
@@ -30,3 +30,20 @@ class DateTimeAdaptor(BaseAdaptor):
             self.template_filters.append(\
                     u"date:'%s'" % settings.DATETIME_FORMAT)
         return super(DateTimeAdaptor, self).render_value(value=value)
+
+
+class TimeAdaptor(BaseAdaptor):
+    """TimeField adaptor
+    """
+    def __init__(self, *args, **kwargs):
+        super(TimeAdaptor, self).__init__(*args, **kwargs)
+        if self.form_field:
+            self.attributes.update({'data-type': 'charField'})
+
+    def render_value(self, value=None):
+        return unicode(value or '')
+
+#   def set_value(self, value):
+#       self.field_value = value
+#       setattr(self.obj, self.get_real_field_name(), unicode(value))
+#       return value

@@ -73,6 +73,8 @@ def get_field_type(field):
         return 'image'
     elif isinstance(field, models.FileField):
         return 'file'
+    elif isinstance(field, models.TimeField):
+        return 'time'
     return 'char'  # Default
 
 

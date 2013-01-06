@@ -23,4 +23,3 @@ class ForeignKeyAdaptor(BaseAdaptor):
         val = value or getattr(self.obj, self.get_real_field_name())
         rendered_val = '' if val is None else unicode(val)
         return rendered_val
-

@@ -109,7 +109,6 @@ INSTALLED_APPS = (
     "lettuce.django",
     'dajaxice',
     "editlive",
-    "south",
     "test_app",
 )
 
@@ -126,6 +125,10 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler'
         }
     },
     'loggers': {
@@ -134,10 +137,13 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'dajaxice': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
     }
 }
-
-SOUTH_TESTS_MIGRATE = True
 
 CACHES = {
     'default': {

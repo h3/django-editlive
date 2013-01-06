@@ -18,10 +18,10 @@ Feature: Time field
         When I click on the placeholder for "#id_time_test"
         Then I see "#id_time_test" is visible
         When I input "16:20:00" in "#id_time_test"
-       #Then the value of "#id_time_test" is "16:20:00"
-       #Then I see "#id_time_test" is hidden
-       #Then I see a visible placeholder for "#id_time_test"
-       #Then I see the placeholder text change to "16:20:00"
+        Then the value of "#id_time_test" is "16:20:00"
+        Then I see "#id_time_test" is hidden
+        Then I see a visible placeholder for "#id_time_test"
+        Then I see the placeholder text change to "16:20:00"
 
     Scenario: Time invalid
         Given I open the time test page

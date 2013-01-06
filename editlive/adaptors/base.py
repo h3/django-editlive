@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 from django.utils.safestring import mark_safe
 from django.forms.models import modelform_factory
@@ -190,6 +191,7 @@ class BaseAdaptor(object):
         if len(field.errors) == 0:
             self.obj.save()
             val = getattr(self.obj, self.field_name)
+            rendered_value = self.render_value(val)
             return {
                 'error': False,
                 'rendered_value': self.render_value(val)}
@@ -201,11 +203,11 @@ class BaseAdaptor(object):
                         'field_name': field_name_error,
                         'message': unicode(error)
                     })
-
+            value = self.get_value()
             return {
                 'error': True,
                 'messages': messages,
-                'value': self.get_value(),
+                'value': value,
                 'rendered_value': self.render_value()}
 
     def render_widget(self):
