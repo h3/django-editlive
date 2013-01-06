@@ -1,10 +1,13 @@
 django-editlive
 ===============
 
-Live form editing for django with bootstrap (prototype application)
+Live form editing for django with bootstrap and jQuery UI
 
-.. figure:: https://api.travis-ci.org/h3/django-editlive.png?branch=master
-    :figwidth: image
+|BUILD|_
+
+.. |BUILD| image:: https://api.travis-ci.org/h3/django-editlive.png?branch=master
+.. _BUILD: https://travis-ci.org/h3/django-editlive/
+
 
 Requirements
 ------------
