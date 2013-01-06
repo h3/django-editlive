@@ -28,7 +28,7 @@ Feature: Date field tests
         When I input "2013-99-99" in "#id_date_test"
         Then I see the following error: Enter a valid date.
 
-    Scenario: Date invalid
+    Scenario: Date with template filters
         Given I open the date test page with options "?template_filters=date:'M d, Y'"
         Then the value of the placeholder for "#id_date_test" is "Jan 01, 2013"
         When I click on the placeholder for "#id_date_test"

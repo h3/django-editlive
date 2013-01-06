@@ -23,3 +23,10 @@ Feature: Char field tests
         Then I see "#id_char_test" is hidden
         Then I see a visible placeholder for "#id_char_test"
         Then I see the placeholder text change to "Hello World"
+
+    Scenario: Char with template filters
+        Given I open the char test page with options "?template_filters=title|slice:'0:20'"
+        Then the value of the placeholder for "#id_char_test" is "Lorem Ipsum Dolor Si"
+        When I click on the placeholder for "#id_char_test"
+        When I input "The world is a strange place" in "#id_char_test"
+        Then the value of the placeholder for "#id_char_test" is "The World Is A Stran"
