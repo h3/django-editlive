@@ -41,6 +41,8 @@ USE_I18N = False
 USE_L10N = False
 USE_TZ = False
 
+DATE_FORMAT = 'Y-m-d'
+DATE_INPUT_FORMATS = ('%Y-%m-%d',)
 
 MEDIA_ROOT = join(PROJECT_ROOT, "media")
 MEDIA_URL = '/media/'
