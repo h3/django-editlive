@@ -4,23 +4,57 @@
      *
      * @name jQuery.fn.dateField
      * @class
+     * 
+     * +----+----+--------------------------------------+
+     * | Dj | Js | Description                          |
+     * +====+====+======================================+
+     * | j  | d  | day of month (no leading zero)       |
+     * | d  | dd | day of month (two digit)             |
+     * | z  | o  | day of the year (no leading zeros)   |
+     * | z  | oo | day of the year (three digit) *      |
+     * | D  | D  | day name short                       |
+     * | l  | DD | day name long                        |
+     * | n  | m  | month of year (no leading zero)      |
+     * | m  | mm | month of year (two digit)            |
+     * | M  | M  | month name short                     |
+     * | F  | MM | month name long                      |
+     * | y  | y  | year (two digit)                     |
+     * | Y  | yy | year (four digit)                    |
+     * | U  | @  | Unix timestamp (ms since 01/01/1970) |
+     * +----+----+--------------------------------------+
+     *
      */
+
+    var djangoDateFormatMap = {
+        j:'d', d:'dd', z:'o', z:'oo',
+        D:'D', l:'DD', n:'m', m:'mm',
+        M:'M', F:'MM', y:'y', Y:'yy',
+        U:'@'};
+
     var dateField = {
         _type: 'date',
         options: { 
-            dateFormat: 'dd/mm/yy',
             showOn: 'button',
             currentText: 'Maintenant',
             closeText: 'Ok'
         }
     };
 
-
     dateField._init = function(){
         var $self = this;
         $self.options.onClose = function() {
             $self.blur();
         };
+
+        if ($self.options.format) {
+            var format = $self.options.format,
+                tokens = $self.options.format.match(/(%\w+)/g);
+            for (var x in tokens) {
+                format = format.replace(tokens[x], djangoDateFormatMap[tokens[x].replace('%','')])
+            }
+            $self.options.dateFormat = format;
+        }
+
         $self._createPlaceholder();
         $self.element.width(160).wrap('<div class="input-append" />').hide();
         $self.element.datepicker($self.options);

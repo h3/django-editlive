@@ -133,8 +133,9 @@ LOGGING = {
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
+           #'handlers': ['mail_admins'],
+            'handlers': ['console'],
+            'level': 'WARNING',
             'propagate': True,
         },
         'dajaxice': {
