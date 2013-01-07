@@ -5,3 +5,4 @@ local_settings.py
 *.egg-info
 docs/_build/
 editlive_test_env/
+example_project/testdb.sqlite3
