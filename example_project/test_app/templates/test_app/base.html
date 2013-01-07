@@ -6,18 +6,19 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <script type="text/javascript" src="{{ STATIC_URL }}test_app/jquery-ui-1.9.2/js/jquery-1.8.3.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}test_app/jquery-ui-1.9.2/css/smoothness/jquery-ui-1.9.2.custom.min.css">
-        <script type="text/javascript" src="{{ STATIC_URL }}test_app/jquery-ui-1.9.2/js/jquery-ui-1.9.2.custom.min.js"></script>
+        {# jQuery UI + Bootstrap #}
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}editlive/contrib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}editlive/contrib/bootstrap/css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}editlive/contrib/jquery-ui-bootstrap/css/style.css">
+        <script type="text/javascript" src="{{ STATIC_URL }}editlive/contrib/jquery-ui-bootstrap/js/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}editlive/contrib/jquery-ui-bootstrap/js/jquery-ui.custom.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}editlive/contrib/jquery-ui-bootstrap/js/bootstrap/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}editlive/contrib/jquery-ui-bootstrap/third-party/jQuery-UI-Date-Time-Picker/jquery-ui-timepicker.css">
+        <script type="text/javascript" src="{{ STATIC_URL }}editlive/contrib/jquery-ui-bootstrap/third-party/jQuery-UI-Date-Time-Picker/jquery-ui-timepicker-addon.js"></script>
+        {# Dajaxice #}
         {% dajaxice_js_import %}
 
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}test_app/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}test_app/bootstrap/css/bootstrap-responsive.min.css">
-        <script type="text/javascript" src="{{ STATIC_URL }}test_app/bootstrap/js/bootstrap.min.js"></script>
-        {# contrib #}
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}editlive/contrib/jquery-ui-timepicker/jquery-ui-timepicker.css">
-        <script type="text/javascript" src="{{ STATIC_URL }}editlive/contrib/jquery-ui-timepicker/jquery-ui-timepicker-addon.js"></script>
-
+        {# Editlive #}
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}editlive/css/editlive.css">
         <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}editlive/js/jquery.editlive.char.js"></script>
