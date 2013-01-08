@@ -1,12 +1,9 @@
 django-editlive
 ===============
 
-Live form editing for django with bootstrap and jQuery UI
+Live form editing for django with Bootstrap_ and `jQuery UI`_
 
-|BUILD|_
-
-.. |BUILD| image:: https://api.travis-ci.org/h3/django-editlive.png?branch=master
-.. _BUILD: https://travis-ci.org/h3/django-editlive/
+|BUILDSTATUS|_
 
  +-------------------+------------------+
  | **Demo page**     | To come..        |
@@ -16,15 +13,13 @@ Live form editing for django with bootstrap and jQuery UI
  | **Build server**  | `Travis ci`_     |
  +-------------------+------------------+
 
+.. _Bootstrap: http://twitter.github.com/bootstrap/index.html
+.. _jQuery UI: http://jqueryui.com/
+.. |BUILDSTATUS| image:: https://api.travis-ci.org/h3/django-editlive.png?branch=master
+.. _BUILDSTATUS: https://travis-ci.org/h3/django-editlive/
 .. _Read the Docs: https://django-editlive.readthedocs.org/en/latest/
 .. _Travis ci: https://travis-ci.org/h3/django-editlive/
 
-Python_ is `my favourite
-programming language`__.
-
-.. _Python: http://www.python.org/
-
-__ Python_ 
 
 Requirements
 ------------
