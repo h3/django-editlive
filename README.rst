@@ -22,12 +22,14 @@ Live form editing for django with Bootstrap_ and `jQuery UI`_
 Requirements
 ------------
 
-* Django-dajaxice (latest): https://github.com/jorgebastida/django-dajaxice
+* `Django-dajaxice`_ (latest)
+
+.. _Django-dajaxice: https://github.com/jorgebastida/django-dajaxice
 
 Basic usage
 -----------
 
-Editlive can take any database object and make it editable live with a simple template tag::
+In a template, editlive can take any in context database object and make it editable live with a simple template tag::
 
     {% load editlive_tags %}
 
@@ -39,7 +41,7 @@ Editlive can take any database object and make it editable live with a simple te
 This will render the object's property value in a clickable container. When the container is clicked, 
 it changes to a input field according to the field's type.
 
-It is possible to apply template filters to a property value like this::
+It's possible to apply template filters to the placeholder's display value like this::
 
     {% editlive "object.description" template_filters="capfirst" as object_description %}
 
