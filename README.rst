@@ -8,16 +8,23 @@ Live form editing for django with bootstrap and jQuery UI
 .. |BUILD| image:: https://api.travis-ci.org/h3/django-editlive.png?branch=master
 .. _BUILD: https://travis-ci.org/h3/django-editlive/
 
- +-------------------+----------------+
- | **Demo page**     | To come..      |
- +-------------------+----------------+
- | **Documentation** | Read the Docs_ |
- +-------------------+----------------+
- | **Build server**  | Travis ci_     |
- +-------------------+----------------+
+ +-------------------+------------------+
+ | **Demo page**     | To come..        |
+ +-------------------+------------------+
+ | **Documentation** | `Read the Docs`_ |
+ +-------------------+------------------+
+ | **Build server**  | `Travis ci`_     |
+ +-------------------+------------------+
 
 .. _Read the Docs: https://django-editlive.readthedocs.org/en/latest/
 .. _Travis ci: https://travis-ci.org/h3/django-editlive/
+
+Python_ is `my favourite
+programming language`__.
+
+.. _Python: http://www.python.org/
+
+__ Python_ 
 
 Requirements
 ------------
