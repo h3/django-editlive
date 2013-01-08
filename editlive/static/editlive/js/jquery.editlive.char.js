@@ -296,11 +296,13 @@
     };
 
     charField.hide = function() {
-        this._unwatch_blur();
-        this._unbind_kb_blur_events();
-        this.element.hide()
-            .parent().find('.add-on').css('display', 'none');
-        if (this.placeholder) this.placeholder.show();
+        if (!this.control.hasClass('error')) {
+            this._unwatch_blur();
+            this._unbind_kb_blur_events();
+            this.element.hide()
+                .parent().find('.add-on').css('display', 'none');
+            if (this.placeholder) this.placeholder.show();
+        }
     };
 
     charField.change = function(){

@@ -13,7 +13,7 @@ Feature: PositiveSmallInteger field
         When I click on the placeholder for "#id_positivesmallinteger_test"
         Then I see "#id_positivesmallinteger_test" is visible
 
-    Scenario: PositiveInteger edit and save
+    Scenario: PositiveSmallInteger edit and save
         Given I open the positivesmallinteger test page
         When I click on the placeholder for "#id_positivesmallinteger_test"
         Then I see "#id_positivesmallinteger_test" is visible
@@ -23,14 +23,17 @@ Feature: PositiveSmallInteger field
         Then I see a visible placeholder for "#id_positivesmallinteger_test"
         Then I see the placeholder text change to "1"
 
-    Scenario: PositiveInteger invalid (negative)
+    Scenario: PositiveSmallInteger invalid (negative)
         Given I open the positivesmallinteger test page
         When I click on the placeholder for "#id_positivesmallinteger_test"
         When I input "-1" in "#id_positivesmallinteger_test"
         Then I see the following error: Ensure this value is greater than or equal to 0.
 
-    Scenario: PositiveInteger invalid
+    Scenario: PositiveSmallInteger validation
         Given I open the positivesmallinteger test page
         When I click on the placeholder for "#id_positivesmallinteger_test"
         When I input "a" in "#id_positivesmallinteger_test"
         Then I see the following error: Enter a whole number.
+        When I click on "h1"
+        Then I see a hidden placeholder for "#id_positivesmallinteger_test"
+        Then I see "#id_positivesmallinteger_test" is visible

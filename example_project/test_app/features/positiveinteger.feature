@@ -29,8 +29,11 @@ Feature: PositiveInteger field
         When I input "-1" in "#id_positiveinteger_test"
         Then I see the following error: Ensure this value is greater than or equal to 0.
 
-    Scenario: PositiveInteger invalid
+    Scenario: PositiveInteger validation
         Given I open the positiveinteger test page
         When I click on the placeholder for "#id_positiveinteger_test"
         When I input "a" in "#id_positiveinteger_test"
         Then I see the following error: Enter a whole number.
+        When I click on "h1"
+        Then I see a hidden placeholder for "#id_positiveinteger_test"
+        Then I see "#id_positiveinteger_test" is visible

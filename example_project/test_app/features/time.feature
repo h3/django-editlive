@@ -23,8 +23,11 @@ Feature: Time field
         Then I see a visible placeholder for "#id_time_test"
         Then I see the placeholder text change to "16:20:00"
 
-    Scenario: Time invalid
+    Scenario: Time validation
         Given I open the time test page
         When I click on the placeholder for "#id_time_test"
         When I input "invalid time!" in "#id_time_test"
         Then I see the following error: Enter a valid time.
+        When I click on "h1"
+        Then I see a hidden placeholder for "#id_time_test"
+        Then I see "#id_time_test" is visible

@@ -24,8 +24,11 @@ Feature: Email field
         Then I see a visible placeholder for "#id_email_test"
         Then I see the placeholder text change to "Hello@World.com"
 
-    Scenario: Email invalid
+    Scenario: Email validation
         Given I open the email test page
         When I click on the placeholder for "#id_email_test"
         When I input "blah blah" in "#id_email_test"
         Then I see the following error: Enter a valid e-mail address.
+        When I click on "h1"
+        Then I see a hidden placeholder for "#id_email_test"
+        Then I see "#id_email_test" is visible

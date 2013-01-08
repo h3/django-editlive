@@ -58,11 +58,20 @@ def see_html_node_visible_or_hidden(step, node_id, state):
         assert node.visible
  
 
+@step(r'I click on "(.*)"')
+def click_on(step, node_id):
+    node = S(node_id).first
+    node.click()
+ 
+
 @step(r'I see a (hidden|visible) placeholder for "(.*)"')
 def see_placeholder_visible_or_hidden(step, state, node_id):
     node = get_placeholder_for(node_id).first
     assert 'editlive' in node['class'].split(' ')
-    assert node.visible
+    if state == 'hidden':
+        assert node.visible is False
+    else:
+        assert node.visible
  
 
 @step(r'I click on the placeholder for "(.*)"')

@@ -23,8 +23,11 @@ Feature: Slug field tests
         Then I see a visible placeholder for "#id_slug_test"
         Then I see the placeholder text change to "Hello-World"
 
-    Scenario: Slug invalid
+    Scenario: Slug validation
         Given I open the slug test page
         When I click on the placeholder for "#id_slug_test"
         When I input "invalid slug!" in "#id_slug_test"
         Then I see the following error: Enter a valid
+        When I click on "h1"
+        Then I see a hidden placeholder for "#id_slug_test"
+        Then I see "#id_slug_test" is visible

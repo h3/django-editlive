@@ -23,8 +23,11 @@ Feature: Float field
         Then I see a visible placeholder for "#id_float_test"
         Then I see the placeholder text change to "1.23"
 
-    Scenario: Float invalid
+    Scenario: Float validation
         Given I open the float test page
         When I click on the placeholder for "#id_float_test"
         When I input "blah blah" in "#id_float_test"
         Then I see the following error: Enter a number.
+        When I click on "h1"
+        Then I see a hidden placeholder for "#id_float_test"
+        Then I see "#id_float_test" is visible

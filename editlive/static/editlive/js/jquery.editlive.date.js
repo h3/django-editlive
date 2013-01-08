@@ -95,7 +95,9 @@
         $('html').bind('click.editlive_'+ $self.element.attr('id'), function(e){
             var target = $(e.target),
                 _parent = target.parent();
+         
             if (!target.hasClass('ui-datepicker-current') 
+                && !$self.control.hasClass('error')
                 && !target.parents('.ui-datepicker').get(0) 
                 && !target.parents('.ui-datepicker-header').get(0)) {
                 if (!target.hasClass('no-blur')) {

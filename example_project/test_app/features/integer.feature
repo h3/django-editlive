@@ -23,8 +23,11 @@ Feature: Integer field
         Then I see a visible placeholder for "#id_integer_test"
         Then I see the placeholder text change to "1"
 
-    Scenario: Integer invalid
+    Scenario: Integer validation
         Given I open the integer test page
         When I click on the placeholder for "#id_integer_test"
         When I input "a" in "#id_integer_test"
         Then I see the following error: Enter a whole number.
+        When I click on "h1"
+        Then I see a hidden placeholder for "#id_integer_test"
+        Then I see "#id_integer_test" is visible

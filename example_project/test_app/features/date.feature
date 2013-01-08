@@ -22,11 +22,14 @@ Feature: Date field tests
         Then I see "#id_date_test" is hidden
         Then I see a visible placeholder for "#id_date_test"
 
-    Scenario: Date invalid
+    Scenario: Date validation
         Given I open the date test page
         When I click on the placeholder for "#id_date_test"
         When I input "2013-99-99" in "#id_date_test"
         Then I see the following error: Enter a valid date.
+        When I click on "h1"
+        Then I see a hidden placeholder for "#id_date_test"
+        Then I see "#id_date_test" is visible
 
     Scenario: Date with template filters
         Given I open the date test page with options "?template_filters=date:'M d, Y'"

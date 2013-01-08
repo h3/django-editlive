@@ -22,3 +22,12 @@ Feature: SmallInteger field
         Then I see "#id_smallinteger_test" is hidden
         Then I see a visible placeholder for "#id_smallinteger_test"
         Then I see the placeholder text change to "1"
+
+    Scenario: SmallInteger validation
+        Given I open the smallinteger test page
+        When I click on the placeholder for "#id_smallinteger_test"
+        When I input "a" in "#id_smallinteger_test"
+        Then I see the following error: Enter a whole number.
+        When I click on "h1"
+        Then I see a hidden placeholder for "#id_smallinteger_test"
+        Then I see "#id_smallinteger_test" is visible

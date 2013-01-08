@@ -28,3 +28,6 @@ Feature: IPAddress field
         When I click on the placeholder for "#id_ipaddress_test"
         When I input "blah blah" in "#id_ipaddress_test"
         Then I see the following error: Enter a valid IPv4 address.
+        When I click on "h1"
+        Then I see a hidden placeholder for "#id_ipaddress_test"
+        Then I see "#id_ipaddress_test" is visible
