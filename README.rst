@@ -82,17 +82,6 @@ This way `editlive` stays non-intrusive as it doesn't alter the original input t
 This also means that you are not constrained to use the editlive template tag, you can hardcode `<editlive />` tag in HTML and the JavaScript will hook it up.
 
 
-More to come
-------------
-
-There is other undocumented features I will eventually document. Meanwhile you can take a look at the source code.
-
-
- * ajaxform (kind of functional, but undocummented)
- * listactions (kind of functional, but undocummented)
- * sync (experimental, not functional yet)
-
-
 Credits
 =======
 
