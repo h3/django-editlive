@@ -22,7 +22,7 @@ Live form editing for django with Bootstrap_ and `jQuery UI`_
 Requirements
 ------------
 
- * Django-dajaxice (latest): https://github.com/jorgebastida/django-dajaxice
+* Django-dajaxice (latest): https://github.com/jorgebastida/django-dajaxice
 
 Basic usage
 -----------
