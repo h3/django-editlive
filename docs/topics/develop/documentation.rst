@@ -1,8 +1,31 @@
-Contributing to JavaScript documentation
-++++++++++++++++++++++++++++++++++++++++
+Contributing to documentation
++++++++++++++++++++++++++++++
+
+You see that `build` script in the docs folder ? Don't use it.
+
+That is, unless you have followed the instructions on how to compile the JavaScript 
+documentation and placed the `sdoc_toolkit-2.4.0` in a folder named `~/Ubuntu\ One/SDKs`.
+
+I might give the build script some love some day and make it more useful, but for now I 
+have other priorities.
+
+
+Building the Python documentation
+-------------------------------------
+
+::
+
+    cd django-editlive/docs/
+    make html
+
+
+Building the JavaScript documentation
+-------------------------------------
+
+This is only needed if changes have been made to a JavaScript file.
 
 Installing requirements
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Using Ubuntu One is really not a requirement, just a convenience for me.
 
@@ -15,10 +38,11 @@ Using Ubuntu One is really not a requirement, just a convenience for me.
     
 
 Compiling docs
---------------
+^^^^^^^^^^^^^^
 
 ::
-
+    
+    cd django-editlive/
     java -jar ~/Ubuntu\ One/SDKs/jsdoc_toolkit-2.4.0/jsdoc-toolkit/jsrun.jar \
     ~/Ubuntu\ One/SDKs/jsdoc_toolkit-2.4.0/jsdoc-toolkit/app/run.js ./ \
     --template=_themes/jsdoc-for-sphinx -x=js,jsx --directory=./jsdoc
@@ -29,7 +53,7 @@ Compiling docs
     --template=./docs/_themes/jsdoc-for-sphinx -x=js,jsx --directory=./docs/jsdoc
 
 Including documentation
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
@@ -37,7 +61,7 @@ Including documentation
        :start-after: class-methods
 
 Tags reference
---------------
+^^^^^^^^^^^^^^
 
  * **@augments** - Indicate this class uses another class as its "base."
  * **@author** - Indicate the author of the code being documented.
@@ -77,7 +101,7 @@ Tags reference
  * **@version** - Indicate the release version of this code. 
 
 References
-==========
+^^^^^^^^^^
 
  * https://github.com/stdbrouw/jsdoc-for-sphinx
  * http://code.google.com/p/jsdoc-toolkit/
