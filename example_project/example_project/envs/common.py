@@ -108,7 +108,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.markup',
-   #'django.contrib.admin',
+    'django.contrib.admin',
    #"compressor",
     "lettuce.django",
     'dajaxice',

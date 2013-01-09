@@ -2,6 +2,7 @@ Feature: GenericIPAddress field
     Functional tests for the editlive GenericIPAddress field
 
     Scenario: GenericIPAddress initial state
+        Given I'm TestMan
         Given I open the genericipaddress test page
         Then I see "input#id_genericipaddress_test[name='genericipaddress_test'][type='text']"
         Then I see a "charField" editlive for "#id_genericipaddress_test"
@@ -9,11 +10,13 @@ Feature: GenericIPAddress field
         Then I see a visible placeholder for "#id_genericipaddress_test"
 
     Scenario: GenericIPAddress edit mode
+        Given I'm TestMan
         Given I open the genericipaddress test page
         When I click on the placeholder for "#id_genericipaddress_test"
         Then I see "#id_genericipaddress_test" is visible
 
     Scenario: GenericIPAddress edit and save
+        Given I'm TestMan
         Given I open the genericipaddress test page
         When I click on the placeholder for "#id_genericipaddress_test"
         Then I see "#id_genericipaddress_test" is visible
@@ -24,6 +27,7 @@ Feature: GenericIPAddress field
         Then I see the placeholder text change to "192.168.0.1"
 
     Scenario: GenericIPAddress validation
+        Given I'm TestMan
         Given I open the genericipaddress test page
         When I click on the placeholder for "#id_genericipaddress_test"
         When I input "blah blah" in "#id_genericipaddress_test"
@@ -31,3 +35,7 @@ Feature: GenericIPAddress field
         When I click on "h1"
         Then I see a hidden placeholder for "#id_genericipaddress_test"
         Then I see "#id_genericipaddress_test" is visible
+
+    Scenario: Anonymous mode
+        Given I open the char test page
+        Then I don't see ".editlive"

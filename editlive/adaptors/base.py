@@ -30,9 +30,10 @@ class BaseAdaptor(object):
 
     """
 
-    def __init__(self, field, obj, field_name, field_value='', \
+    def __init__(self, request, field, obj, field_name, field_value='', \
             kwargs={}, initial={}):
 
+        self.request = request 
         self.kwargs = kwargs
         self.field = field
         self.obj = obj
@@ -75,6 +76,9 @@ class BaseAdaptor(object):
                                             .split('|')
                 if self.kwargs.get('load_tags'):
                     self.load_tags = self.kwargs.get('load_tags').split('|')
+
+    def can_edit(self):
+        return self.request.user.is_authenticated()
 
     def format_attributes(self):
         """Formats the HTML attributes of the <editlive /> element.
@@ -234,18 +238,21 @@ class BaseAdaptor(object):
             data-field-id="id_firstname" module-name="mymodule"></editlive>
 
         """
-        field = unicode(self.form_field)
-        if self.form_field:
-            if self.kwargs.get('readonly'):
-                return self.render_value()
-            if self.kwargs.get('formset'):
-                auto_id = 'id="%s"' % self.form_field.auto_id
-                name = 'name="%s"' % self.form_field.html_name
-                field = re.sub(auto_id, 'id="%s"' % self.field_id, field)
-                field = re.sub(name, 'name="%s"' % self.field_name, field)
-            return mark_safe(field + self.render_widget())
+        if not self.can_edit():
+            return self.render_value()
         else:
-            return field
+            field = unicode(self.form_field)
+            if self.form_field:
+                if self.kwargs.get('readonly'):
+                    return self.render_value()
+                if self.kwargs.get('formset'):
+                    auto_id = 'id="%s"' % self.form_field.auto_id
+                    name = 'name="%s"' % self.form_field.html_name
+                    field = re.sub(auto_id, 'id="%s"' % self.field_id, field)
+                    field = re.sub(name, 'name="%s"' % self.field_name, field)
+                return mark_safe(field + self.render_widget())
+            else:
+                return field
 
 
 class BaseInlineAdaptor(object):
