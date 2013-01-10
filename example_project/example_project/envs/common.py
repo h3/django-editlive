@@ -156,3 +156,10 @@ CACHES = {
         'LOCATION': 'CACHE+' + SECRET_KEY
     }
 }
+
+LETTUCE_SERVER_PORT = 8782
+
+LETTUCE_AVOID_APPS = (
+    'dajaxice,south',
+    'editlive',
+)
