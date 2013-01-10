@@ -38,4 +38,4 @@ class TestView(View):
 
 class HomeView(View):
     def get(self, request):
-        return HttpResponse(Template('').render(RequestContext({})))
+        return HttpResponse(Template('').render(RequestContext(request, {})))
