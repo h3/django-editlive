@@ -1,7 +1,28 @@
-BD tests
-+++++++++++++
+Behavior Driven Testing
++++++++++++++++++++++++
+
+
+As editlive is a Interface component, a BTD approach is used for testing it.
+
+This gives this project the following benefits:
+
+* Writing test is *really* easy. Non-programmers could almost write them.
+* It tests the client and the backend at the same time, like a real user would
+* It allow real world testing in multiple browsers (but currently only in Firefox and Chrome are tested)
+
+`Travis CI`_ is used as build server. Not only you can see the current build status and the complete history, but you
+can see the build status of branches and pull requests.
+
+.. _Travis CI: https://travis-ci.org/h3/django-editlive
 
 The test suite is a mix of Lettuce, Selenium and Splinter.
+
+.. sidebar:: Tip for committers
+
+    If you send pull request to this project for things that does not requires testing, 
+    like updating the documentation or fixing typos in comments, just add `[ci skip]` 
+    in your commit message and a build wont be triggered on Travis CI.
+
 
 Lettuce
 ^^^^^^^
@@ -120,18 +141,26 @@ Instruction for Ubuntu 12::
   mv chromedriver /usr/local/bin"
 
 
-**Run the functional test suite**::
+Running the tests
+-----------------
+
+
+**With Google Chrome**::
 
     cd example_project/
 
     export BROWSER="CHROME"
     ./run-test
+
+**With Google Firefox**::
     
     export BROWSER="FIREFOX"
     ./run-test
 
 
 *Note*: Google Chrome is used as default.
+
+**Test command arguments**::
 
 If you have special arguments to pass to the test runner you will 
 have to use the full command::
@@ -145,3 +174,9 @@ To test a single feature::
 Excluding applications::
 
     python manage.py harvest -A myApp1,myApp2
+
+
+For a complete argument documentation, please refer to `this section of the Lettuce documentation`_.
+
+.. _this section of the Lettuce documentation: http://lettuce.it/recipes/django-lxml.html#run-the-tests
+
