@@ -58,7 +58,7 @@
         $self._createPlaceholder();
         $self.element.width(160).wrap('<div class="input-append" />').hide();
         $self.element.datepicker($self.options);
-        $('<span class="add-on"><i class="icon-time"></i></span>')
+        $('<span class="add-on"><i class="icon-calendar"></i></span>')
             .hide().insertAfter($self.element)
             .bind('click.editlive', function(e){
                 $self.element.datepicker('show');
@@ -77,11 +77,13 @@
     };
 
     dateField.hide = function() {
-        this._unwatch_blur();
-        this._unbind_kb_blur_events();
-        this.element.parent().hide();
-        this.placeholder.removeClass('no-blur');
-        if (this.placeholder) this.placeholder.show();
+        if (!this.control.hasClass('error')) {
+            this._unwatch_blur();
+            this._unbind_kb_blur_events();
+            this.element.parent().hide();
+            this.placeholder.removeClass('no-blur');
+            if (this.placeholder) this.placeholder.show();
+        }
     };
 
     dateField._unwatch_blur = function() {
