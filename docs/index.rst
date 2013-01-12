@@ -14,8 +14,10 @@ Django editlive documentation
 :Source code: `github.com project <https://github.com/h3/django-editlive/>`_
 :Bug tracker: `github.com issues <https://github.com/h3/django-editlive/issues>`_
 :Generated: |today|
-:License: BSD
+:License: Open source, `BSD license`_
 :Version: |release|
+
+.. _BSD license: https://github.com/h3/django-editlive/blob/master/LICENSE
 
 .. rubric:: Everything you need to know about Django editlive.
 
