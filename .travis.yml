@@ -19,7 +19,7 @@ install:
   - "wget https://chromedriver.googlecode.com/files/chromedriver_linux32_23.0.1240.0.zip"
   - "unzip chromedriver_linux32_23.0.1240.0.zip"
   - "mv chromedriver /tmp/bin"
-  - "pip install -r requirements.txt --use-mirrors"
+  - "pip install -r docs/requirements.txt --use-mirrors"
   - "pip install -r example_project/requirements.txt --use-mirrors"
 before_script:
   # Setup headless X per http://about.travis-ci.org/docs/user/gui-and-headless-browsers/
