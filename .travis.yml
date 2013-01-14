@@ -26,4 +26,5 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 script:
+  - "export BROWSER=CHROME"
   - "PATH=$PATH:/tmp/bin sudo python example_project/manage.py harvest -A dajaxice,south,editlive"

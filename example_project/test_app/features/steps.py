@@ -43,6 +43,11 @@ def node_exists(step, selector):
     assert world.browser.is_element_present_by_css(selector)
 
 
+@step(r'I don\'t see "(.*)"')
+def node_doesnt_exists(step, selector):
+    assert world.browser.is_element_not_present_by_css(selector)
+
+
 @step(r'I see a "(.*)" editlive for "(.*)"')
 def see_editlive(step, fieldtype, field_id):
     editlive = S('editlive[data-field-id="'+field_id.replace('#','')+'"]').first
@@ -58,11 +63,20 @@ def see_html_node_visible_or_hidden(step, node_id, state):
         assert node.visible
  
 
+@step(r'I click on "(.*)"')
+def click_on(step, node_id):
+    node = S(node_id).first
+    node.click()
+ 
+
 @step(r'I see a (hidden|visible) placeholder for "(.*)"')
 def see_placeholder_visible_or_hidden(step, state, node_id):
     node = get_placeholder_for(node_id).first
     assert 'editlive' in node['class'].split(' ')
-    assert node.visible
+    if state == 'hidden':
+        assert node.visible is False
+    else:
+        assert node.visible
  
 
 @step(r'I click on the placeholder for "(.*)"')
@@ -98,6 +112,7 @@ def write(step, content, node_id):
     assert n['value'] == content
     world.browser.find_by_tag('h1').first.click()
 
+
 @step(r'I see the placeholder text change to "(.*)"')
 def write(step, content):
     assert world.is_placeholder_present(content)
@@ -106,3 +121,13 @@ def write(step, content):
 @step(r'Then I see the following error: (.*)')
 def errorpresent(step, error):
     assert world.is_error_present(error)
+
+
+@step(r'I\'m (\w+)')
+def loginas(step, user):
+    world.login(username=user)
+
+
+@step(r'I logout')
+def logout(step, user):
+    world.logout()

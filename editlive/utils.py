@@ -90,7 +90,7 @@ def get_default_adaptor(field):
         return adaptors.get('text')
 
 
-def get_adaptor(obj, field_name, field_value=None, kwargs={}, adaptor=None):
+def get_adaptor(request, obj, field_name, field_value=None, kwargs={}, adaptor=None):
     # Related field
     if field_name.endswith('_set'):
         if adaptor is None:
@@ -98,7 +98,7 @@ def get_adaptor(obj, field_name, field_value=None, kwargs={}, adaptor=None):
         path_module, class_adaptor = ('.'.join(adaptor.split('.')[:-1]), \
                                         adaptor.split('.')[-1])
         Adaptor = getattr(import_module(path_module), class_adaptor)
-        return Adaptor(obj, field_name, field_value, kwargs=kwargs)
+        return Adaptor(request, obj, field_name, field_value, kwargs=kwargs)
 
     else:  # Vanilla field
 
@@ -113,7 +113,7 @@ def get_adaptor(obj, field_name, field_value=None, kwargs={}, adaptor=None):
                                         adaptor.split('.')[-1])
         Adaptor = getattr(import_module(path_module), class_adaptor)
 
-        return Adaptor(field, obj, field_name, \
+        return Adaptor(request, field, obj, field_name, \
                 field_value=field_value, kwargs=kwargs)
 
 

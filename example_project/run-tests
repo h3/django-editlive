@@ -1,3 +1,8 @@
 #!/bin/sh
-export BROWSER="FF"
-python manage.py harvest -A dajaxice,south,editlive
+
+if [ -z "$BROWSER" ]
+then
+    export BROWSER="CHROME"
+fi
+
+time python manage.py harvest

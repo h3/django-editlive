@@ -1,30 +1,6 @@
-django-editlive
-===============
+Usage examples
+++++++++++++++
 
-Live form editing for django with Bootstrap_ and `jQuery UI`_
-
- +-------------------+-----------------------------+
- | **Demo page**     | To come..                   |
- +-------------------+-----------------------------+
- | **Documentation** | `Read the Docs`_            |
- +-------------------+-----------------------------+
- | **Build server**  | `Travis ci`_ |BUILDSTATUS|_ |
- +-------------------+-----------------------------+
-
-.. _Bootstrap: http://twitter.github.com/bootstrap/index.html
-.. _jQuery UI: http://jqueryui.com/
-.. |BUILDSTATUS| image:: https://api.travis-ci.org/h3/django-editlive.png?branch=master
-.. _BUILDSTATUS: https://travis-ci.org/h3/django-editlive/
-.. _Read the Docs: https://django-editlive.readthedocs.org/en/latest/
-.. _Travis ci: https://travis-ci.org/h3/django-editlive/
-
-
-Requirements
-------------
-
-* `Django-dajaxice`_ (latest)
-
-.. _Django-dajaxice: https://github.com/jorgebastida/django-dajaxice
 
 Basic usage
 -----------
@@ -45,7 +21,7 @@ It's possible to apply template filters to the placeholder's display value like 
 
     {% editlive "object.description" template_filters="capfirst" as object_description %}
 
-    {% editlive "object.date_visit" template_filters="date:'l j M Y at H:i\h'" as date_visit %}
+    {% editlive "object.date_visit" template_filters="date:'l j M Y at H:i\h'" as date_visit %}
 
 Most other arguments are converted into js options and fed to the jQuery UI widget.
 
@@ -64,9 +40,8 @@ The input field will then look like this::
 
     <input type="text" maxlength="250" name="user_set-0-first_name" id="id_user_set-0-first_name" />
 
-
-The magic
----------
+How it works
+------------
 
 To avoid conflicting with other plugins or altering the input field directly, editlive use its own
 tag to bind the field properties and settings to the right input.
@@ -80,14 +55,3 @@ look something like this::
 This way `editlive` stays non-intrusive as it doesn't alter the original input tag.
 
 This also means that you are not constrained to use the editlive template tag, you can hardcode `<editlive />` tag in HTML and the JavaScript will hook it up.
-
-
-Credits
-=======
-
-This project was created and is sponsored by:
-
-.. figure:: http://motion-m.ca/media/img/logo.png
-    :figwidth: image
-
-Motion Média (http://motion-m.ca)

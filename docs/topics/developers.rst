@@ -8,4 +8,5 @@ On this page you will find information for developers who want to contribute to 
 
     utils
     widgets/custom
-    develop/jsdoc
+    develop/documentation
+    develop/tests

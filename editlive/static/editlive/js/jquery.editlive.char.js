@@ -10,6 +10,7 @@
         _active: false,
         widgetEventPrefix: 'editlive',
         placeholdertag: 'span',
+        controlClass: '',
         value: undefined,
         options: {
             minwidth: 120,
@@ -47,7 +48,6 @@
         $self.value        = $self._get_value();
         $self.editlive     = $self.element.data('widget.editlive');
         $self.options      = $.extend($self.options, $self.editlive.data());
-        $self.control      = $('<div class="controls editlive-controls '+ $self.options.wrapclass +'" />');
         $self.field_name   = $self.editlive.attr('field-name'); 
         $self.object_id    = $self.editlive.attr('object-id');
         $self.app_label    = $self.editlive.attr('app-label');
@@ -55,6 +55,8 @@
         $self.rendered_val = $self.editlive.attr('rendered-value');
         $self.tpl_filters  = $self.editlive.attr('template_filters');
         $self.load_tags    = $self.editlive.attr('load_tags');
+
+        $self.control      = $('<div class="controls editlive-controls '+ $self.options.wrapclass +'" />');
 
         if ($self.options.maxwidth != 'auto') {
             $self.control.css('max-width', $self.options.maxwidth);
@@ -68,6 +70,10 @@
         }
 
         $self.element.hide().wrap($self.control);
+        
+        // For odd reasons, jQuery seems its lose the DOM sync once a node is wrapped.
+        $self.control = $self.element.parent();
+
 
         if ($self.options.input_prepend != '') {
             var addon = $('<span class="add-on" />').css('display', 'none').insertBefore(this.element),
@@ -235,6 +241,7 @@
             title: error.message,
             placement: this.options.errorplacement
         }).tooltip('show');
+        this.control.addClass('error');
     };
 
     charField._display_errors = function(errors) {
@@ -248,6 +255,7 @@
 
     charField._destroy_errors = function() {
         this.element.tooltip('destroy');
+        this.control.removeClass('error');
     };
 
     charField.focus = function(e){
@@ -296,11 +304,13 @@
     };
 
     charField.hide = function() {
-        this._unwatch_blur();
-        this._unbind_kb_blur_events();
-        this.element.hide()
-            .parent().find('.add-on').css('display', 'none');
-        if (this.placeholder) this.placeholder.show();
+        if (!this.control.hasClass('error')) {
+            this._unwatch_blur();
+            this._unbind_kb_blur_events();
+            this.element.hide()
+                .parent().find('.add-on').css('display', 'none');
+            if (this.placeholder) this.placeholder.show();
+        }
     };
 
     charField.change = function(){
@@ -359,9 +369,9 @@
 
     charField.error = function(data) {
         var $self = this;
-        $self.control.addClass('error');
         $self._display_errors(data.messages);
         $self._trigger('error');
+        $self.control.addClass('error')
     };
 
     // Clean up any modifications made to the DOM

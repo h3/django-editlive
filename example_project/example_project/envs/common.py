@@ -108,7 +108,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.markup',
-   #'django.contrib.admin',
+    'django.contrib.admin',
    #"compressor",
     "lettuce.django",
     'dajaxice',
@@ -156,3 +156,11 @@ CACHES = {
         'LOCATION': 'CACHE+' + SECRET_KEY
     }
 }
+
+LETTUCE_SERVER_PORT = 8782
+
+LETTUCE_AVOID_APPS = (
+    'dajaxice,south',
+    'editlive',
+    'dajaxice',
+)

@@ -27,6 +27,7 @@ def editlive(context, context_variable, **kwargs):
     try:
         context_obj = Variable(context_variable.split('.')[0])\
                         .resolve(context)
+        request = Variable('request').resolve(context)
         if kwargs.get('formset'):
             try:
                 kwargs['field-index'] = Variable('forloop.counter0')\
@@ -34,7 +35,7 @@ def editlive(context, context_variable, **kwargs):
             except VariableDoesNotExist:
                 kwargs['field-index'] = 0
 
-        adaptor = get_adaptor(context_obj, field_name, field_value=field_value,\
+        adaptor = get_adaptor(request, context_obj, field_name, field_value=field_value,\
                                 kwargs=kwargs, adaptor=adaptor_str)
         return adaptor.render()
     except VariableDoesNotExist:
