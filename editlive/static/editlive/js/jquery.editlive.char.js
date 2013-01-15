@@ -9,7 +9,7 @@
         options: {
             minwidth: 120,
             maxwidth: 'auto',
-            emptyvalue: 'Cliquer pour modifier',
+            placeholder: 'Click to edit',
             wrapclass: 'inline',
             errorplacement: 'bottom',
             mini: false,
@@ -293,7 +293,7 @@
             if (this.placeholder) {
                 var p = this.options.input_prepend,
                     a = this.options.input_append,
-                    v = display || this.get_display_value() || this.options.emptyvalue,
+                    v = display || this.get_display_value() || this.options.placeholder,
                     o = [a, v, p].join('');
                 if (o.indexOf('<') > -1) {
                     this.placeholder.html(o);

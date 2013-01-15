@@ -78,6 +78,7 @@ def delete_objects(request, **kwargs):
         'app_label': kwargs['meta'].get('appLabel'),
         'module_name': kwargs['meta'].get('moduleName'),
     }
+
     try:
         Model.objects.filter(pk__in=object_list).delete()
     except:
