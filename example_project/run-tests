@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -z "$BROWSER" ]
+then
+    export BROWSER="CHROME"
+fi
+
+time python manage.py harvest

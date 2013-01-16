@@ -5,9 +5,19 @@ import collections
 from django import template
 from django.db import models
 from django.conf import settings
+from django.forms import ModelForm
 from django.db.models.fields.related import ForeignKey, ManyToManyField
 
 from editlive.conf import settings as editlive_settings
+
+
+def get_dynamic_modelform(**kwargs):
+    form = type('DynamicForm', (ModelForm, ), {})
+    meta = type('Meta', (object, ), {})
+    meta.exclude = kwargs.get('exclude', None)
+    form.Meta = meta
+    return form
+
 
 """
 Mostly copied/inspired of:
@@ -63,13 +73,15 @@ def get_field_type(field):
         return 'image'
     elif isinstance(field, models.FileField):
         return 'file'
+    elif isinstance(field, models.TimeField):
+        return 'time'
     return 'char'  # Default
 
 
 def get_default_adaptor(field):
     fieldtype = get_field_type(field)
-    adaptors = getattr(settings, 'EDITLIVE_ADAPTORS', {})
-    adaptors.update(editlive_settings.EDITLIVE_DEFAULT_ADAPTORS)
+    adaptors = editlive_settings.EDITLIVE_DEFAULT_ADAPTORS
+    adaptors.update(getattr(settings, 'EDITLIVE_ADAPTORS', {}))
     adaptor = adaptors.get(fieldtype, None)
 
     if adaptor:
@@ -78,15 +90,15 @@ def get_default_adaptor(field):
         return adaptors.get('text')
 
 
-def get_adaptor(obj, field_name, field_value=None, kwargs={}, adaptor=None):
+def get_adaptor(request, obj, field_name, field_value=None, kwargs={}, adaptor=None):
     # Related field
     if field_name.endswith('_set'):
         if adaptor is None:
-            adaptor = get_default_adaptor('stacked')
+            adaptor = get_default_adaptor('stacked') #  TODO: customizable
         path_module, class_adaptor = ('.'.join(adaptor.split('.')[:-1]), \
                                         adaptor.split('.')[-1])
         Adaptor = getattr(import_module(path_module), class_adaptor)
-        return Adaptor(obj, field_name, field_value, kwargs=kwargs)
+        return Adaptor(request, obj, field_name, field_value, kwargs=kwargs)
 
     else:  # Vanilla field
 
@@ -101,7 +113,7 @@ def get_adaptor(obj, field_name, field_value=None, kwargs={}, adaptor=None):
                                         adaptor.split('.')[-1])
         Adaptor = getattr(import_module(path_module), class_adaptor)
 
-        return Adaptor(field, obj, field_name, \
+        return Adaptor(request, field, obj, field_name, \
                 field_value=field_value, kwargs=kwargs)
 
 

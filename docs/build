@@ -1,0 +1,5 @@
+java -jar ~/Ubuntu\ One/SDKs/jsdoc_toolkit-2.4.0/jsdoc-toolkit/jsrun.jar \
+~/Ubuntu\ One/SDKs/jsdoc_toolkit-2.4.0/jsdoc-toolkit/app/run.js \
+-a --directory=./jsdoc --recurse=2 -v ../editlive/static/editlive/js/ \
+-t=_themes/jsdoc-for-sphinx/ \
+&& make html

@@ -18,7 +18,7 @@ def save(request, **kwargs):
     field_options = kwargs.get('field_options')
     Model = get_model(app_label, module_name)
     obj = get_object_or_404(Model, pk=object_id)
-    adaptor = get_adaptor(obj, field_name)
+    adaptor = get_adaptor(request, obj, field_name)
     tpl_filters = kwargs.get('tpl_filters')
     load_tags = kwargs.get('load_tags')
 

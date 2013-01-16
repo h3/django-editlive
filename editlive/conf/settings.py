@@ -8,6 +8,7 @@ EDITLIVE_DEFAULT_ADAPTORS = {
     'fk':       'editlive.adaptors.ForeignKeyAdaptor',
     'choices':  'editlive.adaptors.ChoicesAdaptor',
     'm2m':      'editlive.adaptors.ManyToManyAdaptor',
+    'time':     'editlive.adaptors.TimeAdaptor',
    #'file':     'editlive.adaptors.FileAdaptor',
    #'image':    'editlive.adaptors.ImageAdaptor',
 

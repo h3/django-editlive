@@ -1,67 +1,35 @@
 django-editlive
 ===============
 
-Live form editing for django with bootstrap (prototype application)
+Live form editing for django with Bootstrap_ and `jQuery UI`_
+
+ +-------------------+-----------------------------+
+ | **Demo page**     | To come..                   |
+ +-------------------+-----------------------------+
+ | **Documentation** | `Read the Docs`_            |
+ +-------------------+-----------------------------+
+ | **Build server**  | `Travis ci`_ |BUILDSTATUS|_ |
+ +-------------------+-----------------------------+
+
+.. _Bootstrap: http://twitter.github.com/bootstrap/index.html
+.. _jQuery UI: http://jqueryui.com/
+.. |BUILDSTATUS| image:: https://api.travis-ci.org/h3/django-editlive.png?branch=master
+.. _BUILDSTATUS: https://travis-ci.org/h3/django-editlive/
+.. _Read the Docs: https://django-editlive.readthedocs.org/en/latest/
+.. _Travis ci: https://travis-ci.org/h3/django-editlive/
+
 
 Requirements
 ------------
 
- * Django-dajaxice (latest): https://github.com/jorgebastida/django-dajaxice
- * Bootstrap: http://twitter.github.com/bootstrap/
- * django-bootstrap-ui[1]: https://github.com/h3/django-bootstrap-ui
+* `Django-dajaxice`_ (latest)
 
-
- [1] django-bootstrap-ui provides most of the JavaScript requirements, which are:
-
-  * jQuery 1.8.2
-  * jQuery ui 1.8.23 (custom build made compatible with bootstrap)
-  * bootstrap 2.1.1
-  * jQuery-UI-Date-Range-Picker (custom tweaks to support time inputs)
-
-At this stage, I'm not sure yet if I will eventually ship those requirements with editlive or not.
-
-
-Installation
-------------
-
- 1. Add `dajaxice` and `editlive` to your `settings.INSTALLED_APPS`
- 2. Add `'dajaxice.finders.DajaxiceFinder'` to your `settings.STATICFILES_FINDERS`.
- 3. Add the following code to your `settings.LOGGING['loggers']` (optional)::
-
-     'dajaxice': {
-         'handlers': ['console'],
-         'level': 'WARNING',
-         'propagate': False,
-     },
-
- 4. Add the Dajaxice JS to your base template::
-
-    {% load dajaxice_templatetags %}
-    {% dajaxice_js_import %}
-
- 4. Add the editlive CSS to your base template::
-
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}editlive/css/editlive.css">
-
- 5. Add the editlive JS to your base template::
-
-    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.js"></script>
-    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.char.js"></script>
-    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.text.js"></script>
-    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.date.js"></script>
-    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.datetime.js"></script>
-    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.boolean.js"></script>
-    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.foreignkey.js"></script>
-    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.choices.js"></script>
-    <script type="text/javascript" src="/static/editlive/js/jquery.editlive.manytomany.js"></script>
-
-Note: not all files are required. Eventually all the JS will be minified, but meanwhile you can include just what you need.
-
+.. _Django-dajaxice: https://github.com/jorgebastida/django-dajaxice
 
 Basic usage
 -----------
 
-Editlive can take any database object and make it editable live with a simple template tag::
+In a template, editlive can take any in context database object and make it editable live with a simple template tag::
 
     {% load editlive_tags %}
 
@@ -73,17 +41,13 @@ Editlive can take any database object and make it editable live with a simple te
 This will render the object's property value in a clickable container. When the container is clicked, 
 it changes to a input field according to the field's type.
 
-It is possible to apply template filters to a property value like this::
+It's possible to apply template filters to the placeholder's display value like this::
 
     {% editlive "object.description" template_filters="capfirst" as object_description %}
 
     {% editlive "object.date_visit" template_filters="date:'l j M Y at H:i\h'" as date_visit %}
 
-
-The editlive tag also accept a `wrapclass` argument. If specified it will add the provided class
-to the control's container.
-
-All other argument are converted into js argument and fed to the jQuery plugin.
+Most other arguments are converted into js options and fed to the jQuery UI widget.
 
 Working with formsets
 ---------------------
@@ -115,14 +79,15 @@ look something like this::
 
 This way `editlive` stays non-intrusive as it doesn't alter the original input tag.
 
-This also means that you are not constrained to use the editlive template tag, you can create the `<editlive />` tag by hand and the JavaScript will hook it up.
+This also means that you are not constrained to use the editlive template tag, you can hardcode `<editlive />` tag in HTML and the JavaScript will hook it up.
 
 
-More to come
-------------
+Credits
+=======
 
-There is other undocumented features I will eventually document. Meanwhile you can take a look at the source code.
+This project was created and is sponsored by:
 
- * ajaxform (functional, but undocummented)
- * listactions (functional, but undocummented)
- * sync (not functional yet)
+.. figure:: http://motion-m.ca/media/img/logo.png
+    :figwidth: image
+
+Motion Média (http://motion-m.ca)
