@@ -115,7 +115,7 @@
             $self._toggle();
         });
 
-        $self.element.is(':checked') ? $self._set_on() : $self._set_off();
+        $self.element.is(':checked') ? $self._set_on(true) : $self._set_off(true);
     };
 
     booleanFieldButton._toggle = function() {
@@ -130,10 +130,12 @@
         }
         this.btn.removeClass(this.options.class_off)
             .addClass(this.options.class_on).append(this.get_value_display());
-        this.change();
+        if (typeof(nochange) == 'undefined') {
+            this.change();
+        }
     };
 
-    booleanFieldButton._set_off = function() {
+    booleanFieldButton._set_off = function(nochange) {
         this.element.prop('checked', false);
         this.btn.empty();
         if (this.options.icon_off) {
@@ -141,7 +143,9 @@
         }
         this.btn.removeClass(this.options.class_on)
             .addClass(this.options.class_off).append(this.get_value_display());
-        this.change();
+        if (typeof(nochange) == 'undefined') {
+            this.change();
+        }
     };
 
     booleanFieldButton._display_errors = function(errors) {
