@@ -5,52 +5,6 @@
      * @name jQuery.fn.dateField
      * @class
      *
-     * We have to deal with 4 different date formatting syntax. As if
-     * it wasn't enough some of them conflict..
-     *
-     *  1. JavaScript: The JavaScript date and time picker needs 2 different
-     *     formats. One for the date and the other for the time. 
-     *
-     *  2. Django as it's own implementation which is used for template tags.
-     *     settings.DATE_FORMAT
-     *     settings.DATETIME_FORMAT
-     *     https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date
-     *
-     *  3. Python also has it's own date time format which is used for input 
-     *     fields
-     *     settings.DATE_INPUT_FORMAT
-     *     settings.DATETIME_INPUT_FORMAT
-     *     http://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior
-     * 
-     * +----+----+----+---------------------------------------+
-     * | Py | Dj | Js | Description                           |
-     * +====+====+====+=======================================+
-     * |    | j  | d  | day of month (no leading zero)        |
-     * | d  | d  | dd | day of month (two digit)              |
-     * |    | z  | o  | day of the year (no leading zeros)    |
-     * | j  | z  | oo | day of the year (three digit) *       |
-     * | a  | D  | D  | day name short                        |
-     * | A  | l  | DD | day name long                         |
-     * |    | n  | m  | month of year (no leading zero)       |
-     * | m  | m  | mm | month of year (two digit)             |
-     * | b  | M  | M  | month name short                      |
-     * | B  | F  | MM | month name long                       |
-     * | y  | y  | y  | year (two digit)                      |
-     * | Y  | Y  | yy | year (four digit)                     |
-     * |    | U  | @  | Unix timestamp (ms since 01/01/1970)  |
-     * +----+----+----+---------------------------------------+
-     * | H  | h-H| hh | Hour, 12/24-hour format.              |
-     * |    | g  | h  | Hour, 12/24-hour format without zeros |
-     * | M  | i  | mi | Minutes with zeros.                   |
-     * |    |    | m  | Minutes (unsupported by django)       |
-     * | S  | s  | ss | Seconds, 2 digits with leading zeros  |
-     * |    |    | s  | Seconds (unsupported by django)       |
-     * | f  | u  | l  | Microseconds                          |
-     * | Z  | T  | z  | Time zone                             |
-     * |    |    | t  | AM/PM (unsupported by django)         |
-     * | P  | A  | tt | AM/PM                                 |
-     * +----+----+----+---------------------------------------+
-     *
      */
 
     var dateField = {
