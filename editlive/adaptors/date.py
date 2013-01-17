@@ -26,6 +26,9 @@ class DateTimeAdaptor(BaseAdaptor):
     """
     def __init__(self, *args, **kwargs):
         super(DateTimeAdaptor, self).__init__(*args, **kwargs)
+        field = self.form.fields.get(self.field_name)
+        if field:
+            self.attributes.update({'data-format': '%s' % field.widget.format})
         if self.form_field:
             self.attributes.update({'data-type': 'datetimeField'})
 

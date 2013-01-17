@@ -5,39 +5,75 @@
      * @name jQuery.fn.dateField
      * @class
      * 
-     * +----+----+--------------------------------------+
-     * | Dj | Js | Description                          |
-     * +====+====+======================================+
-     * | j  | d  | day of month (no leading zero)       |
-     * | d  | dd | day of month (two digit)             |
-     * | z  | o  | day of the year (no leading zeros)   |
-     * | z  | oo | day of the year (three digit) *      |
-     * | D  | D  | day name short                       |
-     * | l  | DD | day name long                        |
-     * | n  | m  | month of year (no leading zero)      |
-     * | m  | mm | month of year (two digit)            |
-     * | M  | M  | month name short                     |
-     * | F  | MM | month name long                      |
-     * | y  | y  | year (two digit)                     |
-     * | Y  | yy | year (four digit)                    |
-     * | U  | @  | Unix timestamp (ms since 01/01/1970) |
-     * +----+----+--------------------------------------+
+     * +----+----+----+---------------------------------------+
+     * | Py | Dj | Js | Description                           |
+     * +====+====+====+=======================================+
+     * |    | j  | d  | day of month (no leading zero)        |
+     * | d  | d  | dd | day of month (two digit)              |
+     * |    | z  | o  | day of the year (no leading zeros)    |
+     * | j  | z  | oo | day of the year (three digit) *       |
+     * | a  | D  | D  | day name short                        |
+     * | A  | l  | DD | day name long                         |
+     * |    | n  | m  | month of year (no leading zero)       |
+     * | m  | m  | mm | month of year (two digit)             |
+     * | b  | M  | M  | month name short                      |
+     * | B  | F  | MM | month name long                       |
+     * | y  | y  | y  | year (two digit)                      |
+     * | Y  | Y  | yy | year (four digit)                     |
+     * |    | U  | @  | Unix timestamp (ms since 01/01/1970)  |
+     * +----+----+----+---------------------------------------+
+     * | H  | h-H| hh | Hour, 12/24-hour format.              |
+     * |    | g  | h  | Hour, 12/24-hour format without zeros |
+     * | M  | i  | mi | Minutes with zeros.                   |
+     * |    |    | m  | Minutes (unsupported by django)       |
+     * | S  | s  | ss | Seconds, 2 digits with leading zeros  |
+     * |    |    | s  | Seconds (unsupported by django)       |
+     * | f  | u  | l  | Microseconds                          |
+     * | Z  | T  | z  | Time zone                             |
+     * |    |    | t  | AM/PM (unsupported by django)         |
+     * | P  | A  | tt | AM/PM                                 |
+     * +----+----+----+---------------------------------------+
+     *
+     * References:
+     *
+     * http://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior
+     * https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date
      *
      */
-
-    var djangoDateFormatMap = {
-        j:'d', d:'dd', z:'o', z:'oo',
-        D:'D', l:'DD', n:'m', m:'mm',
-        M:'M', F:'MM', y:'y', Y:'yy',
-        U:'@'};
 
     var dateField = {
         _type: 'date',
         options: { 
             showOn: 'button',
             currentText: 'Maintenant',
-            closeText: 'Ok'
+            closeText: 'Ok',
+            djangoDateFormatMap: {
+                // Date
+                j:'d', d:'dd', z:'o', z:'oo',
+                D:'D', l:'DD', n:'m', m:'mm',
+                M:'M', F:'MM', y:'y', Y:'yy',
+                U:'@',
+                // Time
+                h:'h',  H:'hh', g:'h',
+                i:'mi', s:'ss', u:'l',  
+                T:'z',  A:'tt'
+            }
         }
+    };
+    
+    dateField._translate_date_format = function(){
+        var format = this.options.format,
+            tokens = this.options.format.match(/(%\w+)/g);
+        console.log(tokens);
+        for (var x in tokens) {
+
+            format = format.replace(tokens[x], 
+                        this.options.djangoDateFormatMap[tokens[x].replace('%','')])
+            console.log('A', tokens[x], format)
+            console.log('B', tokens[x], this.options.djangoDateFormatMap[tokens[x].replace('%','')])
+
+        }
+        return format;
     };
 
     dateField._init = function(){
@@ -45,14 +81,10 @@
         $self.options.onClose = function() {
             $self.blur();
         };
-
+        
         if ($self.options.format) {
-            var format = $self.options.format,
-                tokens = $self.options.format.match(/(%\w+)/g);
-            for (var x in tokens) {
-                format = format.replace(tokens[x], djangoDateFormatMap[tokens[x].replace('%','')])
-            }
-            $self.options.dateFormat = format;
+            $self.options.dateFormat = $self._translate_date_format();
+            console.log($self.options.dateFormat);
         }
 
         $self._createPlaceholder();

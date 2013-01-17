@@ -43,8 +43,8 @@ USE_TZ = False
 
 DATE_FORMAT = 'Y-m-d'
 DATE_INPUT_FORMATS = ('%Y-%m-%d',)
-DATETIME_FORMAT = 'Y-m-d H:i:s'
-DATETIME_INPUT_FORMATS = ('%Y-%m-%d %H:%i:%s',)
+DATETIME_FORMAT = 'Y-m-d H:i'
+DATETIME_INPUT_FORMATS = ('%Y-%m-%d %H:%M',)
 
 MEDIA_ROOT = join(PROJECT_ROOT, "media")
 MEDIA_URL = '/media/'

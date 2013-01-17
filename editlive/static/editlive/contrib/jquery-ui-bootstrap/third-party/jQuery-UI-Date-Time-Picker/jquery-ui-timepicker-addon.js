@@ -43,7 +43,7 @@ function Timepicker() {
 		ampm: false,
 		amNames: ['AM', 'A'],
 		pmNames: ['PM', 'P'],
-		timeFormat: 'hh:mm tt',
+		timeFormat: 'hh:mi tt',
 		timeSuffix: '',
 		timeOnlyTitle: 'Choose Time',
 		timeText: 'Time',
@@ -826,6 +826,7 @@ $.extend(Timepicker.prototype, {
 			formatCfg = $.datepicker._getFormatConfig(dp_inst),
 			timeAvailable = dt !== null && this.timeDefined;
 		this.formattedDate = $.datepicker.formatDate(dateFmt, (dt === null ? new Date() : dt), formatCfg);
+        console.log(this.formattedDate, dateFmt)
 		var formattedDateTime = this.formattedDate;
 		// remove following lines to force every changes in date picker to change the input value
 		// Bug descriptions: when an input field has a default value, and click on the field to pop up the date picker. 
@@ -836,9 +837,10 @@ $.extend(Timepicker.prototype, {
 
 		if (this._defaults.timeOnly === true) {
 			formattedDateTime = this.formattedTime;
-		} else if (this._defaults.timeOnly !== true && (this._defaults.alwaysSetTime || timeAvailable)) {
-			formattedDateTime += this._defaults.separator + this.formattedTime + this._defaults.timeSuffix;
-		}
+        }
+	  //} else if (this._defaults.timeOnly !== true && (this._defaults.alwaysSetTime || timeAvailable)) {
+	  //	formattedDateTime += this._defaults.separator + this.formattedTime + this._defaults.timeSuffix;
+	  //}
 
 		this.formattedDateTime = formattedDateTime;
 
@@ -995,14 +997,14 @@ $.datepicker.parseTime = function(timeFormat, timeString, options) {
 				case 1:	// Z
 					tz = o.timezoneIso8601 ? 'Z' : '+0000';
 					break;
-				case 5:	// +hhmm
+				case 5:	// +hhmi
 					if (o.timezoneIso8601) {
 						tz = tz.substring(1) == '0000' ?
 							'Z' :
 							tz.substring(0, 3) + ':' + tz.substring(3);
                     }
 					break;
-				case 6:	// +hh:mm
+				case 6:	// +hh:mi
 					if (!o.timezoneIso8601) {
 						tz = tz == 'Z' || tz.substring(1) == '00:00' ?
 							'+0000' :
@@ -1050,11 +1052,11 @@ $.datepicker.formatTime = function(format, time, options) {
 			hour = 12;
         }
 	}
-	tmptime = tmptime.replace(/(?:hh?|mm?|ss?|[tT]{1,2}|[lz])/g, function(match) {
+	tmptime = tmptime.replace(/(?:hh?|mi?|ss?|[tT]{1,2}|[lz])/g, function(match) {
 		switch (match.toLowerCase()) {
 			case 'hh': return ('0' + hour).slice(-2);
 			case 'h':  return hour;
-			case 'mm': return ('0' + time.minute).slice(-2);
+			case 'mi': return ('0' + time.minute).slice(-2);
 			case 'm':  return time.minute;
 			case 'ss': return ('0' + time.second).slice(-2);
 			case 's':  return time.second;
