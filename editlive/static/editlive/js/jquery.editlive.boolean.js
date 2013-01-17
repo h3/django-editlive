@@ -122,7 +122,7 @@
         this.element.is(':checked') ? this._set_off() : this._set_on();
     };
 
-    booleanFieldButton._set_on = function() {
+    booleanFieldButton._set_on = function(nochange) {
         this.element.prop('checked', true);
         this.btn.empty();
         if (this.options.icon_off) {
