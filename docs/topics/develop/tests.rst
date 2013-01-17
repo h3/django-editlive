@@ -122,7 +122,7 @@ Bootstrapping
 
 **Install requirements**::
 
-    pip install -r requirements.txt
+    pip install -r docs/requirements.txt
     pip install -r example_project/requirements.txt
 
 
