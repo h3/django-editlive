@@ -91,17 +91,16 @@ def see_placeholder_visible_or_hidden(step, node_id, value):
     assert node.text == value
 
 
-@step(r'I input "(.*)" in "(.*)"')
-def write(step, content, node_id):
-    n = S(node_id).first
-    n.fill(content)
-    assert n['value'] == content
+#@step(r'I input "(.*)" in "(.*)"')
+#def write(step, content, node_id):
+#    n = S(node_id).first
+#    n.fill(content)
+#    assert n['value'] == content
+
 
 @step(r'the value of "(.*)" is "(.*)"')
 def valueof(step, node_id, value):
     n = S(node_id).first
-   #import IPython
-   #IPython.embed()
     assert n['value'] == value
 
 
@@ -111,6 +110,15 @@ def write(step, content, node_id):
     n.fill(content)
     assert n['value'] == content
     world.browser.find_by_tag('h1').first.click()
+
+
+@step(r'I type "(.*)" in "(.*)"')
+def write2(step, content, node_name):
+    n = S('#id_'+node_name).first
+    world.browser.execute_script("alert("+ content +")")
+    world.browser.type(node_name, content, slowly=True)
+    world.browser.find_by_tag('h1').first.click()
+
 
 
 @step(r'I see the placeholder text change to "(.*)"')
