@@ -136,9 +136,9 @@ Instruction for Ubuntu 12::
   sudo dpkg -i google-chrome*.deb
 
   # Install the Google Chrome webdriver
-  wget https://chromedriver.googlecode.com/files/chromedriver_linux32_23.0.1240.0.zip"
-  unzip chromedriver_linux32_23.0.1240.0.zip"
-  mv chromedriver /usr/local/bin"
+  wget https://chromedriver.googlecode.com/files/chromedriver_linux32_23.0.1240.0.zip
+  unzip chromedriver_linux32_23.0.1240.0.zip
+  mv chromedriver /usr/local/bin
 
 
 Running the tests
