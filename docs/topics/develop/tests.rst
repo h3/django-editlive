@@ -150,12 +150,12 @@ Running the tests
     cd example_project/
 
     export BROWSER="CHROME"
-    ./run-test
+    ./run-tests
 
 **With Google Firefox**::
     
     export BROWSER="FIREFOX"
-    ./run-test
+    ./run-tests
 
 
 *Note*: Google Chrome is used as default.
