@@ -15,12 +15,6 @@
         $self.options.onClose = function() {
             $self.blur();
         };
-
-        if ($self.options.format) {
-            $self.options.dateFormat = $self._translate_date_format();
-            console.log($self.options.dateFormat);
-        }
-
         $self._createPlaceholder();
         $self.element.width(160).wrap('<div class="input-append" />').hide();
         $self.element.datetimepicker($self.options);

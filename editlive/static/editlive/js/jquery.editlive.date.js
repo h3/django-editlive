@@ -4,6 +4,23 @@
      *
      * @name jQuery.fn.dateField
      * @class
+     *
+     * We have to deal with 4 different date formatting syntax. As if
+     * it wasn't enough some of them conflict..
+     *
+     *  1. JavaScript: The JavaScript date and time picker needs 2 different
+     *     formats. One for the date and the other for the time. 
+     *
+     *  2. Django as it's own implementation which is used for template tags.
+     *     settings.DATE_FORMAT
+     *     settings.DATETIME_FORMAT
+     *     https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date
+     *
+     *  3. Python also has it's own date time format which is used for input 
+     *     fields
+     *     settings.DATE_INPUT_FORMAT
+     *     settings.DATETIME_INPUT_FORMAT
+     *     http://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior
      * 
      * +----+----+----+---------------------------------------+
      * | Py | Dj | Js | Description                           |
@@ -34,11 +51,6 @@
      * | P  | A  | tt | AM/PM                                 |
      * +----+----+----+---------------------------------------+
      *
-     * References:
-     *
-     * http://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior
-     * https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date
-     *
      */
 
     var dateField = {
@@ -46,34 +58,8 @@
         options: { 
             showOn: 'button',
             currentText: 'Maintenant',
-            closeText: 'Ok',
-            djangoDateFormatMap: {
-                // Date
-                j:'d', d:'dd', z:'o', z:'oo',
-                D:'D', l:'DD', n:'m', m:'mm',
-                M:'M', F:'MM', y:'y', Y:'yy',
-                U:'@',
-                // Time
-                h:'h',  H:'hh', g:'h',
-                i:'mi', s:'ss', u:'l',  
-                T:'z',  A:'tt'
-            }
+            closeText: 'Ok'
         }
-    };
-    
-    dateField._translate_date_format = function(){
-        var format = this.options.format,
-            tokens = this.options.format.match(/(%\w+)/g);
-        console.log(tokens);
-        for (var x in tokens) {
-
-            format = format.replace(tokens[x], 
-                        this.options.djangoDateFormatMap[tokens[x].replace('%','')])
-            console.log('A', tokens[x], format)
-            console.log('B', tokens[x], this.options.djangoDateFormatMap[tokens[x].replace('%','')])
-
-        }
-        return format;
     };
 
     dateField._init = function(){
@@ -81,11 +67,6 @@
         $self.options.onClose = function() {
             $self.blur();
         };
-        
-        if ($self.options.format) {
-            $self.options.dateFormat = $self._translate_date_format();
-            console.log($self.options.dateFormat);
-        }
 
         $self._createPlaceholder();
         $self.element.width(160).wrap('<div class="input-append" />').hide();

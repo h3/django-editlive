@@ -1,3 +1,12 @@
+from django.conf import settings as settings
+
+
+DATE_FORMAT = getattr(settings, 'DATE_FORMAT')
+DATETIME_FORMAT = getattr(settings, 'DATETIME_FORMAT')
+
+DATE_WIDGET_FORMAT = getattr(settings, 'EDITLIVE_DATE_WIDGET_FORMAT', 'yy-mm-dd')
+TIME_WIDGET_FORMAT = getattr(settings, 'EDITLIVE_IME_WIDGET_FORMAT', 'hh:mm')
+
 EDITLIVE_DEFAULT_ADAPTORS = {
     # Fields
     'char':     'editlive.adaptors.CharAdaptor',
