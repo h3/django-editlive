@@ -1,4 +1,9 @@
 ;(function($){
+
+    if (!$.isFunction(gettext)) {
+        var gettext = function(i) { return i; }
+    }
+    
     /**
      * charField - the base widget
      *
@@ -15,7 +20,7 @@
         options: {
             minwidth: 120,
             maxwidth: 'auto',
-            placeholder: 'Click to edit',
+            placeholder: gettext('Click to edit'),
             wrapclass: 'inline',
             errorplacement: 'bottom',
             mini: false,
@@ -327,7 +332,7 @@
         if (this.placeholder) {
             var p = this.options.input_prepend,
                 a = this.options.input_append,
-                v = display || this.get_display_value() || this.options.placehoder,
+                v = display || this.get_display_value() || this.options.placeholder,
                 o = [a, v, p].join('');
             if (o.indexOf('<') > -1) {
                 this.placeholder.html(o);
