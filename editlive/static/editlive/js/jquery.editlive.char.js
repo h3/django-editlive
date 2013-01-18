@@ -1,9 +1,4 @@
-;(function($){
-
-    if (!$.isFunction(gettext)) {
-        var gettext = function(i) { return i; }
-    }
-    
+;(function($, _){
     /**
      * charField - the base widget
      *
@@ -20,7 +15,7 @@
         options: {
             minwidth: 120,
             maxwidth: 'auto',
-            placeholder: gettext('Click to edit'),
+            placeholder: _('Click to edit'),
             wrapclass: 'inline',
             errorplacement: 'bottom',
             mini: false,
@@ -118,6 +113,7 @@
      * Updates the internal widget value and the DOM element's value
      * @param {mixed} v - The new value.
      * @returns {mixed} v - The  new value.
+     * @memberOf jQuery.fn.charField
      * @public
      */
     charField._set_value = function(v) {
@@ -397,4 +393,4 @@
 
     $.widget('editliveWidgets.charField', charField);
 
-})(jQuery);
+})(jQuery, gettext);

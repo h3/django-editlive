@@ -69,7 +69,7 @@ At this point you might want to take a little time for yourself and cry a little
 
 
 EDITLIVE_TIME_WIDGET_FORMAT
---------------------------
+---------------------------
 
 This setting is used to pass the time format to the timepicker plugin.
 
