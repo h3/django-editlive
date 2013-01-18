@@ -26,7 +26,7 @@
 
     textField.set_placeholder_value = function(display) {
         if (this.placeholder) {
-            var val = display || this.get_display_value() || this.options.emptyvalue;
+            var val = this.get_placeholder_value(display);
             this.placeholder.html(val);
         }
     };

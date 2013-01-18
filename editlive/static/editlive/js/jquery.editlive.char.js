@@ -328,17 +328,21 @@
         return this.rendered_val || this.element.val();
     };
 
+    charField.get_placeholder_value = function(display) {
+        var p = this.options.input_prepend,
+            a = this.options.input_append,
+            v = display || this.get_display_value() || this.options.placeholder;
+        return [a, v, p].join('');
+    };
+
     charField.set_placeholder_value = function(display) {
         if (this.placeholder) {
-            var p = this.options.input_prepend,
-                a = this.options.input_append,
-                v = display || this.get_display_value() || this.options.placeholder,
-                o = [a, v, p].join('');
-            if (o.indexOf('<') > -1) {
-                this.placeholder.html(o);
+            var val = this.get_placeholder_value(display);
+            if (val.indexOf('<') > -1) {
+                this.placeholder.html(val);
             }
             else {
-                this.placeholder.text(o);
+                this.placeholder.text(val);
             }
         }
     };
