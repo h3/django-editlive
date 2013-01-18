@@ -15,6 +15,8 @@
  * @memberOf jQuery
  */
 
+var gettext = jQuery.isFunction(gettext) && gettext || function(i) { return i; }
+
 ;(function($){
 
     var getJsOptions = function(el){
@@ -37,6 +39,11 @@
         $self = this;
 
         return {
+
+            /**
+             * jQuery.editlive.load
+             * @function
+             */
             load: function(el) {
                 (el && $(el).find('editlive') || $('editlive')).each(function(k, v) {
                     $.editlive.loadWidget(v);
@@ -104,7 +111,7 @@
     };
 
     $(function(){
-        $.editlive.load()
-        $('[rel="tooltip"]').tooltip()
+        $.editlive.load();
+        $('[rel="tooltip"]').tooltip();
     });
 })(jQuery);
