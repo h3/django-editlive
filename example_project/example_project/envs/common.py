@@ -112,6 +112,7 @@ INSTALLED_APPS = (
     'dajaxice',
     "editlive",
     "test_app",
+    "south",
 )
 
 STATICFILES_EXCLUDED_APPS = []
