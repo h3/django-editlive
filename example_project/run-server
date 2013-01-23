@@ -1,3 +1,4 @@
 #!/bin/sh
 python manage.py syncdb
-python manage.py runserver
+python manage.py migrate test_app
+python manage.py runserver $1

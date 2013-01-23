@@ -25,7 +25,6 @@ https://github.com/zikzakmedia/django-inplaceeditform/
 blob/master/inplaceeditform/commons.py
 """
 
-
 def import_module(name, package=None):
     try:
         from django.utils.importlib import import_module
@@ -34,16 +33,13 @@ def import_module(name, package=None):
         path = [m for m in name.split('.')]
         return __import__(name, {}, {}, path[-1])
 
-
 def import_class(classpath, package=None):
     classname = classpath.split('.')[-1]
     classpath = '.'.join(classpath.split('.')[:-1])
     return getattr(import_module(classpath), classname, None)
 
-
 def isinstanceof(field, types):
     return any(isinstance(field, getattr(models, t)) for t in types)
-
 
 def get_field_type(field):
     if isinstance(field, str) and field == 'tabular':
@@ -77,7 +73,6 @@ def get_field_type(field):
         return 'time'
     return 'char'  # Default
 
-
 def get_default_adaptor(field):
     fieldtype = get_field_type(field)
     adaptors = editlive_settings.EDITLIVE_DEFAULT_ADAPTORS
@@ -88,7 +83,6 @@ def get_default_adaptor(field):
         return adaptor
     else:
         return adaptors.get('text')
-
 
 def get_adaptor(request, obj, field_name, field_value=None, kwargs={}, adaptor=None):
     # Related field
@@ -116,7 +110,6 @@ def get_adaptor(request, obj, field_name, field_value=None, kwargs={}, adaptor=N
         return Adaptor(request, field, obj, field_name, \
                 field_value=field_value, kwargs=kwargs)
 
-
 def is_managed_field(obj, fieldname):
     if hasattr(obj, fieldname):
         field = getattr(obj, fieldname)
@@ -124,7 +117,6 @@ def is_managed_field(obj, fieldname):
             meta = getattr(field, '_meta')
             return meta.managed
     return False
-
 
 def get_dict_from_obj(obj):
     obj_dict = obj.__dict__
@@ -144,7 +136,6 @@ def get_dict_from_obj(obj):
 
     return obj_dict_result
 
-
 def apply_filters(value, filters, load_tags=None):
     if filters:
         filters_str = '|%s' % '|'.join(filters)
@@ -157,3 +148,9 @@ def apply_filters(value, filters, load_tags=None):
         value = template.Template("""%s{{ value%s }}""" % (\
                 load_tags_str, filters_str)).render(ctx)
     return value
+
+def has_permission(request, model, obj, perm='edit'):
+    if request.user.is_authenticated:
+        return request.user.has_perm('%s.change_%s' % (model._meta.app_label, \
+                                                model._meta.module_name))
+    return False

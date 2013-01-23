@@ -5,4 +5,9 @@ then
     export BROWSER="CHROME"
 fi
 
-time python manage.py harvest
+if [ -z "$1" ]
+then
+    time python manage.py harvest $1
+else
+    time python manage.py harvest
+fi

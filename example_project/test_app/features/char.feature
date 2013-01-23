@@ -38,3 +38,8 @@ Feature: Char field tests
     Scenario: Anonymous mode
         Given I open the char test page
         Then I don't see ".editlive"
+
+
+    Scenario: No permission_mode mode
+        Given I open the char2 test page
+        Then I don't see ".editlive"

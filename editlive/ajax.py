@@ -7,30 +7,36 @@ from dajaxice.decorators import dajaxice_register
 
 from editlive.utils import get_adaptor, import_class
 
-
 @dajaxice_register(method='POST')
 def save(request, **kwargs):
-    field_name = kwargs.get('field_name')
-    field_value = kwargs.get('field_value')
     object_id = kwargs.get('object_id')
     app_label = kwargs.get('app_label')
-    module_name = kwargs.get('module_name') # Unused ?
-    field_options = kwargs.get('field_options')
+    module_name = kwargs.get('module_name')
     Model = get_model(app_label, module_name)
     obj = get_object_or_404(Model, pk=object_id)
+    field_name = kwargs.get('field_name')
     adaptor = get_adaptor(request, obj, field_name)
+    field_value = kwargs.get('field_value') #  TODO: Not even sure this is still good..
+    field_options = kwargs.get('field_options') # TODO: Unused ?
     tpl_filters = kwargs.get('tpl_filters')
     load_tags = kwargs.get('load_tags')
 
-    if tpl_filters:
-        adaptor.template_filters = tpl_filters.split('|')
-        if load_tags:
-            adaptor.load_tags = load_tags.split('|')
+    if not adaptor.can_edit():
+        return simplejson.dumps({
+            'error': True, 
+            'messages': [{
+                'field_name': field_name,
+                'message': unicode(u'Permission denied'), #  TODO: Proper message + translations
+            }]
+        })
+    else:
+        if tpl_filters:
+            adaptor.template_filters = tpl_filters.split('|')
+            if load_tags:
+                adaptor.load_tags = load_tags.split('|')
 
-    adaptor.set_value(field_value)
-
-    return simplejson.dumps(adaptor.save())
-
+        adaptor.set_value(field_value)
+        return simplejson.dumps(adaptor.save())
 
 @dajaxice_register(method='POST')
 def save_form(request, **kwargs):

@@ -3,7 +3,7 @@
 from django.db import models
 
 
-class EditliveBaseFieldsTest(models.Model):
+class EditliveTestBase(models.Model):
     biginteger_test = models.BigIntegerField(u'BigIntegerField test', blank=True, null=True)
     boolean_test = models.BooleanField(u'BooleanField test', default=True)
     char_test = models.CharField(u'CharField test', max_length=250, blank=True, null=True)
@@ -28,7 +28,13 @@ class EditliveBaseFieldsTest(models.Model):
     time_test = models.TimeField(u'TimeField test', blank=True, null=True)
     url_test = models.URLField(u'URLField test', blank=True, null=True)
 
+    class Meta:
+        abstract = True
 
 
-class EditliveBaseFieldsTest2(EditliveBaseFieldsTest):
+class EditliveBaseFieldsTest(EditliveTestBase):
+    pass
+
+
+class EditliveBaseFieldsTest2(EditliveTestBase):
     pass

@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, View
 from django.template import RequestContext, Template
 from django.http import HttpResponse
 
-from test_app.models import EditliveBaseFieldsTest
+from test_app.models import EditliveBaseFieldsTest, EditliveBaseFieldsTest2
 
 TEST_TEMPLATE = """
 {%% extends "test_app/base.html" %%}
@@ -24,15 +24,21 @@ class TestView(View):
         for k in request.GET.keys():
             options.append('%s="%s"' % (k, request.GET.get(k)))
 
+        fieldname = field.endswith('2') and field[:-1] or field
+        model = field.endswith('2') and EditliveBaseFieldsTest2\
+                                    or EditliveBaseFieldsTest
+
         tpl = TEST_TEMPLATE % {
-            'fieldname': field + '_test',
+            'fieldname': fieldname + '_test',
             'options': ' '.join(options),
         }
+
         t = Template(tpl)
         c = RequestContext(request, {
             'field': field,
-            'object': EditliveBaseFieldsTest.objects.all()[0],
+            'object': model.objects.all()[0],
         })
+
         return HttpResponse(t.render(c))
 
 

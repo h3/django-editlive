@@ -4,8 +4,9 @@ from datetime import datetime
 from django.utils.safestring import mark_safe
 from django.forms.models import modelform_factory
 
-from editlive.utils import (get_dict_from_obj,\
-        apply_filters, import_class, get_dynamic_modelform)
+from editlive.utils import (\
+        apply_filters, import_class, get_dynamic_modelform,\
+        has_permission, get_dict_from_obj)
 
 
 class BaseAdaptor(object):
@@ -78,7 +79,14 @@ class BaseAdaptor(object):
                     self.load_tags = self.kwargs.get('load_tags').split('|')
 
     def can_edit(self):
-        return self.request.user.is_authenticated()
+        if self.request.user.is_anonymous():
+            return False
+        elif self.request.user.is_superuser:
+            return True
+        elif self.request.user.is_authenticated():
+           return has_permission(self.request, self.model, self.obj, perm='edit')
+        else:
+            return False
 
     def format_attributes(self):
         """Formats the HTML attributes of the <editlive /> element.
