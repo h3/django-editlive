@@ -11,7 +11,9 @@ This is a gateway function used to interact with an instancied editlive field.
 val
 ^^^
 
-Val is used to get and set the field value::
+Val is used to get and set the field value:
+
+.. code-block:: javascript
 
     $('#id_char_test').editlive('val');
     "Hello World"
@@ -23,14 +25,17 @@ Val is used to get and set the field value::
 $.editlive.load
 ---------------
 
-Scan the entire document for editlive tags and load their widgets::
+Scan the entire document for editlive tags and load their widgets:
 
+.. code-block:: javascript
 
     $(function(){
         $.editlive.load();
     });
 
-This is equivalent of doing this::
+This is equivalent of doing this:
+
+.. code-block:: javascript
 
     $(function(){
         $('editlive').each(function(k, v) {
@@ -38,7 +43,9 @@ This is equivalent of doing this::
         });
     });
 
-You can also pass a selector as parent::
+You can also pass a selector as parent:
+
+.. code-block:: javascript
 
     $(function(){
         $.editlive.load('#my-ajax-content-wrapper');
@@ -48,8 +55,9 @@ You can also pass a selector as parent::
 $.editlive.loadWidget
 ---------------------
 
-Load a given editlive widget element::
+Load a given editlive widget element:
 
+.. code-block:: javascript
     
     $(function(){
         var widget = $('editlive:first');

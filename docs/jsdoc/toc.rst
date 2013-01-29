@@ -11,7 +11,6 @@ JsDoc Reference
     jQuery
     jQuery.fn
     jQuery.fn.booleanField
-    jQuery.fn.booleanFieldButton
     jQuery.fn.charField
     jQuery.fn.choicesField
     jQuery.fn.dateField

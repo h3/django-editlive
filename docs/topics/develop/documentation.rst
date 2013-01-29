@@ -26,7 +26,7 @@ you are submitting. You just have to comment the code properly.
 Building the Python documentation
 -------------------------------------
 
-::
+.. code-block:: bash
 
     cd django-editlive/docs/
     make html
@@ -42,7 +42,7 @@ Installing requirements
 
 Using Ubuntu One is really not a requirement, just a convenience for me.
 
-::
+.. code-block:: bash
 
     mkdir -p ~/Ubuntu\ One/SDKs/ && cd ~/Ubuntu\ One/SDKs/
     wget http://jsdoc-toolkit.googlecode.com/files/jsdoc_toolkit-2.4.0.zip
@@ -53,7 +53,7 @@ Using Ubuntu One is really not a requirement, just a convenience for me.
 Compiling docs
 ^^^^^^^^^^^^^^
 
-::
+.. code-block:: bash
     
     cd django-editlive/
     java -jar ~/Ubuntu\ One/SDKs/jsdoc_toolkit-2.4.0/jsdoc-toolkit/jsrun.jar \
@@ -68,7 +68,7 @@ Compiling docs
 Including documentation
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-::
+.. code-block:: rest
 
     .. include:: jsdoc/MyJavascriptClass.rst
        :start-after: class-methods

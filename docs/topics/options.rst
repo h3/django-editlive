@@ -13,7 +13,9 @@ Template tag options
 wrapclass
 ^^^^^^^^^
 
-Add a CSS class to the control's container.::
+Add a CSS class to the control's container.:
+
+.. code-block:: django
 
     {%load editlive_tags%}
     {%editlive "object.date_test" wrapclass="lead" as field%}{{field}}

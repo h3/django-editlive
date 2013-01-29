@@ -10,7 +10,9 @@ This setting is used to pass the date format to the datepicker widget.
 The format used must match one of the format of the django setting `DATE_INPUT_FORMAT` 
 which itself is used by django to parse and validate input content.
 
-By default `DATE_INPUT_FORMAT` is set to the following::
+By default `DATE_INPUT_FORMAT` is set to the following:
+
+.. code-block:: python
 
     ('%Y-%m-%d %H:%M:%S', '%Y-%m-%d %H:%M', '%Y-%m-%d',
     '%m/%d/%Y %H:%M:%S', '%m/%d/%Y %H:%M', '%m/%d/%Y',
@@ -113,7 +115,9 @@ EDITLIVE_ADAPTORS
 
 This setting serves as default mapping between field types and adaptors.
 
-Currently not all field types are supported, here's the current default mapping::
+Currently not all field types are supported, here's the current default mapping:
+
+.. code-block:: python
 
     EDITLIVE_DEFAULT_ADAPTORS = {
         'char':     'editlive.adaptors.CharAdaptor',
@@ -129,16 +133,18 @@ Currently not all field types are supported, here's the current default mapping:
 
 
 If you want to override the datetime adaptor with your own, you can 
-simply provide one in your `settings.py` like so::
+simply provide one in your `settings.py` like so:
 
+.. code-block:: python
 
     EDITLIVE_ADAPTORS = {
         'datetime': 'mymodule.adaptors.MyDateTimeAdaptor',
     }
 
 The settings `EDITLIVE_ADAPTORS` updates the adaptor mapping instead of 
-overwriting it, so the end result would be this::
+overwriting it, so the end result would be this:
 
+.. code-block:: python
 
     EDITLIVE_DEFAULT_ADAPTORS = {
         'char':     'editlive.adaptors.CharAdaptor',

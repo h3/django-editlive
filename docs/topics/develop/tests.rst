@@ -31,7 +31,7 @@ Lettuce makes writing the test cases and scenarios very easy
 
 **strings.feature**
 
-::
+.. code-block:: python
 
     Feature: Manipulate strings
       In order to have some fun
@@ -45,7 +45,7 @@ Lettuce makes writing the test cases and scenarios very easy
 
 **steps**
 
-::
+.. code-block:: python
 
     from lettuce import *
     @step('I have the string "(.*)"')
@@ -73,7 +73,7 @@ Splinter
 From its website: "*Splinter is an open source tool for testing web applications using Python. 
 It lets you automate browser actions, such as visiting URLs and interacting with their items.*"
 
-::
+.. code-block:: python
 
      from splinter import Browser 
      browser = Browser() 
@@ -113,22 +113,26 @@ Bootstrapping
 -------------
 
 
-**Create a virtual env**::
+**Create a virtual env**
+
+.. code-block:: bash
 
     cd django-editlive/
     virtualenv --distribute --no-site-packages editlive_test_env
     source editlive_test_env/bin/activate
 
 
-**Install requirements**::
+**Install requirements**
+
+.. code-block:: bash
 
     pip install -r docs/requirements.txt
     pip install -r example_project/requirements.txt
 
 
-**Install Google Chrome & Google Chrome Webdriver**
+**Install Google Chrome & Google Chrome Webdriver (Ubuntu 12)**
 
-Instruction for Ubuntu 12::
+.. code-block:: bash
 
   # Install Google Chrome (if not already installed!)
   wget https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb
@@ -145,14 +149,18 @@ Running the tests
 -----------------
 
 
-**With Google Chrome**::
+**With Google Chrome**
+
+.. code-block:: bash
 
     cd example_project/
 
     export BROWSER="CHROME"
     ./run-tests
 
-**With Google Firefox**::
+**With Google Firefox**
+
+.. code-block:: bash
     
     export BROWSER="FIREFOX"
     ./run-tests
@@ -160,18 +168,24 @@ Running the tests
 
 *Note*: Google Chrome is used as default.
 
-**Test command arguments**::
+**Test command arguments**
 
 If you have special arguments to pass to the test runner you will 
-have to use the full command::
+have to use the full command:
+
+.. code-block:: bash
 
     python manage.py harvest
 
-To test a single feature::
+To test a single feature:
+
+.. code-block:: bash
 
     python manage.py harvest test_app/features/date.feature
 
-Excluding applications::
+Excluding applications:
+
+.. code-block:: bash
 
     python manage.py harvest -A myApp1,myApp2
 
