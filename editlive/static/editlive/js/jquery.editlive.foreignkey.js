@@ -48,15 +48,6 @@
                 return false;
             };
 
-          //$self.options.source = function(request, response) {
-          //    var rs = $.ui.autocomplete.filter($self.data, request.term);
-          //    if ($self.options.maxlength) {
-          //        return rs.slice(0, $self.options.maxlength);
-          //    }
-          //    else {
-          //        return rs;
-          //    }
-          //};
         }
 
         //$.editliveWidgets.charField.prototype._init.apply(this, arguments);
@@ -88,15 +79,8 @@
     foreignkeyField.focus = function(e){
         var $self = this;
         $self._trigger('focus')
-        if (typeof($self._parent_is_btn) == 'undefined') {
-            $self._parent_is_btn = $self.control.hasClass('btn');
-        }
-        if ($self._parent_is_btn) {
-            $self.input.parents('.editlive-control-group').removeClass('btn');
-        }
         $self.placeholder.hide();
         $self.input.show().focus();
-        //$self._bind_kb_blur_events($self.input);
         $self._set_element_width($self.input);
         $self._watch_blur($self.input);
         $self._trigger('focused')
