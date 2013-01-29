@@ -64,6 +64,7 @@ Table of Contents
    topics/installation
    topics/settings
    topics/usage-examples
+   topics/options
    topics/javascriptapi
    topics/adaptors
    topics/widgets
