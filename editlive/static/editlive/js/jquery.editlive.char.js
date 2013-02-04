@@ -124,6 +124,7 @@
 
     charField._highlight = function(){
         var $self = this;
+
         var startColor = $self.options.highlight.options.color;
         var endColor   = $self._placeholderColor;
 
@@ -263,18 +264,11 @@
         var $self = this;
         $self._trigger('focus')
         $self.show();
-        if (typeof($self._parent_is_btn) == 'undefined') {
-            $self._parent_is_btn = $self.control.hasClass('btn');
-        }
-        $self.control.removeClass('btn');
         $self._trigger('focused')
     };
 
     charField.blur = function(cancel){
         var $self = this;
-        if ($self._parent_is_btn) {
-            $self.input.parents('.editlive-controls').addClass('btn');
-        }
         if (cancel) {
             $self._set_value($self.value);
             $self.hide();
@@ -365,9 +359,7 @@
         $self.set_placeholder_value();
         $self.control.removeClass('error');
         $self.blur(true);
-        if (!$self._parent_is_btn && $self.placeholder) {
-            $self._highlight();
-        }
+        $self._highlight();
         $self._destroy_errors();
         $self._trigger('success');
     };

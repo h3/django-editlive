@@ -31,7 +31,9 @@ Django editlive documentation
 Django editlive is a Free Open Source project which aims to make it easy to
 make elegant inline editable fields from database objects.
 
-Here's a simple example::
+Here's a simple example:
+
+.. code-block:: django
 
     {% load editlive_tags %}
 
