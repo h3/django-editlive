@@ -4,6 +4,6 @@ lettuce==0.2.11
 lettuce_webdriver==0.2.1
 lxml==2.3.5
 Cython==0.17.4
-
 cssselect==0.7.1
 fuzzywuzzy==0.1
+django-debug-toolbar==0.9.4

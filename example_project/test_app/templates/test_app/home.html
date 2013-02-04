@@ -1,0 +1,30 @@
+{% extends "test_app/base.html" %}
+{% load editlive_tags %}
+{% block content %}
+<div class="span12">
+    <br>
+    <br>
+    <div class="hero-unit">
+        <h1>Tests index</h1>
+        <hr>
+        <ul class="lead">
+            <li><a href="{% url editlive-test-soup %}">Soup</a></li>
+            <li><a href="{% url editlive-test field="char" %}">CharField</a></li>
+            <li><a href="{% url editlive-test field="date" %}">DateField</a></li>
+            <li><a href="{% url editlive-test field="datetime" %}">DateTimeField</a></li>
+            <li><a href="{% url editlive-test field="email" %}">EmailField</a></li>
+            <li><a href="{% url editlive-test field="float" %}">FloatField</a></li>
+            <li><a href="{% url editlive-test field="genericipaddress" %}">GenericIPAddressField</a></li>
+            <li><a href="{% url editlive-test field="integer" %}">IntegerField</a></li>
+            <li><a href="{% url editlive-test field="ipaddress" %}">IPAddressField</a></li>
+            <li><a href="{% url editlive-test field="positiveinteger" %}">PositiveIntegerField</a></li>
+            <li><a href="{% url editlive-test field="positivesmallinteger" %}">PositiveSmallIntegerField</a></li>
+            <li><a href="{% url editlive-test field="slug" %}">SlugField</a></li>
+            <li><a href="{% url editlive-test field="smallinteger" %}">SmallField</a></li>
+            <li><a href="{% url editlive-test field="text" %}">TextField</a></li>
+            <li><a href="{% url editlive-test field="time" %}">TimeField</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
