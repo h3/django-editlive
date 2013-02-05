@@ -262,25 +262,29 @@
 
     charField.focus = function(e){
         var $self = this;
-        $self._trigger('focus')
+        $self._trigger('focus', null, $self)
         $self.show();
-        $self._trigger('focused')
+        $self._trigger('focused', null, $self)
     };
 
     charField.blur = function(cancel){
         var $self = this;
+        // User has cancelled action
         if (cancel) {
             $self._set_value($self.value);
-            $self.hide();
+            $self.blur();
         }
+        // Value has changed, save
         else if ($self.value != $self._get_value()) {
             $self.value = $self._get_value();
+            $self.blur();
             $self.change();
         }
+        // Nothing changed
         else {
             $self.hide();
+            $self._trigger('blur', null, $self);
         }
-        $self._trigger('blur');
     };
 
     charField.show = function() {
@@ -311,7 +315,7 @@
     charField.change = function(){
         var $self = this;
         $self.save();
-        $self._trigger('change');
+        $self._trigger('change', null, $self);
     };
 
     charField.get_display_value = function() {
@@ -339,7 +343,7 @@
 
     charField.save = function() {
         var $self = this;
-        $self._trigger('save');
+        $self._trigger('save', null, $self);
         Dajaxice.editlive.save($.proxy($self._saved, $self), {
             field_value:   $self._get_value(), 
             field_name:    $self.field_name, 
@@ -358,17 +362,16 @@
         }
         $self.set_placeholder_value();
         $self.control.removeClass('error');
-        $self.blur(true);
         $self._highlight();
         $self._destroy_errors();
-        $self._trigger('success');
+        $self._trigger('success', null, $self);
     };
 
     charField.error = function(data) {
         var $self = this;
         $self._display_errors(data.messages);
-        $self._trigger('error');
         $self.control.addClass('error')
+        $self._trigger('error', null, $self);
     };
 
     // Clean up any modifications made to the DOM
