@@ -271,20 +271,16 @@
         var $self = this;
         // User has cancelled action
         if (cancel) {
-            console.log('A')
             $self._set_value($self.value);
             $self.blur();
         }
         // Value has changed, save
         else if ($self.value != $self._get_value()) {
-            console.log('B')
             $self.value = $self._get_value();
-            console.log($self.value);
             $self.change();
         }
         // Do blur
         else {
-            console.log('C')
             $self.hide();
             $self._trigger('blur', null, $self);
         }
