@@ -7,6 +7,7 @@
      */
     var choicesField = {
         _type: 'choices',
+        widgetEventPrefix: 'editlive',
         options: {choices: []}
     };
 

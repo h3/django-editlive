@@ -8,6 +8,7 @@
 
     var booleanField = {
         _type: 'boolean',
+        widgetEventPrefix: 'editlive',
         options: {
             choices: ' Oui| Non',
             icon_on: 'ok-sign',

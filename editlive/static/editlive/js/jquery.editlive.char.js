@@ -271,17 +271,20 @@
         var $self = this;
         // User has cancelled action
         if (cancel) {
+            console.log('A')
             $self._set_value($self.value);
             $self.blur();
         }
         // Value has changed, save
         else if ($self.value != $self._get_value()) {
+            console.log('B')
             $self.value = $self._get_value();
-            $self.blur();
+            console.log($self.value);
             $self.change();
         }
-        // Nothing changed
+        // Do blur
         else {
+            console.log('C')
             $self.hide();
             $self._trigger('blur', null, $self);
         }
@@ -345,7 +348,7 @@
         var $self = this;
         $self._trigger('save', null, $self);
         Dajaxice.editlive.save($.proxy($self._saved, $self), {
-            field_value:   $self._get_value(), 
+            field_value:   $self.value,
             field_name:    $self.field_name, 
             object_id:     $self.object_id,
             app_label:     $self.app_label,
@@ -364,6 +367,7 @@
         $self.control.removeClass('error');
         $self._highlight();
         $self._destroy_errors();
+        $self.blur();
         $self._trigger('success', null, $self);
     };
 

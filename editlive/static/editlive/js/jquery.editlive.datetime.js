@@ -7,6 +7,7 @@
      */
     var datetimeField = {
         _type: 'datetime',
+        widgetEventPrefix: 'editlive',
         options: {}
     };
 

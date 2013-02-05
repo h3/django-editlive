@@ -7,6 +7,7 @@
      */
     var foreignkeyField = {
         _type: 'foreignkey',
+        widgetEventPrefix: 'editlive',
         sourceSelect: false,
         options: {}
     };
