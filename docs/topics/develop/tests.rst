@@ -167,3 +167,16 @@ For a complete argument documentation, please refer to `this section of the Lett
 
 .. _this section of the Lettuce documentation: http://lettuce.it/recipes/django-lxml.html#run-the-tests
 
+
+Manual tests
+============
+
+The example_project can also be used to perform manual tests.
+
+While in the virtualenv, use the command `./run-server`. It accepts arguments as usual.
+
+Open the dev server url, an index of the tests should show up.
+
+If you click on a test it will bring you to a page with an URL like this: `http://127.0.0.1:9999/test/char/`.
+
+You can pass arguments to the editlive instance using GET parameters: `http://127.0.0.1:9999/test/char/?class=fixedwidth&width=80&template_filters=upper`.

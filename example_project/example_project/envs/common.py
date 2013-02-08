@@ -161,4 +161,5 @@ LETTUCE_AVOID_APPS = (
     'dajaxice,south',
     'editlive',
     'dajaxice',
+    'debug_toolbar',
 )
