@@ -31,7 +31,7 @@ class BaseAdaptor(object):
     """
 
     def __init__(self, request, field, obj, field_name, field_value='', \
-            kwargs={}, initial={}):
+            kwargs={}):
 
         self.request = request 
         self.kwargs = kwargs
@@ -42,8 +42,7 @@ class BaseAdaptor(object):
         self.field_value = getattr(self.obj, self.field_name, field_value)
         self.template_filters = None
         self.load_tags = []
-        self.form_class = modelform_factory(self.model)
-        self.form = self.form_class(instance=self.obj, initial=initial)
+        self.form = self.get_form()
 
         try:
             self.form_field = self.form[self.field_name]
@@ -122,7 +121,13 @@ class BaseAdaptor(object):
 
         The returned form is instantiated with `self.obj`.
         """
-        form = modelform_factory(self.model)
+        if self.kwargs.get('form'):  # Custom form
+            try:
+                form = import_class(self.kwargs.get('form'))
+            except ImportError:  # TODO: warning sent to logger or something ?
+                form = modelform_factory(self.model)
+        else:  # Generic form
+            form = modelform_factory(self.model)
         return form(data=get_dict_from_obj(self.obj), instance=self.obj)
 
     def get_real_field_name(self):
