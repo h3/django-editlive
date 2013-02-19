@@ -7,6 +7,7 @@
      */
     var textField = {
         _type: 'text',
+        widgetEventPrefix: 'editlive',
         placeholdertag: 'div',
         options: {wrapclass: ''}
     };

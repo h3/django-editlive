@@ -1,0 +1,28 @@
+{% extends "test_app/base.html" %}
+{% load editlive_tags %}
+{% block content %}
+<div class="span12">
+    <h1>Test soup</h1>
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <th>CharField</th>
+                <td>{% editlive "object.char_test" as test %}{{ test }}</td>
+            </tr>
+            <tr>
+                <th>FloatField</th>
+                <td>{% editlive "object.float_test" as test %}{{ test }}</td>
+            </tr>
+            <tr>
+                <th>TextField</th>
+                <td>{% editlive "object.text_test" as test %}{{ test }}</td>
+            </tr>
+            <tr>
+                <th>DecimalField</th>
+                <td>{% editlive "object.decimal_test" as test %}{{ test }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+</div>
+{% endblock %}

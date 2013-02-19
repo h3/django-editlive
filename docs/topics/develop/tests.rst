@@ -1,6 +1,12 @@
 Behavior Driven Testing
 +++++++++++++++++++++++
 
+.. sidebar:: Tip for committers
+
+    If you send pull request to this project for things that does not requires testing, 
+    like updating the documentation or fixing typos in comments, just add `[ci skip]` 
+    in your commit message and a build wont be triggered on Travis CI.
+
 
 As editlive is a Interface component, a BTD approach is used for testing it.
 
@@ -17,19 +23,14 @@ can see the build status of branches and pull requests.
 
 The test suite is a mix of Lettuce, Selenium and Splinter.
 
-.. sidebar:: Tip for committers
-
-    If you send pull request to this project for things that does not requires testing, 
-    like updating the documentation or fixing typos in comments, just add `[ci skip]` 
-    in your commit message and a build wont be triggered on Travis CI.
-
 
 Lettuce
 ^^^^^^^
 
 Lettuce makes writing the test cases and scenarios very easy
 
-**strings.feature**
+Features
+========
 
 .. code-block:: python
 
@@ -43,7 +44,8 @@ Lettuce makes writing the test cases and scenarios very easy
         When I put it in upper case
         Then I see the string is "LETTUCE LEAVES"
 
-**steps**
+Steps
+=====
 
 .. code-block:: python
 
@@ -109,47 +111,16 @@ For more infos `about Selenium`_.
 .. _about Selenium: http://seleniumhq.org/
 
 
-Bootstrapping
--------------
-
-
-**Create a virtual env**
-
-.. code-block:: bash
-
-    cd django-editlive/
-    virtualenv --distribute --no-site-packages editlive_test_env
-    source editlive_test_env/bin/activate
-
-
-**Install requirements**
-
-.. code-block:: bash
-
-    pip install -r docs/requirements.txt
-    pip install -r example_project/requirements.txt
-
-
-**Install Google Chrome & Google Chrome Webdriver (Ubuntu 12)**
-
-.. code-block:: bash
-
-  # Install Google Chrome (if not already installed!)
-  wget https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb
-  sudo apt-get install libgconf2-4
-  sudo dpkg -i google-chrome*.deb
-
-  # Install the Google Chrome webdriver
-  wget https://chromedriver.googlecode.com/files/chromedriver_linux32_23.0.1240.0.zip
-  unzip chromedriver_linux32_23.0.1240.0.zip
-  mv chromedriver /usr/local/bin
-
 
 Running the tests
------------------
+^^^^^^^^^^^^^^^^^
+
+See the :ref:`test-and-dev-env` documentation for an example of how to
+quickly setup a testing and development environment.
 
 
-**With Google Chrome**
+With Google Chrome
+==================
 
 .. code-block:: bash
 
@@ -158,7 +129,8 @@ Running the tests
     export BROWSER="CHROME"
     ./run-tests
 
-**With Google Firefox**
+With Google Firefox
+===================
 
 .. code-block:: bash
     
@@ -168,7 +140,8 @@ Running the tests
 
 *Note*: Google Chrome is used as default.
 
-**Test command arguments**
+Test command arguments
+======================
 
 If you have special arguments to pass to the test runner you will 
 have to use the full command:
@@ -194,3 +167,16 @@ For a complete argument documentation, please refer to `this section of the Lett
 
 .. _this section of the Lettuce documentation: http://lettuce.it/recipes/django-lxml.html#run-the-tests
 
+
+Manual tests
+============
+
+The example_project can also be used to perform manual tests.
+
+While in the virtualenv, use the command `./run-server`. It accepts arguments as usual.
+
+Open the dev server url, an index of the tests should show up.
+
+If you click on a test it will bring you to a page with an URL like this: `http://127.0.0.1:9999/test/char/`.
+
+You can pass arguments to the editlive instance using GET parameters: `http://127.0.0.1:9999/test/char/?class=fixedwidth&width=80&template_filters=upper`.

@@ -7,6 +7,7 @@
      */
     var foreignkeyField = {
         _type: 'foreignkey',
+        widgetEventPrefix: 'editlive',
         sourceSelect: false,
         options: {}
     };
@@ -78,12 +79,12 @@
 
     foreignkeyField.focus = function(e){
         var $self = this;
-        $self._trigger('focus')
+        $self._trigger('focus', null, $self)
         $self.placeholder.hide();
         $self.input.show().focus();
         $self._set_element_width($self.input);
         $self._watch_blur($self.input);
-        $self._trigger('focused')
+        $self._trigger('focused', null, $self)
     };
 
     foreignkeyField.show = function() {

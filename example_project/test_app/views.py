@@ -2,6 +2,7 @@
 
 from django.views.generic import TemplateView, View
 from django.template import RequestContext, Template
+from django.shortcuts import render_to_response
 from django.http import HttpResponse
 
 from test_app.models import EditliveBaseFieldsTest
@@ -36,6 +37,15 @@ class TestView(View):
         return HttpResponse(t.render(c))
 
 
+class TestSoupView(View):
+    def get(self, request):
+        return render_to_response('test_app/soup.html',{
+                    'object': EditliveBaseFieldsTest.objects.all()[0]},
+                    context_instance=RequestContext(request))
+
+
+
 class HomeView(View):
     def get(self, request):
-        return HttpResponse(Template('').render(RequestContext(request, {})))
+        return render_to_response('test_app/home.html',{},
+                    context_instance=RequestContext(request))

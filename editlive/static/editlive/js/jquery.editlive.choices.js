@@ -7,6 +7,7 @@
      */
     var choicesField = {
         _type: 'choices',
+        widgetEventPrefix: 'editlive',
         options: {choices: []}
     };
 
@@ -91,14 +92,14 @@
     choicesField.success = function(data) {
         var $self = this;
         $self._populate();
-        $self._trigger('success');
+        $self._trigger('success', null, $self);
     };
 
     choicesField.error = function(data) {
         var $self = this;
         $self.control.addClass('error');
         $self._display_errors(data.messages);
-        $self._trigger('error');
+        $self._trigger('error', null, $self);
     }
         
     $.widget('editliveWidgets.choicesField', $.editliveWidgets.charField, choicesField);

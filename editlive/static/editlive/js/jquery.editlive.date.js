@@ -9,6 +9,7 @@
 
     var dateField = {
         _type: 'date',
+        widgetEventPrefix: 'editlive',
         options: { 
             showOn: 'button',
             currentText: 'Maintenant',
@@ -35,9 +36,9 @@
     dateField.show = function() {
         if (this.placeholder) this.placeholder.hide();
         this.placeholder.addClass('no-blur');
-        this.element.parent().show();
-        this.element.next('.add-on').css('display', 'inline-block');
-        this.element.show().focus();
+        this.element.show().focus()
+            .parent().show()
+                .find('.add-on').css('display', 'inline-block');
         this._bind_kb_blur_events();
         this._set_element_width();
         this._watch_blur();
