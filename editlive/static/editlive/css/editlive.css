@@ -157,7 +157,6 @@ select.eie-small {
 /* bootstrapui.less */
 
 .ui-datepicker {
-  z-index: 1031; /* over tooltip */
   -webkit-box-shadow: 1px 1px 12px #777777;
      -moz-box-shadow: 1px 1px 12px #777777;
           box-shadow: 1px 1px 12px #777777;
@@ -229,186 +228,30 @@ select.eie-small {
   display: none;
 }
 
-.editlive-input-append {
-  display: inline-block;
+.editlive-controls .input-prepend,
+.editlive-controls .input-append {
+  margin-bottom: 0;
 }
 
-.editlive-input-append .add-on {
-  display: inline-block;
-  padding: 3px 9px;
-  margin-left: -6px;
-  color: #777;
-  background: #eee;
-  border: 1px solid #c30;
-  border: 1px solid #ddd;
-  border-width: 1px 1px 1px 0;
-  -webkit-border-radius: 0 3px 3px 0;
-     -moz-border-radius: 0 3px 3px 0;
-          border-radius: 0 3px 3px 0;
+/*
+.editlive-input-append {
+    display: inline-block;
+    .add-on {
+        border: 1px solid #c30;    
+        display: inline-block;
+        background: #eee;
+        padding: 3px 9px;
+        border: 1px solid #ddd;
+        margin-left: -6px;
+        color: #777;
+        border-width: 1px 1px 1px 0;
+        .border-radius(0 3px 3px 0);
+    }
 }
+*/
 
 .editlive-controls.inline.input-prepend,
 .editlive-controls.inline.input-append {
   float: left;
   margin-bottom: 0;
-}
-
-
-
-/* Errors */
-
-.editlive-controls.warning .control-label,
-.editlive-controls.warning .help-block,
-.editlive-controls.warning .help-inline {
-  color: #c09853;
-}
-
-.editlive-controls.warning .checkbox,
-.editlive-controls.warning .radio,
-.editlive-controls.warning input,
-.editlive-controls.warning select,
-.editlive-controls.warning textarea {
-  color: #c09853;
-}
-
-.editlive-controls.warning input,
-.editlive-controls.warning select,
-.editlive-controls.warning textarea {
-  border-color: #c09853;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-}
-
-.editlive-controls.warning input:focus,
-.editlive-controls.warning select:focus,
-.editlive-controls.warning textarea:focus {
-  border-color: #a47e3c;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #dbc59e;
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #dbc59e;
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #dbc59e;
-}
-
-.editlive-controls.warning .input-prepend .add-on,
-.editlive-controls.warning .input-append .add-on {
-  color: #c09853;
-  background-color: #fcf8e3;
-  border-color: #c09853;
-}
-
-.editlive-controls.error .control-label,
-.editlive-controls.error .help-block,
-.editlive-controls.error .help-inline {
-  color: #b94a48;
-}
-
-.editlive-controls.error .checkbox,
-.editlive-controls.error .radio,
-.editlive-controls.error input,
-.editlive-controls.error select,
-.editlive-controls.error textarea {
-  color: #b94a48;
-}
-
-.editlive-controls.error input,
-.editlive-controls.error select,
-.editlive-controls.error textarea {
-  border-color: #b94a48;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-}
-
-.editlive-controls.error input:focus,
-.editlive-controls.error select:focus,
-.editlive-controls.error textarea:focus {
-  border-color: #953b39;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
-}
-
-.editlive-controls.error .input-prepend .add-on,
-.editlive-controls.error .input-append .add-on {
-  color: #b94a48;
-  background-color: #f2dede;
-  border-color: #b94a48;
-}
-
-.editlive-controls.success .control-label,
-.editlive-controls.success .help-block,
-.editlive-controls.success .help-inline {
-  color: #468847;
-}
-
-.editlive-controls.success .checkbox,
-.editlive-controls.success .radio,
-.editlive-controls.success input,
-.editlive-controls.success select,
-.editlive-controls.success textarea {
-  color: #468847;
-}
-
-.editlive-controls.success input,
-.editlive-controls.success select,
-.editlive-controls.success textarea {
-  border-color: #468847;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-}
-
-.editlive-controls.success input:focus,
-.editlive-controls.success select:focus,
-.editlive-controls.success textarea:focus {
-  border-color: #356635;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7aba7b;
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7aba7b;
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7aba7b;
-}
-
-.editlive-controls.success .input-prepend .add-on,
-.editlive-controls.success .input-append .add-on {
-  color: #468847;
-  background-color: #dff0d8;
-  border-color: #468847;
-}
-
-.editlive-controls.info .control-label,
-.editlive-controls.info .help-block,
-.editlive-controls.info .help-inline {
-  color: #3a87ad;
-}
-
-.editlive-controls.info .checkbox,
-.editlive-controls.info .radio,
-.editlive-controls.info input,
-.editlive-controls.info select,
-.editlive-controls.info textarea {
-  color: #3a87ad;
-}
-
-.editlive-controls.info input,
-.editlive-controls.info select,
-.editlive-controls.info textarea {
-  border-color: #3a87ad;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-}
-
-.editlive-controls.info input:focus,
-.editlive-controls.info select:focus,
-.editlive-controls.info textarea:focus {
-  border-color: #2d6987;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3;
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3;
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3;
-}
-
-.editlive-controls.info .input-prepend .add-on,
-.editlive-controls.info .input-append .add-on {
-  color: #3a87ad;
-  background-color: #d9edf7;
-  border-color: #3a87ad;
 }

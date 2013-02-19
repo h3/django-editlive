@@ -11,6 +11,7 @@
         _type: 'date',
         widgetEventPrefix: 'editlive',
         options: { 
+            width: 160, // Best fit for YYYY-MM-DD at normal font size
             showOn: 'button',
             currentText: 'Maintenant',
             closeText: 'Ok'
@@ -24,7 +25,14 @@
         };
 
         $self._createPlaceholder();
-        $self.element.width(160).wrap('<div class="input-append" />').hide();
+
+        if ($self.options.width) {
+            var chim = parseInt($self.placeholder.css('padding-left').match(/\d+/)[0], 10) 
+                       + parseInt($self.placeholder.css('padding-right').match(/\d+/)[0], 10);
+            $self.placeholder.css('width', $self.options.width - chim);
+        }
+
+        $self.element.width($self._get_width()).wrap('<div class="input-append" />').hide();
         $self.element.datepicker($self.options);
         $('<span class="add-on"><i class="icon-calendar"></i></span>')
             .hide().insertAfter($self.element)
@@ -34,14 +42,13 @@
     };
 
     dateField.show = function() {
-        if (this.placeholder) this.placeholder.hide();
-        this.placeholder.addClass('no-blur');
-        this.element.show().focus()
-            .parent().show()
-                .find('.add-on').css('display', 'inline-block');
         this._bind_kb_blur_events();
         this._set_element_width();
         this._watch_blur();
+        if (this.placeholder) this.placeholder.addClass('no-blur').hide();
+        this.element.show().focus()
+            .parent().show()
+                .find('.add-on').css('display', 'inline-block');
     };
 
     dateField.hide = function() {

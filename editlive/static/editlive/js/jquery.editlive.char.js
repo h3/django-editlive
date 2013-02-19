@@ -74,13 +74,13 @@
         // For odd reasons, jQuery seems its lose the DOM sync once a node is wrapped.
         $self.control = $self.element.parent();
 
-
         if ($self.options.input_prepend != '') {
             var addon = $('<span class="add-on" />').css('display', 'none').insertBefore(this.element),
                 p = this.options.input_prepend;
             $self.element.parents('.editlive-controls').addClass('input-prepend');
             if (p.indexOf('<') > -1) { addon.html(p); }
             else { addon.text(p); }
+            $self.element.css('width', $self.element.width() - 16);
         }
         if ($self.options.input_append != '') {
             var addon = $('<span class="add-on" />').css('display', 'none').insertAfter(this.element),
@@ -88,12 +88,11 @@
             $self.element.parents('.editlive-controls').addClass('input-append');
             if (p.indexOf('<') > -1) { addon.html(p); }
             else { addon.text(p); }
+            $self.element.css('width', $self.element.width() - 16);
         }
 
         $self.element.data('editlive', $self);
     };
-
-
 
     charField._init = function(){
         var $self = this;
@@ -182,6 +181,15 @@
         if (this.control.width() > 0 && width > this.control.width()) width = this.control.width() - 10;
         if (width < this.option.minwidth) width = this.option.minwidth;
         if (width < 0) width = 'none';
+        // Account for input-append/prepend
+        if (width != 'none' && width > 46) { 
+            if (this.options.input_append.length) {
+                width = width - 27;
+            }
+            if (this.options.input_prepend.length) {
+                width = width - 27;
+            }
+        }
         return width;
     };
 

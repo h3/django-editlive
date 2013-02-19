@@ -115,12 +115,33 @@
         if (this.options.width) {
             var chim = parseInt(this.element.css('padding-left').match(/\d+/)[0], 10) 
                        + parseInt(this.element.css('padding-right').match(/\d+/)[0], 10);
-            this.element.width(this.options.width - chim + 6);
+            this.element.width(this._get_width() - chim);
             var chim = parseInt(this.placeholder.css('padding-left').match(/\d+/)[0], 10) 
                        + parseInt(this.placeholder.css('padding-right').match(/\d+/)[0], 10);
             this.placeholder.width(this.options.width - chim + 8);
             this.element.css('margin-bottom', this.placeholder.css('margin-bottom'));
         }
+    };
+
+    foreignkeyFieldSelect._get_width = function() {
+        if (this.options.width) {
+            var w = this.options.width;
+        }
+        else {
+            var w = $.editliveWidgets.charField.prototype._get_width.apply(this, arguments);
+        }
+        if (w != 'none' && w > 62) { 
+            w = w + 8;
+            if (this.options.input_prepend) {
+                w = w - 27;
+            }
+            if (this.options.input_append) {
+                w = w - 27;
+
+            }
+        }
+        return w;
+
     };
 
     $.widget('editliveWidgets.foreignkeyFieldSelect', $.editliveWidgets.charField, foreignkeyFieldSelect);
