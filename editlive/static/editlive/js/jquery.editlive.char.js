@@ -52,7 +52,7 @@
         $self.object_id    = $self.editlive.attr('object-id');
         $self.app_label    = $self.editlive.attr('app-label');
         $self.module_name  = $self.editlive.attr('module-name');
-        $self.rendered_val = $self.editlive.attr('rendered-value');
+        $self.rendered_val = decodeURI($self.editlive.attr('rendered-value'));
         $self.tpl_filters  = $self.editlive.attr('template_filters');
         $self.load_tags    = $self.editlive.attr('load_tags');
 
@@ -343,7 +343,7 @@
                 this.placeholder.html(val);
             }
             else {
-                this.placeholder.text(val);
+                this.placeholder.html(val);
             }
         }
     };

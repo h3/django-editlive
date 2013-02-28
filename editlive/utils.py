@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 import collections
+import urllib
 
 from django import template
 from django.db import models
@@ -157,3 +158,11 @@ def apply_filters(value, filters, load_tags=None):
         value = template.Template("""%s{{ value%s }}""" % (\
                 load_tags_str, filters_str)).render(ctx)
     return value
+
+
+def encodeURI(uri):
+    """
+    We really only need to escape " (double quotes) and non-ascii characters..
+    """
+    s = u"""!#$%&'()*+,-./:;<=>?@[\]^_{|}~ """
+    return urllib.quote(uri.encode('utf8'), safe=s.encode('ascii'))

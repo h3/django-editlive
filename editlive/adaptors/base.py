@@ -4,7 +4,7 @@ from datetime import datetime
 from django.utils.safestring import mark_safe
 from django.forms.models import modelform_factory
 
-from editlive.utils import (get_dict_from_obj,\
+from editlive.utils import (get_dict_from_obj, encodeURI,\
         apply_filters, import_class, get_dynamic_modelform)
 
 
@@ -67,7 +67,7 @@ class BaseAdaptor(object):
                 'app-label': self.model._meta.app_label,
                 'field-name': self.field_name,
                 'object-id': self.obj.pk,
-                'rendered-value': 'Cliquer pour modifier',
+                'rendered-value': '',
             }
 
             if self.kwargs.get('template_filters'):
@@ -102,7 +102,7 @@ class BaseAdaptor(object):
         o = []
         for k, v in self.kwargs.items():
             if k == 'template_filters':
-                self.attributes['rendered-value'] = self.render_value()
+                self.attributes['rendered-value'] = encodeURI(self.render_value())
                 self.attributes[k] = v
             elif k in ['load_tags']:
                 self.attributes[k] = v
