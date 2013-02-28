@@ -18,10 +18,10 @@ def initial_setup(server):
     Locally we run tests with Firefox because it's faster than Google Chrome .. (wtf?)
     But on Travis CI we use Google Chrome because Firefox hangs .. (wtf?)
     """
-    if os.environ.get('BROWSER') == 'FIREFOX':
-        world.browser = Browser('webdriver.firefox')
-    else:
+    if os.environ.get('BROWSER') == 'CHROME':
         world.browser = Browser('webdriver.chrome')
+    else:
+        world.browser = Browser('webdriver.firefox')
 
 @after.harvest
 def cleanup(server):
