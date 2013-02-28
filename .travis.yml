@@ -32,4 +32,6 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
 script:
   - "export BROWSER=CHROME"
+  - "on -c 'from distutils.sysconfig import get_python_lib; print get_python_lib()'"
+  - "on -c 'import django; print django'"
   - "PATH=$PATH:/tmp/bin sudo python example_project/manage.py harvest -A dajaxice,south,editlive"
