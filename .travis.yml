@@ -10,15 +10,15 @@ python:
   - "2.7"
 install:
   - "/home/travis/virtualenv/python2.7/bin/python setup.py install"
-  - "wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -"
-  - "sudo /bin/sh -c 'echo \"deb http://dl.google.com/linux/chrome/deb/ stable main\" >> /etc/apt/sources.list.d/google.list'"
-  - "sudo apt-get update"
-  - "sudo apt-get install google-chrome-stable"
+  # "wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -"
+  # "sudo /bin/sh -c 'echo \"deb http://dl.google.com/linux/chrome/deb/ stable main\" >> /etc/apt/sources.list.d/google.list'"
+  # "sudo apt-get update"
+  # "sudo apt-get install google-chrome-stable"
   # "sudo apt-get -f install"
   # Install Google Chrome
- #- "wget https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb"
- #- "sudo apt-get install libgconf2-4"
- #- "sudo dpkg -i google-chrome*.deb"
+  - "wget https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb"
+  - "sudo apt-get install libgconf2-4"
+  - "sudo dpkg -i google-chrome*.deb"
   # Install the Google Chrome webdriver
   - "mkdir /tmp/bin"
   - "wget https://chromedriver.googlecode.com/files/chromedriver_linux32_23.0.1240.0.zip"
@@ -32,5 +32,4 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
 script:
   - "export BROWSER=CHROME"
-  - "/home/travis/virtualenv/python2.7/bin/python -c 'import django; print django'"
   - "PATH=$PATH:/tmp/bin sudo /home/travis/virtualenv/python2.7/bin/python example_project/manage.py harvest -A dajaxice,south,editlive"
