@@ -165,4 +165,4 @@ def encodeURI(uri):
     We really only need to escape " (double quotes) and non-ascii characters..
     """
     s = u"""!#$%&'()*+,-./:;<=>?@[\]^_{|}~ """
-    return urllib.quote(uri.encode('utf8'), safe=s.encode('ascii'))
+    return urllib.quote(unicode(uri).encode('utf8'), safe=s.encode('ascii'))

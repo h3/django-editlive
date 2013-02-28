@@ -230,7 +230,7 @@ class BaseAdaptor(object):
             data-field-id="id_firstname" module-name="mymodule"></editlive>
 
         """
-        self.attributes['rendered-value'] = self.render_value()
+        self.attributes['rendered-value'] = encodeURI(self.render_value())
         return u'<editlive%s></editlive>' % self.format_attributes()
 
     def render(self):

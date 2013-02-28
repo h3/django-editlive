@@ -1,4 +1,4 @@
-Django>=1.4
+Django==1.4.5
 South==0.7.6
 django-dajaxice==0.5.4
 virtualenv==1.8.4
