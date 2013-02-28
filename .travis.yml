@@ -33,6 +33,6 @@ before_script:
 script:
   - "export BROWSER=CHROME"
   - "ls /home/travis/virtualenv/python2.7/bin"
-  - "python -c 'from distutils.sysconfig import get_python_lib; print get_python_lib()'"
+  - "whereis python"
   - "python -c 'import django; print django'"
   - "PATH=$PATH:/tmp/bin sudo python example_project/manage.py harvest -A dajaxice,south,editlive"
