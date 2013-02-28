@@ -9,7 +9,7 @@ python:
   # "2.6"
   - "2.7"
 install:
-  - "python setup.py install"
+  - "/home/travis/virtualenv/python2.7/bin/python setup.py install"
   - "wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -"
   - "sudo /bin/sh -c 'echo \"deb http://dl.google.com/linux/chrome/deb/ stable main\" >> /etc/apt/sources.list.d/google.list'"
   - "sudo apt-get update"
@@ -32,7 +32,5 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
 script:
   - "export BROWSER=CHROME"
-  - "ls /home/travis/virtualenv/python2.7/bin"
-  - "whereis python"
-  - "python -c 'import django; print django'"
-  - "PATH=$PATH:/tmp/bin sudo python example_project/manage.py harvest -A dajaxice,south,editlive"
+  - "/home/travis/virtualenv/python2.7/bin/python -c 'import django; print django'"
+  - "PATH=$PATH:/tmp/bin sudo /home/travis/virtualenv/python2.7/bin/python example_project/manage.py harvest -A dajaxice,south,editlive"
