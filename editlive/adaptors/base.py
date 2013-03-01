@@ -170,7 +170,10 @@ class BaseAdaptor(object):
         the placeholder.
         """
         v = value or self.get_value()
-        return apply_filters(v, self.template_filters, self.load_tags)
+        if v is None:
+            return ''
+        else:
+            return apply_filters(v, self.template_filters, self.load_tags)
 
     def save(self):
         """Saves the object to database.
