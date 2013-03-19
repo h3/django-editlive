@@ -371,7 +371,7 @@
         $self.control.removeClass('error');
         $self._highlight();
         $self._destroy_errors();
-        $self.blur();
+        $self.blur(true);
         $self._trigger('success', null, $self);
     };
 
