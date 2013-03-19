@@ -1,4 +1,4 @@
-;(function($){
+;(function($, _){
     /**
      * booleanField - Widget for boolean fields (drop down menu)
      *
@@ -10,7 +10,7 @@
         _type: 'boolean',
         widgetEventPrefix: 'editlive',
         options: {
-            choices: ' Oui| Non',
+            choices: _(' Yes| No'),
             icon_on: 'ok-sign',
             icon_off: 'minus-sign',
             class_on: 'btn',
@@ -90,4 +90,4 @@
 
     $.widget('editliveWidgets.booleanField', $.editliveWidgets.charField, booleanField);
 
-})(jQuery);
+})(jQuery, gettext);
