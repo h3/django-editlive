@@ -270,6 +270,21 @@
 
     charField.focus = function(e){
         var $self = this;
+
+        // We need to blur other editlive instance and save them
+        // if necessary before focusing a new instance. Not doing
+        // so causes concurrency problems and end up not saving
+        // some instance randomly.
+        //
+        // Another approach would be to use a request queue system
+        // which would buffer save requests and clobber them in a 
+        // single request them if they are made at short interval.
+        //
+        // As now I don't have time to investigate the second 
+        // approach, I need to go for the quick, easy and solid
+        // solution. 
+        $('html').trigger('click');
+
         $self._trigger('focus', null, $self)
         $self.show();
         $self._trigger('focused', null, $self)
