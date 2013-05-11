@@ -3,8 +3,8 @@ django-editlive
 
 Live form editing for django with Bootstrap_ and `jQuery UI`_
 
- +-------------------+-----------------------------+
- | **Demo page**     | To come..                   |
+ +-------------------------------------------------+
+ | **Demo**          | `Official site`_            |
  +-------------------+-----------------------------+
  | **Documentation** | `Read the Docs`_            |
  +-------------------+-----------------------------+
@@ -15,6 +15,7 @@ Live form editing for django with Bootstrap_ and `jQuery UI`_
 .. _jQuery UI: http://jqueryui.com/
 .. |BUILDSTATUS| image:: https://api.travis-ci.org/h3/django-editlive.png?branch=master
 .. _BUILDSTATUS: https://travis-ci.org/h3/django-editlive/
+.. _Official site: http://editlive.motion-m.ca/
 .. _Read the Docs: https://django-editlive.readthedocs.org/en/latest/
 .. _Travis ci: https://travis-ci.org/h3/django-editlive/
 
