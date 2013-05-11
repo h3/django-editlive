@@ -3,13 +3,13 @@ django-editlive
 
 Live form editing for django with Bootstrap_ and `jQuery UI`_
 
- +-------------------------------------------------+
- | **Demo**          | `Official site`_            |
- +-------------------+-----------------------------+
- | **Documentation** | `Read the Docs`_            |
- +-------------------+-----------------------------+
- | **Build server**  | `Travis ci`_ |BUILDSTATUS|_ |
- +-------------------+-----------------------------+
++-------------------+-----------------------------+
+| **Demo**          | `Official site`_            |
++-------------------+-----------------------------+
+| **Documentation** | `Read the Docs`_            |
++-------------------+-----------------------------+
+| **Build server**  | `Travis ci`_ |BUILDSTATUS|_ |
++-------------------+-----------------------------+
 
 .. _Bootstrap: http://twitter.github.com/bootstrap/index.html
 .. _jQuery UI: http://jqueryui.com/
